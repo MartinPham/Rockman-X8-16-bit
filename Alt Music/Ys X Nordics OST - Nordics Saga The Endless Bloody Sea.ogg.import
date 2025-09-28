@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Ys X Nordics OST - Nordics Saga The Endless Bloody S
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Ys： Foliage Ocean in Celceta OST - Ancient Land.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

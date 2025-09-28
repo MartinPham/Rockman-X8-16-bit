@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - SigmaAppears.ogg-5ae8745b3138906f9e1f975e823f7
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

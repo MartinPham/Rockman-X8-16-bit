@@ -13,7 +13,7 @@ dest_files=[ "res://.import/hidden_path.tmx-6562a80edab86e7c0f3ec61668211619.scn
 
 custom_properties=true
 tile_metadata=false
-uv_clip=true
+uv_clip=false
 image_flags=7
 collision_layer=1
 embed_internal_images=false

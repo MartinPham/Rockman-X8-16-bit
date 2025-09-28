@@ -13,7 +13,7 @@ dest_files=[ "res://.import/tiled_doorcover.tmx-6cea89a9f307962afcfd9465001e8564
 
 custom_properties=true
 tile_metadata=false
-uv_clip=true
+uv_clip=false
 image_flags=7
 collision_layer=1
 embed_internal_images=false

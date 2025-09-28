@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Ys (Famicom) - Final Battle.ogg-284485e1e1e9064c80d8
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

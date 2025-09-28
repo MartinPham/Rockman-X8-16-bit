@@ -11,5 +11,5 @@ dest_files=[ "res://.import/yeti.ogg-83819e83f5a61dd3f8dbb652307edddd.oggstr" ]
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

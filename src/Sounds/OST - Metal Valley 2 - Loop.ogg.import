@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - Metal Valley 2 - Loop.ogg-d1b12daa679cd9da3eee
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

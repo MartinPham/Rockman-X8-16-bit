@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Kuro no Kiseki OST - Hard Desperation.ogg-82c00776b9
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -13,7 +13,7 @@ dest_files=[ "res://.import/_inferno_1.tmx-6e9b19dcab89b330e0dc0046a09f52cf.scn"
 
 custom_properties=true
 tile_metadata=false
-uv_clip=true
+uv_clip=false
 image_flags=7
 collision_layer=1
 embed_internal_images=false

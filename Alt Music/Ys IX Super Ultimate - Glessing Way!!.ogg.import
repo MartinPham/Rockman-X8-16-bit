@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Ys IX Super Ultimate - Glessing Way!!.ogg-eada359011
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

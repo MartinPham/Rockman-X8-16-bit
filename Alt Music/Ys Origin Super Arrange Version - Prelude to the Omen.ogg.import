@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Ys Origin Super Arrange Version - Prelude to the Ome
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

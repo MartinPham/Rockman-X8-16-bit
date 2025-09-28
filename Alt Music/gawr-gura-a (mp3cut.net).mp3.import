@@ -11,5 +11,5 @@ dest_files=[ "res://.import/gawr-gura-a (mp3cut.net).mp3-ff2126b99e41ae2326d5736
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

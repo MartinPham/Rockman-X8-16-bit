@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OSt - Primrose - Loop.ogg-0b835238e9b5c56868fd23442d
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

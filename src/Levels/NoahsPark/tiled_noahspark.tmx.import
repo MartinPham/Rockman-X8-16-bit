@@ -11,12 +11,12 @@ dest_files=[ "res://.import/tiled_noahspark.tmx-43698d3fe9d7dea2a3eb006928241799
 
 [params]
 
-custom_properties=false
+custom_properties=true
 tile_metadata=false
 uv_clip=false
-image_flags=0
-collision_layer=0
+image_flags=7
+collision_layer=1
 embed_internal_images=false
 save_tiled_properties=false
-add_background=false
+add_background=true
 post_import_script=""

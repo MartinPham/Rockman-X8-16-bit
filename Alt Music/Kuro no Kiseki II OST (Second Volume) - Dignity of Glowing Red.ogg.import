@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Kuro no Kiseki II OST (Second Volume) - Dignity of G
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

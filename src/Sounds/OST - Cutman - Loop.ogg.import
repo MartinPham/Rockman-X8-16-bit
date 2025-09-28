@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - Cutman - Loop.ogg-9859f12f3017ac86e5a48aa2306b
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

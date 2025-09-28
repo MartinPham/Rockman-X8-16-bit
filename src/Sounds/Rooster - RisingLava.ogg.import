@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Rooster - RisingLava.ogg-ef0e97d6413066001863a757681
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

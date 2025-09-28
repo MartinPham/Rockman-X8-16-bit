@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - CopySigma - Loop.ogg-3197ca3ab4925705a503cfc52
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

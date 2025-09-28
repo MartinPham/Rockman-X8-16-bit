@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Ys Origin - Over Drive.ogg-e8f08ee39caa3f5ea5b5b3278
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

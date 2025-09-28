@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Endless History - The Last Moment of the Dark ~ Fina
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

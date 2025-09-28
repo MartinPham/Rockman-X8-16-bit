@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - AngryBoss - Loop.ogg-ad62f82ad1a94a64e189225a3
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

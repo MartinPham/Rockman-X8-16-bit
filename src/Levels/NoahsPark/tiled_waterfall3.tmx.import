@@ -13,7 +13,7 @@ dest_files=[ "res://.import/tiled_waterfall3.tmx-09308376d8112a4bbf2868a4f0518c7
 
 custom_properties=true
 tile_metadata=false
-uv_clip=true
+uv_clip=false
 image_flags=7
 collision_layer=1
 embed_internal_images=false

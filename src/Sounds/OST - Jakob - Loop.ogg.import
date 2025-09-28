@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - Jakob - Loop.ogg-b9311c954606af5d4279a32b3b285
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

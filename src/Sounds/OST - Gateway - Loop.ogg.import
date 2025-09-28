@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - Gateway - Loop.ogg-4569d76891a1d30d263b16bd2c7
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

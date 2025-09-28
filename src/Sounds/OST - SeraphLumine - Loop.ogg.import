@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - SeraphLumine - Loop.ogg-848b8d21efe4aebd90522e
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

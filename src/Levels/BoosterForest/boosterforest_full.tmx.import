@@ -13,7 +13,7 @@ dest_files=[ "res://.import/boosterforest_full.tmx-0e26aa126f0180075e6d65c47f353
 
 custom_properties=true
 tile_metadata=false
-uv_clip=true
+uv_clip=false
 image_flags=7
 collision_layer=1
 embed_internal_images=false

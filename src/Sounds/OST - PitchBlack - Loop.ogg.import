@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - PitchBlack - Loop.ogg-0e7560b7bdc4b8323c40055b
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

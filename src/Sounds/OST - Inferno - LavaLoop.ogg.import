@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - Inferno - LavaLoop.ogg-42e3d1c3e75f3af3345a519
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

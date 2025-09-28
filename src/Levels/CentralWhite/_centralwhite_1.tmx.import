@@ -13,7 +13,7 @@ dest_files=[ "res://.import/_centralwhite_1.tmx-df880b7cb8c46b8fe5e9d7f7e88a1240
 
 custom_properties=true
 tile_metadata=false
-uv_clip=true
+uv_clip=false
 image_flags=7
 collision_layer=1
 embed_internal_images=false

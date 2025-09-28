@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - PitchBlack - AlarmLoop.ogg-7722110b66bf5d44179
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
