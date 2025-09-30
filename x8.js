@@ -737,6 +737,12 @@ const Engine = (function () {
 				return Promise.all([
 					this.init(exe),
 					this.preloadFile(pack, pack),
+					this.preloadFile('Sounds.pck', 'Sounds.pck'),
+					this.preloadFile('Sounds-OST-Intro.pck', 'Sounds-OST-Intro.pck'),
+					this.preloadFile('Sounds-OST-Loop1.pck', 'Sounds-OST-Loop1.pck'),
+					this.preloadFile('Sounds-OST-Loop2.pck', 'Sounds-OST-Loop2.pck'),
+					this.preloadFile('SFX.pck', 'SFX.pck'),
+					// this.preloadFile('AltMusic.pck', 'AltMusic.pck'),
 				]).then(function () {
 					return me.start.apply(me);
 				});
