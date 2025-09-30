@@ -1019,7 +1019,7 @@ _global_script_class_icons={
 config/name="Rockman X8 Awakening 16-Bit - A Mod by Fallen_Tsu"
 config/description="A mod on a mod, Modified version of Tchy's Speedrun mod by Fallen_Tsu
 Original fangame by AlyssonDaPaz"
-run/main_scene="res://src/Title/DisclaimerScreen.tscn"
+run/main_scene="res://src/Title/bootstrap.tscn"
 run/low_processor_mode=true
 boot_splash/show_image=false
 boot_splash/image="res://src/Screens/bootsplash.png"
@@ -1381,7 +1381,8 @@ analog_down_right={
 
 [locale]
 
-test="br"
+test="en"
+fallback="br"
 translation_remaps={
 }
 translations=PoolStringArray( "res://src/Localization/test1.br.translation", "res://src/Localization/test1.en.translation", "res://src/Localization/test1.es.translation", "res://src/Localization/test1.pr.translation" )
