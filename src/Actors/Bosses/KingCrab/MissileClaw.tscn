@@ -50,7 +50,6 @@ z_as_relative = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 4 )
-debug_logs = true
 damage = 3.0
 speed = 350.0
 

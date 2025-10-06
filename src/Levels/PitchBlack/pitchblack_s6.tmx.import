@@ -13,7 +13,7 @@ dest_files=[ "res://.import/pitchblack_s6.tmx-59d4376572a0a30ee46f670ed6872736.s
 
 custom_properties=true
 tile_metadata=false
-uv_clip=false
+uv_clip=true
 image_flags=7
 collision_layer=1
 embed_internal_images=false

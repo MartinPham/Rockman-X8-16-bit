@@ -1,4 +1,4 @@
 extends Resource
 class_name DialogueText
 
-export var dialog : Array
+export  var dialog: Array

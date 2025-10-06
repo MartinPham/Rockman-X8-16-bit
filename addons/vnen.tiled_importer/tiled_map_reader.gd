@@ -1,80 +1,80 @@
-# The MIT License (MIT)
-#
-# Copyright (c) 2018 George Marques
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
 
-tool
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+tool 
 extends Reference
 
-# Constants for tile flipping
-# http://doc.mapeditor.org/reference/tmx-map-format/#tile-flipping
-const FLIPPED_HORIZONTALLY_FLAG = 0x80000000
-const FLIPPED_VERTICALLY_FLAG   = 0x40000000
-const FLIPPED_DIAGONALLY_FLAG   = 0x20000000
 
-# XML Format reader
+
+const FLIPPED_HORIZONTALLY_FLAG = - 2147483648
+const FLIPPED_VERTICALLY_FLAG = 1073741824
+const FLIPPED_DIAGONALLY_FLAG = 536870912
+
+
 const TiledXMLToDictionary = preload("tiled_xml_to_dict.gd")
 
-# Polygon vertices sorter
+
 const PolygonSorter = preload("polygon_sorter.gd")
 
-# Prefix for error messages, make easier to identify the source
+
 const error_prefix = "Tiled Importer: "
 
-# Properties to save the value in the metadata
+
 const whitelist_properties = [
-	"backgroundcolor",
-	"compression",
-	"draworder",
-	"gid",
-	"height",
-	"imageheight",
-	"imagewidth",
-	"infinite",
-	"margin",
-	"name",
-	"orientation",
-	"probability",
-	"spacing",
-	"tilecount",
-	"tiledversion",
-	"tileheight",
-	"tilewidth",
-	"type",
-	"version",
-	"visible",
-	"width",
+	"backgroundcolor", 
+	"compression", 
+	"draworder", 
+	"gid", 
+	"height", 
+	"imageheight", 
+	"imagewidth", 
+	"infinite", 
+	"margin", 
+	"name", 
+	"orientation", 
+	"probability", 
+	"spacing", 
+	"tilecount", 
+	"tiledversion", 
+	"tileheight", 
+	"tilewidth", 
+	"type", 
+	"version", 
+	"visible", 
+	"width", 
 	"custom_material"
 ]
 
-# All templates loaded, can be looked up by path name
+
 var _loaded_templates = {}
-# Maps each tileset file used by the map to it's first gid; Used for template parsing
+
 var _tileset_path_to_first_gid = {}
 
 func reset_global_memebers():
 	_loaded_templates = {}
 	_tileset_path_to_first_gid = {}
 
-# Main function
-# Reads a source file and gives back a scene
+
+
 func build(source_path, options):
 	reset_global_memebers()
 	var map = read_file(source_path)
@@ -113,9 +113,9 @@ func build(source_path, options):
 							cell_offset.y += 1
 							map_pos_offset.y -= cell_size.y
 			"hexagonal":
-				# Godot maps are always odd and don't have an "even" setting. To
-				# imitate even staggering we simply start one row/column late and
-				# adjust the position of the whole map.
+				
+				
+				
 				match map.staggeraxis:
 					"x":
 						map_offset = TileMap.HALF_OFFSET_Y
@@ -132,7 +132,7 @@ func build(source_path, options):
 
 	var tileset = build_tileset_for_scene(map.tilesets, source_path, options)
 	if typeof(tileset) != TYPE_OBJECT:
-		# Error happened
+		
 		return tileset
 
 	var root = Node2D.new()
@@ -143,15 +143,15 @@ func build(source_path, options):
 		set_custom_properties(root, map)
 
 	var map_data = {
-		"options": options,
-		"map_mode": map_mode,
-		"map_offset": map_offset,
-		"map_pos_offset": map_pos_offset,
-		"map_background": map_background,
-		"cell_size": cell_size,
-		"cell_offset": cell_offset,
-		"tileset": tileset,
-		"source_path": source_path,
+		"options": options, 
+		"map_mode": map_mode, 
+		"map_offset": map_offset, 
+		"map_pos_offset": map_pos_offset, 
+		"map_background": map_background, 
+		"cell_size": cell_size, 
+		"cell_offset": cell_offset, 
+		"tileset": tileset, 
+		"source_path": source_path, 
 		"infinite": bool(map.infinite) if "infinite" in map else false
 	}
 
@@ -162,7 +162,7 @@ func build(source_path, options):
 
 	if options.add_background and "backgroundcolor" in map:
 		var bg_color = str(map.backgroundcolor)
-		if (!bg_color.is_valid_html_color()):
+		if ( not bg_color.is_valid_html_color()):
 			print_error("Invalid background color format: " + bg_color)
 			return root
 
@@ -191,14 +191,14 @@ func build(source_path, options):
 
 	return root
 
-# Creates a layer node from the data
-# Returns an error code
+
+
 func make_layer(layer, parent, root, data):
 	var err = validate_layer(layer)
 	if err != OK:
 		return err
 
-	# Main map data
+	
 	var map_mode = data.map_mode
 	var map_offset = data.map_offset
 	var map_pos_offset = data.map_pos_offset
@@ -261,14 +261,14 @@ func make_layer(layer, parent, root, data):
 				if "compression" in layer:
 					chunk_data = decompress_layer_data(chunk.data, layer.compression, layer_size)
 					if typeof(chunk_data) == TYPE_INT:
-						# Error happened
+						
 						return chunk_data
 				else:
 					chunk_data = read_base64_layer_data(chunk.data)
 
 			var count = 0
 			for tile_id in chunk_data:
-				var int_id = int(str(tile_id)) & 0xFFFFFFFF
+				var int_id = int(str(tile_id)) & - 1
 
 				if int_id == 0:
 					count += 1
@@ -278,7 +278,7 @@ func make_layer(layer, parent, root, data):
 				var flipped_v = bool(int_id & FLIPPED_VERTICALLY_FLAG)
 				var flipped_d = bool(int_id & FLIPPED_DIAGONALLY_FLAG)
 
-				var gid = int_id & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG)
+				var gid = int_id & ~ (FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG)
 
 				var cell_x = cell_offset.x + chunk.x + (count % int(chunk.width))
 				var cell_y = cell_offset.y + chunk.y + int(count / chunk.width)
@@ -299,7 +299,7 @@ func make_layer(layer, parent, root, data):
 		if layer.image != "":
 			image = load_image(layer.image, source_path, options)
 			if typeof(image) != TYPE_OBJECT:
-				# Error happened
+				
 				return image
 
 		var pos = Vector2()
@@ -353,11 +353,11 @@ func make_layer(layer, parent, root, data):
 				var template_file = object["template"]
 				var template_data_immutable = get_template(remove_filename_from_path(data["source_path"]) + template_file)
 				if typeof(template_data_immutable) != TYPE_DICTIONARY:
-					# Error happened
-					print("Error getting template for object with id " + str(data["id"]))
+					
+					
 					continue
 
-				# Overwrite template data with current object data
+				
 				apply_template(object, template_data_immutable)
 
 				set_default_obj_params(object)
@@ -381,15 +381,15 @@ func make_layer(layer, parent, root, data):
 					set_custom_properties(point, object)
 
 			elif not "gid" in object:
-				# Not a tile object
+				
 				if "type" in object and object.type == "navigation":
-					# Can't make navigation objects right now
-					print_error("Navigation polygons aren't supported in an object layer.")
-					continue # Non-fatal error
+					
+					print_error("Navigation polygons aren\'t supported in an object layer.")
+					continue
 				var shape = shape_from_object(object)
 
 				if typeof(shape) != TYPE_OBJECT:
-					# Error happened
+					
 					return shape
 
 				if "type" in object and object.type == "occluder":
@@ -430,7 +430,7 @@ func make_layer(layer, parent, root, data):
 					var rot = 0
 
 					if not ("polygon" in object or "polyline" in object):
-						# Regular shape
+						
 						collision = CollisionShape2D.new()
 						collision.shape = shape
 						if shape is RectangleShape2D:
@@ -490,13 +490,13 @@ func make_layer(layer, parent, root, data):
 					body.position = pos
 					body.rotation_degrees = rot
 
-			else: # "gid" in object
-				var tile_raw_id = int(str(object.gid)) & 0xFFFFFFFF
-				var tile_id = tile_raw_id & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG)
+			else:
+				var tile_raw_id = int(str(object.gid)) & - 1
+				var tile_id = tile_raw_id & ~ (FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG)
 
 				var is_tile_object = tileset.tile_get_region(tile_id).get_area() == 0
 				var collisions = tileset.tile_get_shape_count(tile_id)
-				var has_collisions = collisions > 0 && object.has("type") && object.type != "sprite"
+				var has_collisions = collisions > 0 and object.has("type") and object.type != "sprite"
 				var sprite = Sprite.new()
 				var pos = Vector2()
 				var rot = 0
@@ -545,12 +545,12 @@ func make_layer(layer, parent, root, data):
 
 						collision_node.transform = s.shape_transform
 						if sprite.flip_h:
-							collision_node.position.x *= -1
+							collision_node.position.x *= - 1
 							collision_node.position.x -= cell_size.x
-							collision_node.scale.x *= -1
+							collision_node.scale.x *= - 1
 						if sprite.flip_v:
-							collision_node.scale.y *= -1
-							collision_node.position.y *= -1
+							collision_node.scale.y *= - 1
+							collision_node.position.y *= - 1
 							collision_node.position.y -= cell_size.y
 						obj_root.add_child(collision_node)
 						collision_node.owner = root
@@ -564,10 +564,10 @@ func make_layer(layer, parent, root, data):
 				obj_root.rotation_degrees = rot
 				obj_root.visible = bool(object.visible) if "visible" in object else true
 				obj_root.scale = scale
-				# Translate from Tiled bottom-left position to Godot top-left
+				
 				sprite.centered = false
 				sprite.region_filter_clip = options.uv_clip
-				sprite.offset = Vector2(0, -texture_size.y)
+				sprite.offset = Vector2(0, - texture_size.y)
 
 				if not has_collisions:
 					object_layer.add_child(sprite)
@@ -611,13 +611,13 @@ func make_layer(layer, parent, root, data):
 			make_layer(sub_layer, group, root, data)
 
 	else:
-		print_error("Unknown layer type ('%s') in '%s'" % [str(layer.type), str(layer.name) if "name" in layer else "[unnamed layer]"])
+		print_error("Unknown layer type (\'%s\') in \'%s\'" % [str(layer.type), str(layer.name) if "name" in layer else "[unnamed layer]"])
 		return ERR_INVALID_DATA
 
 	return OK
 
 func set_default_obj_params(object):
-	# Set default values for object
+	
 	for attr in ["width", "height", "rotation", "x", "y"]:
 		if not attr in object:
 			object[attr] = 0
@@ -628,8 +628,8 @@ func set_default_obj_params(object):
 
 var flags
 
-# Makes a tileset from a array of tilesets data
-# Since Godot supports only one TileSet per TileMap, all tilesets from Tiled are combined
+
+
 func build_tileset_for_scene(tilesets, source_path, options):
 	var result = TileSet.new()
 	var err = ERR_INVALID_DATA
@@ -644,30 +644,30 @@ func build_tileset_for_scene(tilesets, source_path, options):
 				return ERR_INVALID_DATA
 
 			ts_source_path = source_path.get_base_dir().plus_file(ts.source)
-			# Used later for templates
+			
 			_tileset_path_to_first_gid[ts_source_path] = tileset.firstgid
 
 			if ts.source.get_extension().to_lower() == "tsx":
 				var tsx_reader = TiledXMLToDictionary.new()
 				ts = tsx_reader.read_tsx(ts_source_path)
 				if typeof(ts) != TYPE_DICTIONARY:
-					# Error happened
+					
 					return ts
-			else: # JSON Tileset
+			else:
 				var f = File.new()
 				err = f.open(ts_source_path, File.READ)
 				if err != OK:
-					print_error("Error opening tileset '%s'." % [ts.source])
+					print_error("Error opening tileset \'%s\'." % [ts.source])
 					return err
 
 				var json_res = JSON.parse(f.get_as_text())
 				if json_res.error != OK:
-					print_error("Error parsing tileset '%s' JSON: %s" % [ts.source, json_res.error_string])
+					print_error("Error parsing tileset \'%s\' JSON: %s" % [ts.source, json_res.error_string])
 					return ERR_INVALID_DATA
 
 				ts = json_res.result
 				if typeof(ts) != TYPE_DICTIONARY:
-					print_error("Tileset '%s' is not a dictionary." % [ts.source])
+					print_error("Tileset \'%s\' is not a dictionary." % [ts.source])
 					return ERR_INVALID_DATA
 
 			ts.firstgid = tileset.firstgid
@@ -681,7 +681,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 		var spacing = int(ts.spacing) if "spacing" in ts and str(ts.spacing).is_valid_integer() else 0
 		var margin = int(ts.margin) if "margin" in ts and str(ts.margin).is_valid_integer() else 0
 		var firstgid = int(ts.firstgid)
-		var columns = int(ts.columns) if "columns" in ts and str(ts.columns).is_valid_integer() else -1
+		var columns = int(ts.columns) if "columns" in ts and str(ts.columns).is_valid_integer() else - 1
 
 		var image = null
 		var imagesize = Vector2()
@@ -689,7 +689,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 		if has_global_image:
 			image = load_image(ts.image, ts_source_path, options)
 			if typeof(image) != TYPE_OBJECT:
-				# Error happened
+				
 				return image
 			imagesize = Vector2(int(ts.imagewidth), int(ts.imageheight))
 
@@ -704,7 +704,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 		var i = 0
 		var column = 0
 		
-		# Needed to look up textures for animations
+		
 		var tileRegions = []
 		while i < tilecount:
 			var tilepos = Vector2(x, y)
@@ -731,13 +731,13 @@ func build_tileset_for_scene(tilesets, source_path, options):
 			result.create_tile(gid)
 
 			if has_global_image:
-				if rel_id in ts.tiles && "animation" in ts.tiles[rel_id]:
+				if rel_id in ts.tiles and "animation" in ts.tiles[rel_id]:
 					var animated_tex = AnimatedTexture.new()
 					animated_tex.frames = ts.tiles[rel_id].animation.size()
 					animated_tex.fps = 0
 					var c = 0
-					# Animated texture wants us to have seperate textures for each frame
-					# so we have to pull them out of the tileset
+					
+					
 					var tilesetTexture = image.get_data()
 					for g in ts.tiles[rel_id].animation:
 						var frameTex = tilesetTexture.get_rect(tileRegions[(int(g.tileid))])
@@ -752,17 +752,17 @@ func build_tileset_for_scene(tilesets, source_path, options):
 					result.tile_set_texture(gid, image)
 					result.tile_set_region(gid, region)
 				if options.apply_offset:
-					result.tile_set_texture_offset(gid, Vector2(0, -tilesize.y))
+					result.tile_set_texture_offset(gid, Vector2(0, - tilesize.y))
 			elif not rel_id in ts.tiles:
 				gid += 1
 				continue
 			else:
-				if rel_id in ts.tiles && "animation" in ts.tiles[rel_id]:
+				if rel_id in ts.tiles and "animation" in ts.tiles[rel_id]:
 					var animated_tex = AnimatedTexture.new()
 					animated_tex.frames = ts.tiles[rel_id].animation.size()
 					animated_tex.fps = 0
 					var c = 0
-					#untested
+					
 					var image_path = ts.tiles[rel_id].image
 					for g in ts.tiles[rel_id].animation:
 						animated_tex.set_frame_texture(c, load_image(image_path, ts_source_path, options))
@@ -774,20 +774,19 @@ func build_tileset_for_scene(tilesets, source_path, options):
 					var image_path = ts.tiles[rel_id].image
 					image = load_image(image_path, ts_source_path, options)
 					if typeof(image) != TYPE_OBJECT:
-						# Error happened
+						
 						return image
 					result.tile_set_texture(gid, image)
 				if options.apply_offset:
-					result.tile_set_texture_offset(gid, Vector2(0, -image.get_height()))
+					result.tile_set_texture_offset(gid, Vector2(0, - image.get_height()))
 						
-			if "tiles" in ts and rel_id in ts.tiles and "objectgroup" in ts.tiles[rel_id] \
-					and "objects" in ts.tiles[rel_id].objectgroup:
+			if "tiles" in ts and rel_id in ts.tiles and "objectgroup" in ts.tiles[rel_id] and "objects" in ts.tiles[rel_id].objectgroup:
 				for object in ts.tiles[rel_id].objectgroup.objects:
 
 					var shape = shape_from_object(object)
 
 					if typeof(shape) != TYPE_OBJECT:
-						# Error happened
+						
 						return shape
 
 					var offset = Vector2(float(object.x), float(object.y))
@@ -808,8 +807,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 			if "properties" in ts and "custom_material" in ts.properties:
 				result.tile_set_material(gid, load(ts.properties.custom_material))
 				
-			if options.custom_properties and options.tile_metadata and "tileproperties" in ts \
-					and "tilepropertytypes" in ts and rel_id in ts.tileproperties and rel_id in ts.tilepropertytypes:
+			if options.custom_properties and options.tile_metadata and "tileproperties" in ts and "tilepropertytypes" in ts and rel_id in ts.tileproperties and rel_id in ts.tilepropertytypes:
 				tile_meta[gid] = get_custom_properties(ts.tileproperties[rel_id], ts.tilepropertytypes[rel_id])
 			if options.save_tiled_properties and rel_id in ts.tiles:
 				for property in whitelist_properties:
@@ -834,8 +832,8 @@ func build_tileset_for_scene(tilesets, source_path, options):
 
 	return result
 
-# Makes a standalone TileSet. Useful for importing TileSets from Tiled
-# Returns an error code if fails
+
+
 func build_tileset(source_path, options):
 	var set = read_tileset_file(source_path)
 	if typeof(set) == TYPE_INT:
@@ -843,13 +841,13 @@ func build_tileset(source_path, options):
 	if typeof(set) != TYPE_DICTIONARY:
 		return ERR_INVALID_DATA
 
-	# Just to validate and build correctly using the existing builder
+	
 	set["firstgid"] = 0
 
 	return build_tileset_for_scene([set], source_path, options)
 
-# Loads an image from a given path
-# Returns a Texture
+
+
 func load_image(rel_path, source_path, options):
 	flags = options.image_flags if "image_flags" in options else Texture.FLAGS_DEFAULT
 	var embed = options.embed_internal_images if "embed_internal_images" in options else false
@@ -870,7 +868,7 @@ func load_image(rel_path, source_path, options):
 		return ERR_FILE_NOT_FOUND
 
 	if not total_path.begins_with("res://"):
-		# External images need to be embedded
+		
 		embed = true
 
 	var image = null
@@ -885,19 +883,19 @@ func load_image(rel_path, source_path, options):
 
 	return image
 
-# Reads a file and returns its contents as a dictionary
-# Returns an error code if fails
+
+
 func read_file(path):
 	if path.get_extension().to_lower() == "tmx":
 		var tmx_to_dict = TiledXMLToDictionary.new()
 		var data = tmx_to_dict.read_tmx(path)
 		if typeof(data) != TYPE_DICTIONARY:
-			# Error happened
-			print_error("Error parsing map file '%s'." % [path])
-		# Return error or result
+			
+			print_error("Error parsing map file \'%s\'." % [path])
+		
 		return data
 
-	# Not TMX, must be JSON
+	
 	var file = File.new()
 	var err = file.open(path, File.READ)
 	if err != OK:
@@ -910,19 +908,19 @@ func read_file(path):
 
 	return content.result
 
-# Reads a tileset file and return its contents as a dictionary
-# Returns an error code if fails
+
+
 func read_tileset_file(path):
 	if path.get_extension().to_lower() == "tsx":
 		var tmx_to_dict = TiledXMLToDictionary.new()
 		var data = tmx_to_dict.read_tsx(path)
 		if typeof(data) != TYPE_DICTIONARY:
-			# Error happened
-			print_error("Error parsing map file '%s'." % [path])
-		# Return error or result
+			
+			print_error("Error parsing map file \'%s\'." % [path])
+		
 		return data
 
-	# Not TSX, must be JSON
+	
 	var file = File.new()
 	var err = file.open(path, File.READ)
 	if err != OK:
@@ -935,8 +933,8 @@ func read_tileset_file(path):
 
 	return content.result
 
-# Creates a shape from an object data
-# Returns a valid shape depending on the object type (collision/occluder/navigation)
+
+
 func shape_from_object(object):
 	var shape = ERR_INVALID_DATA
 	set_default_obj_params(object)
@@ -991,12 +989,12 @@ func shape_from_object(object):
 			shape = CircleShape2D.new()
 			shape.radius = w / 2.0
 		else:
-			# Using a capsule since it's the closest from an ellipse
+			
 			shape = CapsuleShape2D.new()
 			shape.radius = w / 2.0
 			shape.height = h / 2.0
 
-	else: # Rectangle
+	else:
 		if not "width" in object or not "height" in object:
 			print_error("Missing width or height in rectangle shape.")
 			return ERR_INVALID_DATA
@@ -1004,11 +1002,11 @@ func shape_from_object(object):
 		var size = Vector2(float(object.width), float(object.height))
 
 		if object.type == "navigation" or object.type == "occluder":
-			# Those types only accept polygons, so make one from the rectangle
+			
 			var vertices = PoolVector2Array([
-					Vector2(0, 0),
-					Vector2(size.x, 0),
-					size,
+					Vector2(0, 0), 
+					Vector2(size.x, 0), 
+					size, 
 					Vector2(0, size.y)
 			])
 			if object.type == "navigation":
@@ -1025,20 +1023,20 @@ func shape_from_object(object):
 
 	return shape
 
-# Determines if the set of vertices is convex or not
-# Returns a boolean
+
+
 func is_convex(vertices):
 	var size = vertices.size()
 	if size <= 3:
-		# Less than 3 verices can't be concave
+		
 		return true
 
 	var cp = 0
 
 	for i in range(0, size + 2):
-		var p1 = vertices[(i + 0) % size]
-		var p2 = vertices[(i + 1) % size]
-		var p3 = vertices[(i + 2) % size]
+		var p1 = vertices[(i + 0) %size]
+		var p2 = vertices[(i + 1) %size]
+		var p3 = vertices[(i + 2) %size]
 
 		var prev_cp = cp
 		cp = (p2.x - p1.x) * (p3.y - p2.y) - (p2.y - p1.y) * (p3.x - p2.x)
@@ -1047,8 +1045,8 @@ func is_convex(vertices):
 
 	return true
 
-# Decompress the data of the layer
-# Compression argument is a string, either "gzip" or "zlib"
+
+
 func decompress_layer_data(layer_data, compression, map_size):
 	if compression != "gzip" and compression != "zlib":
 		print_error("Unrecognized compression format: %s" % [compression])
@@ -1060,25 +1058,22 @@ func decompress_layer_data(layer_data, compression, map_size):
 
 	return decode_layer(raw_data)
 
-# Reads the layer as a base64 data
-# Returns an array of ints as the decoded layer would be
+
+
 func read_base64_layer_data(layer_data):
 	var decoded = Marshalls.base64_to_raw(layer_data)
 	return decode_layer(decoded)
 
-# Reads a PoolByteArray and returns the layer array
-# Used for base64 encoded and compressed layers
+
+
 func decode_layer(layer_data):
 	var result = []
 	for i in range(0, layer_data.size(), 4):
-		var num = (layer_data[i]) | \
-				(layer_data[i + 1] << 8) | \
-				(layer_data[i + 2] << 16) | \
-				(layer_data[i + 3] << 24)
+		var num = (layer_data[i]) | (layer_data[i + 1] << 8) | (layer_data[i + 2] << 16) | (layer_data[i + 3] << 24)
 		result.push_back(num)
 	return result
 
-# Set the custom properties into the metadata of the object
+
 func set_custom_properties(object, tiled_object):
 	if not "properties" in tiled_object or not "propertytypes" in tiled_object:
 		return
@@ -1087,8 +1082,8 @@ func set_custom_properties(object, tiled_object):
 	for property in properties:
 		object.set_meta(property, properties[property])
 
-# Get the custom properties as a dictionary
-# Useful for tile meta, which is not stored directly
+
+
 func get_custom_properties(properties, types):
 	var result = {}
 
@@ -1107,22 +1102,22 @@ func get_custom_properties(properties, types):
 		result[property] = value
 	return result
 
-# Get the available whitelisted properties from the Tiled object
-# And them as metadata in the Godot object
+
+
 func set_tiled_properties_as_meta(object, tiled_object):
 	for property in whitelist_properties:
 		if property in tiled_object:
 			object.set_meta(property, tiled_object[property])
 
-# Custom function to sort objects in an object layer
-# This is done to support the "topdown" draw order, which sorts by 'y' coordinate
+
+
 func object_sorter(first, second):
 	if first.y == second.y:
 		return first.id < second.id
 	return first.y < second.y
 
-# Validates the map dictionary content for missing or invalid keys
-# Returns an error code
+
+
 func validate_map(map):
 	if not "type" in map or map.type != "map":
 		print_error("Missing or invalid type property.")
@@ -1151,8 +1146,8 @@ func validate_map(map):
 			return ERR_INVALID_DATA
 	return OK
 
-# Validates the tileset dictionary content for missing or invalid keys
-# Returns an error code
+
+
 func validate_tileset(tileset):
 	if not "firstgid" in tileset or not str(tileset.firstgid).is_valid_integer():
 		print_error("Missing or invalid firstgid tileset property.")
@@ -1186,8 +1181,8 @@ func validate_tileset(tileset):
 			return ERR_INVALID_DATA
 	return OK
 
-# Validates the layer dictionary content for missing or invalid keys
-# Returns an error code
+
+
 func validate_layer(layer):
 	if not "type" in layer:
 		print_error("Missing or invalid type layer property.")
@@ -1256,28 +1251,28 @@ func validate_chunk(chunk):
 		return ERR_INVALID_DATA
 	return OK
 
-# Custom function to print error, to centralize the prefix addition
+
 func print_error(err):
 	printerr(error_prefix + err)
 
 func get_template(path):
-	# If this template has not yet been loaded
+	
 	if not _loaded_templates.has(path):
-		# IS XML
+		
 		if path.get_extension().to_lower() == "tx":
 			var parser = XMLParser.new()
 			var err = parser.open(path)
 			if err != OK:
-				print_error("Error opening TX file '%s'." % [path])
+				print_error("Error opening TX file \'%s\'." % [path])
 				return err
 			var content = parse_template(parser, path)
 			if typeof(content) != TYPE_DICTIONARY:
-				# Error happened
-				print_error("Error parsing template map file '%s'." % [path])
+				
+				print_error("Error parsing template map file \'%s\'." % [path])
 				return false
 			_loaded_templates[path] = content
 
-		# IS JSON
+		
 		else:
 			var file = File.new()
 			var err = file.open(path, File.READ)
@@ -1286,12 +1281,12 @@ func get_template(path):
 
 			var json_res = JSON.parse(file.get_as_text())
 			if json_res.error != OK:
-				print_error("Error parsing JSON template map file '%s'." % [path])
+				print_error("Error parsing JSON template map file \'%s\'." % [path])
 				return json_res.error
 
 			var result = json_res.result
 			if typeof(result) != TYPE_DICTIONARY:
-				print_error("Error parsing JSON template map file '%s'." % [path])
+				print_error("Error parsing JSON template map file \'%s\'." % [path])
 				return ERR_INVALID_DATA
 
 			var object = result.object
@@ -1312,7 +1307,7 @@ func get_template(path):
 
 func parse_template(parser, path):
 	var err = OK
-	# Template root node shouldn't have attributes
+	
 	var data = {}
 	var tileset_gid_increment = 0
 	data.id = 0
@@ -1356,7 +1351,7 @@ static func get_filename_from_path(path):
 static func remove_filename_from_path(path):
 	var file_name = get_filename_from_path(path)
 	var stringSize = path.length() - file_name.length()
-	var file_path = path.substr(0,stringSize)
+	var file_path = path.substr(0, stringSize)
 	return file_path
 
 static func is_same_file(path1, path2):
@@ -1380,7 +1375,7 @@ static func is_same_file(path1, path2):
 
 static func apply_template(object, template_immutable):
 	for k in template_immutable:
-		# Do not overwrite any object data
+		
 		if typeof(template_immutable[k]) == TYPE_DICTIONARY:
 			if not object.has(k):
 				object[k] = {}

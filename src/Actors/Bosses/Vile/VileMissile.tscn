@@ -25,7 +25,7 @@ damage = 4.0
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 5 )
 animation = "normal"
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( -16, 0 )
 flip_h = true

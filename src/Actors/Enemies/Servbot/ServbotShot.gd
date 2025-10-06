@@ -3,7 +3,7 @@ export (PackedScene) var projectile
 onready var shot_sound: AudioStreamPlayer2D = $shot_sound
 
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	if attack_stage == 0 and timer > 1:
 		turn_and_face_player()
 		play_animation_once("shot_fire")

@@ -62,7 +62,7 @@ position = Vector2( 0, -16 )
 z_index = 1
 frames = ExtResource( 21 )
 animation = "idle"
-frame = 1
+frame = 12
 playing = true
 flip_h = true
 
@@ -75,7 +75,6 @@ scale = Vector2( 6, 4.8 )
 rect = Rect2( -5, -5, 10, 10 )
 
 [node name="EnemyShield" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 4 )
 
 [node name="hittable_area" type="Area2D" parent="EnemyShield"]

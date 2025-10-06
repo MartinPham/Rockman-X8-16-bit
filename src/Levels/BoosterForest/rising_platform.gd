@@ -1,58 +1,62 @@
 extends StaticBody2D
+class_name RisingPlatform
 
-export var tiles := 10
-export var speed := 0.25
-export var screenshake := false
-onready var tween = TweenController.new(self,false)
-var max_position := false
-var activated := false
+export  var tiles: int = 10
+export  var speed: float = 0.25
+export  var screenshake: bool = false
+
+onready var tween: TweenController = TweenController.new(self, false)
+
+var max_position: bool = false
+var activated: bool = false
 
 signal started
 signal reset
 signal at_max
 
-func _on_Button_button_press() -> void:
+
+func _on_Button_button_press() -> void :
 	if not max_position:
 		rise()
 	else:
 		lower()
 
-func rise() -> void:
+func rise() -> void :
 	if not max_position:
 		emit_signal("started")
-		tween.attribute("position:y",position.y - tiles * 16.0 , speed * tiles)
+		tween.attribute("position:y", position.y - tiles * 16.0, speed * tiles)
 		tween.set_sequential()
 		tween.add_callback("reached_max_position")
 
-func lower() -> void:
+func lower() -> void :
 	if max_position:
 		emit_signal("started")
-		tween.attribute("position:y",position.y + tiles * 16.0 , speed * tiles)
+		tween.attribute("position:y", position.y + tiles * 16.0, speed * tiles)
 		tween.set_sequential()
 		tween.add_callback("reached_start_position")
 
-func reached_max_position() -> void:
+func reached_max_position() -> void :
 	if screenshake:
-		Event.emit_signal("screenshake",0.7)
+		Event.emit_signal("screenshake", 0.7)
 	emit_signal("reset")
 	emit_signal("at_max")
 	max_position = true
-	
-func reached_start_position() -> void:
+
+func reached_start_position() -> void :
 	if screenshake:
-		Event.emit_signal("screenshake",0.7)
+		Event.emit_signal("screenshake", 0.7)
 	emit_signal("reset")
 	max_position = false
-	
-func _on_ElevatorStarter_body_entered(_body: Node) -> void:
+
+func _on_ElevatorStarter_body_entered(_body: Node) -> void :
 	if not activated:
 		activated = true
 		rise()
-		Tools.timer(6,"lower_on_time",self)
+		Tools.timer(6, "lower_on_time", self)
 
-func lower_on_time() -> void:
+func lower_on_time() -> void :
 	lower()
 	activated = false
 
-func _on_area2D_body_entered(_body: Node) -> void:
+func _on_area2D_body_entered(_body: Node) -> void :
 	_on_ElevatorStarter_body_entered(_body)

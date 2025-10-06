@@ -2,11 +2,11 @@ extends GenericIntro
 onready var spin: AudioStreamPlayer2D = $"../GigaStomp/spin"
 onready var space: Node = $"../Space"
 
-func prepare_for_intro() -> void:
+func prepare_for_intro() -> void :
 	Log("Preparing for Intro")
 	make_invisible()
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	if attack_stage == 0:
 		space.define_arena()
 		character.global_position.y -= 100
@@ -17,7 +17,7 @@ func _Update(_delta) -> void:
 		spin.play()
 		character.global_position.x -= 100
 		var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(character, "global_position:y", character.global_position.y+136, 1.0)
+		tween.tween_property(character, "global_position:y", character.global_position.y + 136, 1.0)
 		tween_list.append(tween)
 		next_attack_stage()
 

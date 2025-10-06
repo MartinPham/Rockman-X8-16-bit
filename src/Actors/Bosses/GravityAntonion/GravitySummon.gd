@@ -1,10 +1,10 @@
 extends AttackAbility
 
-export var projectile : PackedScene
+export  var projectile: PackedScene
 onready var point: AudioStreamPlayer2D = $point
 onready var space: Node = $"../Space"
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0:
 		turn_towards_point(space.center)

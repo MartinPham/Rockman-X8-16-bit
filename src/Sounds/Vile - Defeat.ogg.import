@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Vile - Defeat.ogg-037c3de136c22ad01175e001eabfc88e.o
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

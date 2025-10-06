@@ -1,13 +1,13 @@
 extends Node2D
 class_name ArtificialIntelligence
 
-onready var character := get_parent()
-onready var detector := $player_detector
+onready var character: = get_parent()
+onready var detector: = $player_detector
 
-export var player_control := false
+export  var player_control: = false
 var target_list = []
-var last_action := 0
-var current_action := 0
+var last_action: = 0
+var current_action: = 0
 
 signal go_left
 signal go_right
@@ -15,17 +15,17 @@ signal go_up
 signal go_down
 signal attack
 
-var timer := 0.0
+var timer: = 0.0
 
-func _ready() -> void:
-# warning-ignore:return_value_discarded
-	get_parent().connect("ability_end",self,"next_step")
-# warning-ignore:return_value_discarded
-	detector.connect("body_entered",self,"on_body_entered")
-# warning-ignore:return_value_discarded
-	detector.connect("body_exited",self,"on_body_exited")
+func _ready() -> void :
 
-func _physics_process(delta: float) -> void:
+	get_parent().connect("ability_end", self, "next_step")
+
+	detector.connect("body_entered", self, "on_body_entered")
+
+	detector.connect("body_exited", self, "on_body_exited")
+
+func _physics_process(delta: float) -> void :
 	if player_control:
 		process_controls()
 		return
@@ -45,7 +45,7 @@ func respond_to_player_nearby(_delta: float):
 func action_for_no_nearby_player(_delta: float):
 	pass
 
-func next_step(ability) -> void:
+func next_step(ability) -> void :
 	if ability is Attack:
 		last_action += 1
 
@@ -74,15 +74,15 @@ func process_controls():
 		emit_signal("attack")
 
 
-func on_body_entered(body: Node) -> void:
-	if body.is_in_group("Player") and not body.is_in_group("Props") :
+func on_body_entered(body: Node) -> void :
+	if body.is_in_group("Player") and not body.is_in_group("Props"):
 		add_to_visible_list(body)
 
-func on_body_exited(body: Node) -> void:
-	if body.is_in_group("Player") and not body.is_in_group("Props") :
+func on_body_exited(body: Node) -> void :
+	if body.is_in_group("Player") and not body.is_in_group("Props"):
 		remove_from_visible_list(body)
 
-func add_to_visible_list(_body: Node) -> void:
+func add_to_visible_list(_body: Node) -> void :
 	if not (_body in target_list):
 		target_list.append(_body)
 

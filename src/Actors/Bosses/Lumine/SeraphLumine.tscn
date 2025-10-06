@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=2]
+[gd_scene load_steps=112 format=2]
 
 [ext_resource path="res://src/Actors/Panda.gd" type="Script" id=1]
 [ext_resource path="res://src/Actors/Bosses/Lumine/lumine_main.res" type="SpriteFrames" id=2]
@@ -10,7 +10,8 @@
 [ext_resource path="res://src/Actors/Bosses/Lumine/lumine_frontwings.res" type="SpriteFrames" id=8]
 [ext_resource path="res://src/Actors/Bosses/GigaboltManowar/Space.gd" type="Script" id=9]
 [ext_resource path="res://src/Actors/Bosses/Lumine/SeraphIntro.gd" type="Script" id=10]
-[ext_resource path="res://Alt Music/Ys X Nordics OST - Nordics Saga The Endless Bloody Sea.ogg" type="AudioStream" id=11]
+[ext_resource path="res://src/Sounds/OST - SeraphLumine - Loop.ogg" type="AudioStream" id=11]
+[ext_resource path="res://src/Sounds/OST - SeraphLumine - Intro.ogg" type="AudioStream" id=12]
 [ext_resource path="res://src/Actors/Bosses/SatanSigma/flash.gd" type="Script" id=13]
 [ext_resource path="res://src/Levels/PitchBlack/light.png" type="Texture" id=14]
 [ext_resource path="res://src/Actors/NewStateMachine/audioplayer.gd" type="Script" id=15]
@@ -25,7 +26,7 @@
 [ext_resource path="res://src/Sounds/HIT_BOSS.wav" type="AudioStream" id=24]
 [ext_resource path="res://src/Effects/Materials/default_material.tres" type="Material" id=25]
 [ext_resource path="res://src/Effects/Materials/feather_particles2.tres" type="Material" id=26]
-[ext_resource path="res://Alt Music/Ys I&II Chronicles OST - Final Battle.ogg" type="AudioStream" id=27]
+[ext_resource path="res://src/Sounds/OST - ParadiseLost.ogg" type="AudioStream" id=27]
 [ext_resource path="res://src/Effects/Materials/feather_exp2.tres" type="Material" id=28]
 [ext_resource path="res://src/Actors/Bosses/Lumine/LumineDeath.gd" type="Script" id=29]
 [ext_resource path="res://src/Effects/Textures/blue_explosion.png" type="Texture" id=30]
@@ -318,7 +319,7 @@ extents = Vector2( 19, 25.6875 )
 
 [node name="SeraphLumine" type="KinematicBody2D" groups=["Bosses"]]
 z_index = 4
-collision_layer = 64
+collision_layer = 0
 collision_mask = 0
 script = ExtResource( 1 )
 max_health = 400.0
@@ -334,6 +335,7 @@ low_height_segments = 3
 script = ExtResource( 42 )
 time_between_attacks = Vector2( 0.1, 0.1 )
 desperation_threshold = 0.25
+desperation_chance = 0
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 6 )
@@ -342,7 +344,7 @@ shape = SubResource( 49 )
 [node name="backWings" type="AnimatedSprite" parent="."]
 frames = ExtResource( 7 )
 animation = "idle"
-frame = 4
+frame = 5
 playing = true
 flip_h = true
 script = ExtResource( 32 )
@@ -439,7 +441,7 @@ playing = true
 z_index = 2
 frames = ExtResource( 8 )
 animation = "idle"
-frame = 5
+frame = 6
 playing = true
 flip_h = true
 script = ExtResource( 32 )
@@ -463,7 +465,8 @@ scale = Vector2( 4.35, 4.25 )
 
 [node name="Intro" type="Node2D" parent="."]
 script = ExtResource( 10 )
-loop_alt = ExtResource( 11 )
+intro = ExtResource( 12 )
+loop = ExtResource( 11 )
 
 [node name="flash" type="Sprite" parent="Intro"]
 pause_mode = 2
@@ -691,7 +694,7 @@ script = ExtResource( 15 )
 script = ExtResource( 23 )
 desperation_attack = true
 death_walls = ExtResource( 22 )
-music_alt = ExtResource( 27 )
+music = ExtResource( 27 )
 
 [node name="flap" type="AudioStreamPlayer2D" parent="ParadiseLost"]
 stream = ExtResource( 16 )
@@ -773,7 +776,7 @@ duration = 0.064
 script = ExtResource( 44 )
 invulnerability_time = 0.1
 max_flash_time = 0.35
-weakenesses = [ "SqueezeBomb" ]
+weakenesses = [ "SqueezeBomb", "SpiralMagnum", "Juuhazan" ]
 weakness_multiplier = 1.3
 
 [node name="audioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Damage"]

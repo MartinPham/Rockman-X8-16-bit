@@ -141,7 +141,7 @@ animation = "laugh"
 script = ExtResource( 30 )
 invulnerability_time = 0.1
 max_flash_time = 0.35
-weakenesses = [ "DriftDiamond", "RideArmor" ]
+weakenesses = [ "DriftDiamond", "RideArmor", "IceGattling", "Hyouryuushou" ]
 
 [node name="audioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Damage"]
 pause_mode = 2
@@ -367,8 +367,7 @@ texture = ExtResource( 51 )
 script = ExtResource( 52 )
 initial_alpha = 1.0
 tween_scale_y = false
-initial_color = Color( 0.878431, 0.878431, 0.878431, 1 )
-final_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+final_color = Color( 1, 1, 1, 1 )
 duration = 0.064
 
 [node name="VileAirCannon" type="Node2D" parent="."]

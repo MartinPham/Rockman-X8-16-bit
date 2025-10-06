@@ -2,12 +2,12 @@ extends Node
 onready var character: KinematicBody2D = $".."
 
 
-func _ready() -> void:
-	#activate()
+func _ready() -> void :
+	
 	pass
 
 func activate():
-	GameManager.player.connect("received_damage",self,"on_damage_player")
+	GameManager.player.connect("received_damage", self, "on_damage_player")
 	pass
 
 func on_damage_player():
@@ -15,6 +15,6 @@ func on_damage_player():
 		character.recover_health(10)
 	pass
 
-func _on_Intro_executed() -> void:
+func _on_Intro_executed() -> void :
 	activate()
-	pass # Replace with function body.
+	pass

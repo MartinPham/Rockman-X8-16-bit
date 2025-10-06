@@ -1,21 +1,21 @@
 extends Node2D
 onready var laser: AnimatedSprite = $laser
-onready var laser_damage: Node2D = $laser/damage
+onready var laser_damage: Node2D = $laser / damage
 onready var sprite: AnimatedSprite = $ball
 onready var shot_sfx: AudioStreamPlayer2D = $prepare
 onready var damage = get_parent().get_node_or_null("Damage")
 onready var shield: Node2D = $EnemyShield
-var deflects := 2
-var target : Vector2
-var active := true
+var deflects: = 2
+var target: Vector2
+var active: = true
 signal started_deflect
 signal deflected
 signal resetted
 signal vanished
 
 
-func _ready() -> void:
-	Tools.timer(0.1,"deactivate_damage",self)
+func _ready() -> void :
+	Tools.timer(0.1, "deactivate_damage", self)
 	set_physics_process(false)
 
 func reset():
@@ -38,7 +38,7 @@ func aim_laser():
 	laser.visible = true
 	target = GameManager.get_player_position()
 	laser.look_at(target)
-	Tools.timer(0.16,"fire_laser",self)
+	Tools.timer(0.16, "fire_laser", self)
 	laser.play("ready")
 	set_physics_process(true)
 	
@@ -55,11 +55,11 @@ func fire_laser():
 	if deflects == 0:
 		activate_damage()
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void :
 	laser.look_at(target)
 
 
-func _on_shield_hit(projectile) -> void:
+func _on_shield_hit(projectile) -> void :
 	if active and not immunity and deflects > 0:
 		if "GigaCrash" in projectile.name:
 			deflects = 0
@@ -70,10 +70,10 @@ func _on_shield_hit(projectile) -> void:
 			deflects -= 1
 			emit_signal("started_deflect")
 			start_immunity()
-			Tools.timer(0.16,"end_immunity",self)
+			Tools.timer(0.16, "end_immunity", self)
 			aim_laser()
 		
-var immunity := false
+var immunity: = false
 
 func start_immunity():
 	immunity = true

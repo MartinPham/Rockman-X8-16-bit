@@ -76,6 +76,7 @@ script = ExtResource( 3 )
 position = Vector2( 0, -64 )
 frames = ExtResource( 2 )
 animation = "loop"
+frame = 2
 playing = true
 
 [node name="trail" type="AnimatedSprite" parent="."]

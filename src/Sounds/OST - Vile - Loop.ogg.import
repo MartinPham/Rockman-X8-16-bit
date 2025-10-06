@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - Vile - Loop.ogg-3ab74e56fa078f8829b58739a48954
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

@@ -1,12 +1,12 @@
 extends Sprite
 
-onready var tween := TweenController.new(self,false)
+onready var tween: = TweenController.new(self, false)
 
-func _ready() -> void:
+func _ready() -> void :
 	modulate.a = 0.0
 
 func start():
-	modulate = Color(2,2,2,1)
+	modulate = Color(2, 2, 2, 1)
 	var color = Color.fuchsia
 	color.a = 0
-	tween.attribute("modulate",color)
+	tween.attribute("modulate", color)

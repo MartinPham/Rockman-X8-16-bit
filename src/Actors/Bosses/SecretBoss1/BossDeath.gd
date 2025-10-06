@@ -2,36 +2,54 @@ extends AttackAbility
 onready var explosion: AudioStreamPlayer2D = $explosion
 onready var beam_out: AudioStreamPlayer2D = $beam_out
 onready var sparks: AudioStreamPlayer2D = $sparks
-export var dialogue : Resource
+export  var dialogue: Resource
 signal screen_flash
 onready var battle_song: AudioStreamPlayer = $"../Intro/BattleSong"
 
-func _ready() -> void:
-	character.listen("zero_health",self,"start")
+func unlock_axl_white():
+	if CharacterManager.player_character == "Axl":
+		if is_instance_valid(GameManager.player):
+			var axl = GameManager.player
+			CharacterManager.white_axl_armor = true
+			axl.equip_axl_white_parts()
+			CharacterManager.set_axl_colors(axl.animatedSprite)
+			var pause_node = get_tree().root.find_node("Pause", true, false)
+			pause_node.character_menu_visibility()
+			GameManager.add_collectible_to_savedata("white_axl_armor")
+			achievement_check()
+		
+func achievement_check() -> void :
+	Achievements.unlock("COLLECTWHITEAXL")
+	Savefile.save(Savefile.save_slot)
 
-func start() -> void:
+func _ready() -> void :
+	dialogue = CharacterManager._set_correct_dialogues("Secret1Defeated", dialogue)
+	character.listen("zero_health", self, "start")
+
+func start() -> void :
 	character.interrupt_all_moves()
-	
+	unlock_axl_white()
 	ExecuteOnce()
 
-func _Setup() -> void:
+func _Setup() -> void :
 	play_animation("defeat")
 	animatedSprite.pause_mode = Node.PAUSE_MODE_PROCESS
-	call_deferred("force_movement_regardless_of_direction", horizontal_velocity * -get_player_direction_relative())
-	set_vertical_speed(-jump_velocity)
+	call_deferred("force_movement_regardless_of_direction", horizontal_velocity * - get_player_direction_relative())
+	set_vertical_speed( - jump_velocity)
 	explosion.play()
 	emit_signals()
 	battle_song.fade_out()
+	GlobalVariables.add("red_defeated", "defeated")
 
-func emit_signals() -> void:
+func emit_signals() -> void :
 	character.emit_signal("death")
-	Event.emit_signal("enemy_kill",character)
+	Event.emit_signal("enemy_kill", character)
 	GameManager.start_cutscene()
 	GameManager.player.stop_charge()
-	Tools.timer(0.5,"unfreeze",self,null,true)
+	Tools.timer(0.5, "unfreeze", self, null, true)
 	GameManager.pause("BossDefeat")
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0 and timer > 0.1:
 		if character.is_on_floor():
@@ -66,13 +84,13 @@ func _Update(delta) -> void:
 			emit_signal("screen_flash")
 			character.destroy()
 
-func _Interrupt() -> void:
-	push_error("Interrupted Red's Death")
+func _Interrupt() -> void :
+	push_error("Interrupted Red\'s Death")
 
-func unfreeze() -> void:
+func unfreeze() -> void :
 	GameManager.unpause("BossDefeat")
 	
-func start_dialog_or_go_to_attack_stage(skip_dialog_stage := 0) -> void:
+func start_dialog_or_go_to_attack_stage(skip_dialog_stage: = 0) -> void :
 	if not seen_dialog():
 		GameManager.start_dialog(dialogue)
 		next_attack_stage()

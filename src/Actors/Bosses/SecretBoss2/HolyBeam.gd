@@ -1,6 +1,6 @@
 extends AttackAbility
 
-var diag_attack := false
+var diag_attack: = false
 onready var laser: Node2D = $"../animatedSprite/SigmaLaser"
 onready var diag_laser: Node2D = $"../animatedSprite/SigmaLaser2"
 onready var shot: AudioStreamPlayer2D = $shot
@@ -21,8 +21,8 @@ func _Update(_delta):
 	elif attack_stage == 1 and timer > 1.0:
 		play_animation("attack_start")
 		screenshake()
-		#Tools.timer(.5,"screenshake",self)
-		Tools.timer(1.2,"screenshake",self)
+		
+		Tools.timer(1.2, "screenshake", self)
 		shot.play()
 		activate_laser()
 		next_attack_stage()
@@ -58,14 +58,14 @@ func deactivate_laser():
 		return
 	laser.deactivate()
 
-func play_animation(anim_name : String) -> void:
-	var diag_prefix := "diag"
+func play_animation(anim_name: String) -> void :
+	var diag_prefix: = "diag"
 	if diag_attack:
 		.play_animation(diag_prefix + anim_name)
 	else:
 		.play_animation(anim_name)
 
-func screenshake(value := 2.0):
+func screenshake(value: = 2.0):
 	if executing:
 		flash.start()
 		.screenshake(value)

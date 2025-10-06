@@ -1,32 +1,29 @@
 extends Sprite
 class_name SpriteEffect
 
-export var max_duration := 0.0
-export var animation_speed := 40.0
-export var one_shot := false
-export var horizontal_flip_chance := 0.0
-export var vertical_flip_chance := 0.0
-export var copy_rotation := false
-var actual_particle := false
-var emitter : Node2D
-var _anim_speed := 0.0
-var _one_shot := false
-var current_frame := 0.0
-var emitting := false
-var timer := 0.0
+export  var max_duration: float = 0.0
+export  var animation_speed: float = 40.0
+export  var one_shot: bool = false
+export  var horizontal_flip_chance: float = 0.0
+export  var vertical_flip_chance: float = 0.0
+export  var copy_rotation: bool = false
+
+var actual_particle: bool = false
+var emitter: Node2D
+var _anim_speed: float = 0.0
+var _one_shot: bool = false
+var current_frame: float = 0.0
+var emitting: bool = false
+var timer: float = 0.0
 var _particle
 
- 
 signal emit
- 
 signal finished_animation
- 
 signal max_time_reached
- 
 signal destroyed
 
 
-func emit(scale_x := 1):
+func emit(scale_x: = 1):
 	timer = 0.0
 	_particle = duplicate()
 	_particle.actual_particle = true
@@ -47,23 +44,20 @@ func emit(scale_x := 1):
 	if sound.size() > 0:
 		if sound[0] is AudioStreamPlayer2D:
 			sound[0].play()
-		
-	
-	if horizontal_flip_chance > 0:
-		_particle.flip_h = rand_range(0.0,1.0) <= horizontal_flip_chance
 			
+	if horizontal_flip_chance > 0:
+		_particle.flip_h = rand_range(0.0, 1.0) <= horizontal_flip_chance
+		
 	if vertical_flip_chance > 0:
-		var rng = rand_range(0.0,1.0)
+		var rng = rand_range(0.0, 1.0)
 		_particle.flip_v = rng <= vertical_flip_chance
-	
+		
 	if copy_rotation:
 		_particle.rotation_degrees = rotation_degrees
-	
 	emitter_signal("emit")
 	return _particle
 
-
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void :
 	if _anim_speed > 0.99:
 		timer += delta
 		process_frames(delta)
@@ -74,25 +68,24 @@ func _physics_process(delta: float) -> void:
 			emitter_signal("max_time_reached")
 			destroy()
 
-func process_frames(delta:float) -> void:
+func process_frames(delta: float) -> void :
 	current_frame += delta * _anim_speed
 	if current_frame >= vframes * hframes:
 		if _one_shot:
-			#print("Destroyin Particle")
 			destroy()
 		emitter_signal("finished_animation")
 		current_frame = 0
 	frame = int(floor(current_frame))
 
-func emitter_signal(signal_name : String):
+func emitter_signal(signal_name: String) -> void :
 	if is_instance_valid(emitter):
 		emitter.emit_signal(signal_name)
 
-func stop_emission():
+func stop_emission() -> void :
 	emitting = false
 	if actual_particle:
 		destroy()
 
-func destroy():
+func destroy() -> void :
 	emitter_signal("destroyed")
 	queue_free()

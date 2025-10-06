@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://src/Actors/Bosses/GiantMechaniloid/GiantMechaniloid.gd" type="Script" id=1]
 [ext_resource path="res://src/Actors/Bosses/BossAI.gd" type="Script" id=2]
@@ -33,7 +33,6 @@
 [ext_resource path="res://src/Effects/Textures/remains.png" type="Texture" id=31]
 [ext_resource path="res://src/Effects/Materials/mechaniloid_explosion_particles.tres" type="Material" id=32]
 [ext_resource path="res://src/Effects/Materials/mechaniloid_remains_particle.tres" type="Material" id=33]
-[ext_resource path="res://src/Actors/Bosses/Vile/RNGUpdate.gd" type="Script" id=34]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 73, 96.5 )
@@ -127,7 +126,7 @@ material = ExtResource( 9 )
 z_index = 1
 frames = ExtResource( 6 )
 animation = "idle"
-frame = 2
+frame = 4
 playing = true
 script = ExtResource( 7 )
 head_l_frames = ExtResource( 10 )
@@ -137,7 +136,7 @@ position = Vector2( 0, 44 )
 z_index = -1
 frames = ExtResource( 5 )
 animation = "idle"
-frame = 2
+frame = 4
 playing = true
 script = ExtResource( 8 )
 
@@ -287,7 +286,6 @@ bus = "SFX"
 
 [node name="EnemyDeath" type="Node2D" parent="."]
 script = ExtResource( 26 )
-explosion_duration = 1.5
 
 [node name="Explosion Particles" type="Particles2D" parent="EnemyDeath"]
 material = SubResource( 71 )
@@ -349,12 +347,8 @@ process_material = ExtResource( 24 )
 texture = ExtResource( 23 )
 script = ExtResource( 25 )
 
-[node name="RNGUpdate" type="Node" parent="."]
-script = ExtResource( 34 )
-
 [connection signal="death" from="." to="Explosion" method="_on_GiantMechaniloid_death"]
 [connection signal="body_entered" from="DamageDetector" to="DamageDetector" method="_on_DamageDetector_body_entered"]
 [connection signal="body_entered" from="DamageDetector" to="Damage" method="_on_area2D_body_entered"]
 [connection signal="ability_start" from="EnemyDeath" to="Explosion" method="_on_EnemyDeath_ability_start"]
-[connection signal="ability_start" from="EnemyDeath" to="RNGUpdate" method="_on_BossDeath_ability_start"]
 [connection signal="timeout" from="EnemyDeath/Remains/timer" to="EnemyDeath/Remains" method="_on_timer_timeout"]

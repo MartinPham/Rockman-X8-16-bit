@@ -1,9 +1,11 @@
 extends BossDamage
 
-const exceptions = ["RideArmor","Optic","Fire"]
 onready var panda: Node2D = $"../Panda"
 
-func should_ignore_damage (inflicter) -> bool:
+const exceptions: Array = ["RideArmor", "Optic", "Fire"]
+
+
+func should_ignore_damage(inflicter) -> bool:
 	if panda.executing and panda.attack_stage >= 4:
 		if character.is_invulnerable() or not character.has_health():
 			return true
@@ -16,7 +18,7 @@ func should_ignore_damage (inflicter) -> bool:
 				if word in inflicter.name:
 					return false
 			return true
-
+			
 		if ignore_nearby_hits and character.has_shield():
 			if "bypass_shield" in inflicter:
 				return false
@@ -28,20 +30,19 @@ func should_ignore_damage (inflicter) -> bool:
 	else:
 		return .should_ignore_damage(inflicter)
 
-func set_damage_reduction (_value):
+func set_damage_reduction(_value) -> void :
 	pass
-	#discarding damage reduction for Lumine
-	
+
 func handle_weakness(inflicter) -> float:
 	var dmg_value = 0.0
-	dmg_value = inflicter.damage_to_weakness 
+	dmg_value = inflicter.damage_to_weakness
 	character.reduce_health(dmg_value)
 	if "Charged" in inflicter.name or "Punch" in inflicter.name:
-		print_debug("Hit by charged weakness for " + str(dmg_value))
+		
 		invulnerability_time = charged_weakness_invul_time
-		emit_signal("charged_weakness_hit",get_inflicter_direction(inflicter))
+		emit_signal("charged_weakness_hit", get_inflicter_direction(inflicter))
 	else:
-		print_debug("Hit by weakness for " + str(dmg_value))
+		
 		invulnerability_time = weakness_invulnerability_time
 	max_flash_time = invulnerability_time
 	return dmg_value

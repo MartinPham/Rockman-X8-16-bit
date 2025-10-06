@@ -1,23 +1,23 @@
 extends AttackAbility
 onready var enemy_shield: Node2D = $"../EnemyShield"
 
-var able_to_defend := true
-var turning := false
+var able_to_defend: = true
+var turning: = false
 signal unable_to_defend
 
 func _StartCondition() -> bool:
 	return able_to_defend
 
-func _Setup() -> void:
+func _Setup() -> void :
 	turning = false
 	if not is_facing_player():
 		play_animation("turn")
 		turning = true
 	
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	process_gravity(_delta)
 	if attack_stage == 0:
-		if turning: 
+		if turning:
 			if has_finished_last_animation():
 				turn()
 				play_animation("shield_prepare")
@@ -41,9 +41,9 @@ func _Update(_delta) -> void:
 	elif attack_stage == 3 and has_finished_last_animation():
 		EndAbility()
 
-func make_unable_to_defend() -> void:
+func make_unable_to_defend() -> void :
 	able_to_defend = false
 	emit_signal("unable_to_defend")
 
-func _on_EnemyStun_ability_start(_ability) -> void:
+func _on_EnemyStun_ability_start(_ability) -> void :
 	make_unable_to_defend()

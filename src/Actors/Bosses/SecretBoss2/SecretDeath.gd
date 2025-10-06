@@ -1,15 +1,15 @@
 extends AttackAbility
 
-onready var tween := TweenController.new(self,false)
+onready var tween: = TweenController.new(self, false)
 onready var space: Node = $"../Space"
 onready var idle: Node2D = $"../Idle"
 onready var damage: Node2D = $"../Damage"
 onready var flash: Sprite = $flash
 onready var battle_song: AudioStreamPlayer = $"../Intro/BattleSong"
 onready var desperation: AudioStreamPlayer = $Desperation
-export var _holy_death : PackedScene
-export var dialogue : Resource
-var holy_death : Node2D
+export  var _holy_death: PackedScene
+export  var dialogue: Resource
+var holy_death: Node2D
 onready var damage_on_touch: Node2D = $"../DamageOnTouch"
 onready var veil_manager: Node = $"../animatedSprite/VeilManager"
 onready var reflector: Node2D = $"../DamageReflector"
@@ -27,27 +27,27 @@ onready var light: Sprite = $background_light
 onready var fullscreen_light: Sprite = $fullscreen_light
 onready var break_vfx: AnimatedSprite = $break_vfx
 
-const interval := 3.0
-var first_death := true
+const interval: = 3.0
+var first_death: = true
 signal screen_flash
 signal true_death
 
 func true_end():
+	GlobalVariables.set("serenade_defeated", true)
 	GameManager.start_cutscene()
-	Tools.timer(.25,"turn_player_towards_boss",self)
+	Tools.timer(0.25, "turn_player_towards_boss", self)
 	smoke.emitting = true
 	explosions.emitting = true
 	final_explosion.play()
 	desperation.fade_out(3)
-	Tools.timer(2,"set_weak_light",self)
+	Tools.timer(2, "set_weak_light", self)
 	golden_particles_2.emitting = false
 	emit_signal("true_death")
-	pass
-	
-func _ready() -> void:
-	get_parent().listen("zero_health",self,"start_death")
-	reset_shader()
 
+func _ready() -> void :
+	dialogue = CharacterManager._set_correct_dialogues("Secret2Defeated", dialogue)
+	get_parent().listen("zero_health", self, "start_death")
+	reset_shader()
 
 func start_death():
 	character.interrupt_all_moves()
@@ -70,19 +70,19 @@ func _Setup():
 	blink()
 	GameManager.pause(character.name + name)
 	if first_death:
-		Tools.timer(0.5,"unpause",self,null,true)
+		Tools.timer(0.5, "unpause", self, null, true)
 	else:
 		break_vfx.visible = true
 		break_vfx.playing = true
-		Tools.timer(1.25,"unpause",self,null,true)
+		Tools.timer(1.25, "unpause", self, null, true)
 	
 func unpause():
 	GameManager.unpause(character.name + name)
 	stop_blink()
 	if first_death:
 		first_death = false
-		character.set_horizontal_speed(60 * -get_player_direction_relative())
-		character.set_vertical_speed(-200)
+		character.set_horizontal_speed(60 * - get_player_direction_relative())
+		character.set_vertical_speed( - 200)
 		next_attack_stage()
 	else:
 		true_end()
@@ -103,11 +103,11 @@ func _Update(delta):
 		play_animation("lotus_start")
 		golden_particles.emitting = true
 		screenshake()
-		Tools.timer(1,"screenshake",self)
-		Tools.timer(2,"screenshake",self)
-		Tools.timer(3,"screenshake",self)
+		Tools.timer(1, "screenshake", self)
+		Tools.timer(2, "screenshake", self)
+		Tools.timer(3, "screenshake", self)
 		vfx.activate()
-		set_vertical_speed(-30)
+		set_vertical_speed( - 30)
 		desperation.play()
 		next_attack_stage()
 
@@ -124,8 +124,8 @@ func _Update(delta):
 		golden_particles.emitting = false
 		golden_particles_2.emitting = true
 		flash.start()
-		Tools.timer(0.15,"start",flash_2)
-		Tools.timer(0.35,"start",flash_2)
+		Tools.timer(0.15, "start", flash_2)
+		Tools.timer(0.35, "start", flash_2)
 		reflector.reset()
 		screenshake()
 		start_holy_death()
@@ -137,8 +137,8 @@ func _Update(delta):
 
 	elif attack_stage == 5 and has_finished_last_animation():
 		play_animation("unleash")
-		Tools.timer(1,"screenshake",self)
-		Tools.timer(2,"screenshake",self)
+		Tools.timer(1, "screenshake", self)
+		Tools.timer(2, "screenshake", self)
 		next_attack_stage()
 	
 	elif attack_stage == 6 and timer > 3:
@@ -172,14 +172,14 @@ func _Update(delta):
 	elif attack_stage == 12 and timer > 2:
 		GameManager.end_boss_death_cutscene()
 		next_attack_stage()
-		#character.destroy()
-	#print(seen_dialog())
+		
+	
 
 func start_holy_death():
 	holy_death = _holy_death.instance()
 	character.get_parent().add_child(holy_death)
-	Tools.timer(0.1,"activate",holy_death)
-	idle.connect("started",holy_death,"activate")
+	Tools.timer(0.1, "activate", holy_death)
+	idle.connect("started", holy_death, "activate")
 	
 func end_holy_death():
 	holy_death.deactivate()
@@ -199,7 +199,7 @@ func stop_blink():
 	animatedSprite.material.set_shader_param("Flash", 0)
 
 func set_weak_light():
-	print_debug("set weak light...")
+	
 	break_vfx.visible = false
 	tween.create()
 	tween.add_wait(8)
@@ -212,20 +212,20 @@ func end():
 	emit_signal("screen_flash")
 	turn_player_towards_boss()
 	turn_and_face_player()
-	Tools.timer_p(1,"go_to_attack_stage",self,9)
-	#go_to_attack_stage(9)
-
-func set_light_alpha(value : float):
-	light.material.set_shader_param("Alpha",value)
-
-func set_light_color(value : float):
-	light.material.set_shader_param("Color",value)
+	Tools.timer_p(1, "go_to_attack_stage", self, 9)
 	
-func set_darken(value : float):
-	animatedSprite.material.set_shader_param("Darken",value)
+
+func set_light_alpha(value: float):
+	light.material.set_shader_param("Alpha", value)
+
+func set_light_color(value: float):
+	light.material.set_shader_param("Color", value)
+	
+func set_darken(value: float):
+	animatedSprite.material.set_shader_param("Darken", value)
 
 
-func start_dialog_or_go_to_attack_stage(skip_dialog_stage := 0) -> void:
+func start_dialog_or_go_to_attack_stage(skip_dialog_stage: = 0) -> void :
 	if not seen_dialog():
 		GameManager.start_dialog(dialogue)
 		next_attack_stage()

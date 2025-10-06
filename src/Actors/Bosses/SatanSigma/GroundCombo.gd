@@ -6,13 +6,13 @@ onready var slash_3: Node2D = $slash3
 onready var slash_1_sfx: AudioStreamPlayer2D = $slash1_sfx
 onready var projectile_sfx: AudioStreamPlayer2D = $projectile_sfx
 
-export var projectile : PackedScene
+export  var projectile: PackedScene
 
-func _Setup() -> void:
+func _Setup() -> void :
 	turn_and_face_player()
 	play_animation("slash_1_prepare")
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	if attack_stage == 0 and has_finished_last_animation():
 		play_animation("slash_1_prepare_loop")
 		go_to_attack_stage(2)
@@ -26,7 +26,7 @@ func _Update(delta) -> void:
 		slash_1_sfx.play_rp()
 		slash_1.activate()
 		screenshake()
-		tween_speed(220,0,0.35)
+		tween_speed(220, 0, 0.35)
 		next_attack_stage()
 	
 	elif attack_stage == 3 and has_finished_last_animation():
@@ -36,7 +36,7 @@ func _Update(delta) -> void:
 	elif attack_stage == 4 and timer > 0.1:
 		turn_and_face_player()
 		play_animation("slash_2_prepare")
-		tween_speed(220,0,0.35)
+		tween_speed(220, 0, 0.35)
 		next_attack_stage()
 		
 	elif attack_stage == 5 and has_finished_last_animation():
@@ -49,7 +49,7 @@ func _Update(delta) -> void:
 		slash_2.activate()
 		particles.restart()
 		screenshake()
-		tween_speed(100,0,0.5)
+		tween_speed(100, 0, 0.5)
 		next_attack_stage()
 
 	elif attack_stage == 7 and has_finished_last_animation():
@@ -95,10 +95,10 @@ func turn_and_face_player():
 
 onready var ground_projectile_pos: Position2D = $"../animatedSprite/ground_projectile_pos"
 
-var target_dir : Vector2
+var target_dir: Vector2
 
-func instantiate_projectile(scene : PackedScene) -> Node2D:
-	var proj = instantiate(scene) 
+func instantiate_projectile(scene: PackedScene) -> Node2D:
+	var proj = instantiate(scene)
 	proj.set_creator(self)
 	proj.initialize(character.get_facing_direction())
 	proj.global_position = ground_projectile_pos.global_position

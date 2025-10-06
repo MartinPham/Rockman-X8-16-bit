@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - MiniBoss - Loop.ogg-6b8c51b61975d27c8a6bc2bd53
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

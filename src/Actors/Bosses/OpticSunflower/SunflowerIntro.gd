@@ -1,14 +1,14 @@
 extends GenericIntro
 onready var appear: AudioStreamPlayer2D = $"../OpticTeleport/appear"
 onready var leaves: Particles2D = $"../OpticTeleport/leaves"
-export var bar : Texture
+export  var bar: Texture
 
-func _Setup() -> void:
+func _Setup() -> void :
 	Log("Setup Intro")
 	GameManager.start_cutscene()
 	turn_and_face_player()
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0 and timer > 1:
 		Log("Setup Intro")
@@ -38,7 +38,7 @@ func _Update(delta) -> void:
 		next_attack_stage()
 		
 	elif attack_stage == 5 and timer > 0.5:
-		Event.emit_signal("set_boss_bar",bar)
+		Event.emit_signal("set_boss_bar", bar)
 		Event.emit_signal("boss_health_appear", character)
 		leaves.emitting = false
 		leaves.z_index = 1
@@ -52,7 +52,7 @@ func _Update(delta) -> void:
 		play_animation("idle")
 		EndAbility()
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	Event.emit_signal("boss_start", character)
 	GameManager.end_cutscene()
 	character.emit_signal("intro_concluded")

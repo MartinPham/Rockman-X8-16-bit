@@ -13,7 +13,7 @@ dest_files=[ "res://.import/_map.tmx-49881711c37ff36c6b64b5e7898e3b42.scn" ]
 
 custom_properties=true
 tile_metadata=false
-uv_clip=false
+uv_clip=true
 image_flags=7
 collision_layer=1
 embed_internal_images=false

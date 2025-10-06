@@ -1,15 +1,15 @@
 extends AttackAbility
 
-export var projectile : PackedScene
-const distance := Vector2(128,64)
-const escape_distance := Vector2(384,64)
+export  var projectile: PackedScene
+const distance: = Vector2(128, 64)
+const escape_distance: = Vector2(384, 64)
 onready var shot_sound: AudioStreamPlayer2D = $shot_sound
-var shots_fired := 0
+var shots_fired: = 0
 
-func _Setup() -> void:
+func _Setup() -> void :
 	shots_fired = 0
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0:
 		turn_and_face_player()
@@ -42,11 +42,11 @@ func _Update(delta) -> void:
 	elif attack_stage == 4 and has_finished_last_animation():
 		EndAbility()
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	play_animation("idle")
 	force_movement(0)
 
-func create_projectile() -> void:
+func create_projectile() -> void :
 	shots_fired += 1
 	var shot = instantiate_projectile(projectile)
 	shot.global_position = character.global_position

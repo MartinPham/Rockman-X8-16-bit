@@ -1,19 +1,19 @@
 extends Node
 onready var character: KinematicBody2D = $".."
 
-export var bike : PackedScene
-export var spawn_damaged := false
+export  var bike: PackedScene
+export  var spawn_damaged: = false
 
-func _ready() -> void:
-	character.listen("zero_health",self,"instantiate")
+func _ready() -> void :
+	character.listen("zero_health", self, "instantiate")
 
-func instantiate() -> void:
+func instantiate() -> void :
 	call_deferred("instantiate_bike")
 
-func instantiate_bike() -> void:
+func instantiate_bike() -> void :
 	var instance = bike.instance()
-	get_tree().current_scene.add_child(instance,true)
-	instance.set_global_position(character.global_position) 
+	get_tree().current_scene.add_child(instance, true)
+	instance.set_global_position(character.global_position)
 	instance.set_direction(character.get_facing_direction())
 	if instance.has_method("set_actual_speed"):
 		instance.set_actual_speed(character.get_actual_horizontal_speed())

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - Noah's Park - Loop.ogg-012d5415ab3a3fbcd64cae7
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

@@ -1,6 +1,6 @@
 extends BossIdle
 
-func _Update(_delta) -> void:
-	#set_vertical_speed(jump_velocity * sin(timer))
+func _Update(_delta: float) -> void :
+	
 	pass
 

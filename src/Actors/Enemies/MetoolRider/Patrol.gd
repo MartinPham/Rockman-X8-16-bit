@@ -1,6 +1,6 @@
 extends AttackAbility
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0 and timer > 2:
 		turn()
@@ -16,5 +16,5 @@ func _Update(delta) -> void:
 		play_animation("idle")
 		go_to_attack_stage(0)
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	force_movement(0)

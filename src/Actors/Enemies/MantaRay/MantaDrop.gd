@@ -1,15 +1,15 @@
 extends AttackAbility
 
-export var drop_enemy : PackedScene
-var tween : SceneTreeTween
+export  var drop_enemy: PackedScene
+var tween: SceneTreeTween
 
 func _Setup():
 	attack_stage = 0
 	start_tween()
-	tween.tween_property(character,"position",Vector2(400,50),3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)# warning-ignore:return_value_discarded
-	tween.tween_property(character,"position",Vector2(500,-200),2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)# warning-ignore:return_value_discarded
+	tween.tween_property(character, "position", Vector2(400, 50), 3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(character, "position", Vector2(500, - 200), 2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	if attack_stage == 0 and timer > 0.35:
 		spawn_enemy()
 		next_attack_stage()
@@ -18,7 +18,7 @@ func _Update(_delta) -> void:
 		if timer > 0.5:
 			spawn_enemy()
 			timer = 0
-		if character.position.x > 400-1:
+		if character.position.x > 400 - 1:
 			next_attack_stage()
 			
 	elif attack_stage == 2:
@@ -27,33 +27,33 @@ func _Update(_delta) -> void:
 			play_animation("idle_loop")
 			next_attack_stage()
 
-	elif attack_stage == 3 and character.position.y <= -200+1:
+	elif attack_stage == 3 and character.position.y <= - 200 + 1:
 		play_animation("idle_loop")
 		start_tween()
-		tween.tween_property(character,"position",Vector2(0,0),3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)# warning-ignore:return_value_discarded
+		tween.tween_property(character, "position", Vector2(0, 0), 3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 		next_attack_stage_on_tween_end()
 	
 	elif attack_stage == 5:
 		EndAbility()
 
-func spawn_enemy() -> void:
+func spawn_enemy() -> void :
 	var enemy = instantiate(drop_enemy)
 	enemy.set_direction(1)
-	character.call_deferred("emit_signal_spawn",enemy)
+	character.call_deferred("emit_signal_spawn", enemy)
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	end_tween()
 
-func next_attack_stage_on_tween_end() -> void:
+func next_attack_stage_on_tween_end() -> void :
 	next_attack_stage()
-	tween.set_parallel(false)# warning-ignore:return_value_discarded
-	tween.tween_callback(self,"next_attack_stage_on_next_frame")# warning-ignore:return_value_discarded
+	tween.set_parallel(false)
+	tween.tween_callback(self, "next_attack_stage_on_next_frame")
 	
-func start_tween() -> void:
+func start_tween() -> void :
 	if tween:
 		tween.kill()
 	tween = create_tween()
 	
-func end_tween() -> void:
+func end_tween() -> void :
 	if tween:
 		tween.kill()

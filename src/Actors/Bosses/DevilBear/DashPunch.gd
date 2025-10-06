@@ -7,13 +7,13 @@ onready var wallhit: Node2D = $wallhit
 onready var hit: Particles2D = $"../animatedSprite/hit"
 onready var wallpunch: AudioStreamPlayer2D = $"../wallpunch"
 onready var wave: Sprite = $"../animatedSprite/wave"
-onready var tween := TweenController.new(self,false)
+onready var tween: = TweenController.new(self, false)
 
-func _Setup() -> void:
+func _Setup() -> void :
 	turn_and_face_player()
 	wallhit.handle_direction()
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0:
 		play_animation_once("dash")
@@ -36,7 +36,7 @@ func _Update(delta) -> void:
 	
 	elif attack_stage == 4 and facing_a_wall():
 		create_wave()
-		Tools.timer(0.05,"hit_wall",self)
+		Tools.timer(0.05, "hit_wall", self)
 		next_attack_stage()
 	
 	elif attack_stage == 5 and has_finished_last_animation():
@@ -46,7 +46,7 @@ func _Update(delta) -> void:
 	elif attack_stage == 6 and timer > 0.25:
 		EndAbility()
 
-func hit_wall() -> void:
+func hit_wall() -> void :
 	wallhit.activate()
 	wallpunch.play_rp()
 	hit.restart()
@@ -56,15 +56,15 @@ func hit_wall() -> void:
 	prepare.restart()
 	screenshake(0.9)
 
-func create_wave() -> void:
+func create_wave() -> void :
 	wave.visible = true
-	wave.scale = Vector2(.5,.5)
+	wave.scale = Vector2(0.5, 0.5)
 	wave.modulate.a = 1
 	tween.create()
 	tween.set_parallel()
-	tween.add_attribute("scale",Vector2(1,4.0),0.16,wave)
-	tween.add_attribute("modulate:a",0.0,0.16,wave)
+	tween.add_attribute("scale", Vector2(1, 4.0), 0.16, wave)
+	tween.add_attribute("modulate:a", 0.0, 0.16, wave)
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	._Interrupt()
 	dash_particles.emitting = false

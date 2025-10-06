@@ -1,18 +1,18 @@
 extends AttackAbility
 class_name SFlierPatrol
 
-export var travel_speed := 60.0
-export var travel_duration := 2.65
-var distance_limit := 160.0
-#var tween
-var current_speed := 0.0
-var moving := false
+export  var travel_speed: = 60.0
+export  var travel_duration: = 2.65
+var distance_limit: = 160.0
 
-onready var tween := TweenController.new(self,false)
+var current_speed: = 0.0
+var moving: = false
 
-var initial_pos : Vector2
+onready var tween: = TweenController.new(self, false)
 
-func _ready() -> void:
+var initial_pos: Vector2
+
+func _ready() -> void :
 	initial_pos = global_position
 
 func is_beyond_limit() -> bool:
@@ -25,8 +25,8 @@ func _Setup():
 	moving = false
 	pass
 
-func _Update(_delta) -> void:
-	if attack_stage == 0: #andando
+func _Update(_delta: float) -> void :
+	if attack_stage == 0:
 		if not moving:
 			tween.attribute("current_speed", travel_speed, 0.75)
 			moving = true
@@ -35,7 +35,7 @@ func _Update(_delta) -> void:
 		if is_beyond_limit():
 			next_attack_stage()
 	
-	elif attack_stage ==1: 
+	elif attack_stage == 1:
 		if moving:
 			tween.attribute("current_speed", 0.0, 0.35)
 			moving = false
@@ -44,8 +44,8 @@ func _Update(_delta) -> void:
 		
 		if has_finished_last_animation() and timer > 0.4:
 			play_animation_once("idle")
-# warning-ignore:narrowing_conversion
-			set_direction(character.get_direction() * -1)
+
+			set_direction(character.get_direction() * - 1)
 			go_to_attack_stage_on_next_frame(0)
 
 func _Interrupt():

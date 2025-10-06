@@ -1,17 +1,18 @@
 extends NewAbility
 
-onready var physics = Physics.new(get_parent())
-onready var animation = AnimationController.new($"../animatedSprite", self)
+onready var physics: Physics = Physics.new(get_parent())
+onready var animation: AnimationController = AnimationController.new($"../animatedSprite", self)
+
 
 func should_execute() -> bool:
 	return current_conflicts.size() == 0
 
-func _Setup() -> void:
-	#animation.play("deactivated")
+func _Setup() -> void :
 	pass
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	physics.process_gravity(delta)
+	
 
-func _on_Eject_stop(_ability_name) -> void:
+func _on_Eject_stop(_ability_name) -> void :
 	_on_signal()

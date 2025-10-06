@@ -1,20 +1,20 @@
 extends GenericIntro
 
-export var projectile : PackedScene
+export  var projectile: PackedScene
 
-func _Setup() -> void:
+func _Setup() -> void :
 	GameManager.start_cutscene()
-	attack_stage = -1
+	attack_stage = - 1
 
-func spawn_box() -> void:
+func spawn_box() -> void :
 	var p = instantiate(projectile)
 	p.global_position.y = character.global_position.y - 144
 	p.global_position.x = character.global_position.x
 	p.floor_position = character.global_position.y - 28
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	process_gravity(_delta)
-	if attack_stage == -1 and timer > 1:
+	if attack_stage == - 1 and timer > 1:
 		spawn_box()
 		next_attack_stage()
 

@@ -1,23 +1,26 @@
 extends Node2D
 
 export (PackedScene) var object_to_spawn
-export var set_direction_to_right := false
-export var detection_area : NodePath
-var timer := 0.0
-var alarm := false
-var spawned_object : Node2D
-var area
+export  var set_direction_to_right: bool = false
+export  var detection_area: NodePath
 
 onready var visibility: VisibilityNotifier2D = $visibilityNotifier2D
-func _ready() -> void:
-	Event.listen("alarm",self,"on_alarm")
-	Event.listen("turn_off_alarm",self,"on_reset_lights")
+
+var timer: float = 0.0
+var alarm: bool = false
+var spawned_object: Node2D
+var area
+
+
+func _ready() -> void :
+	Event.listen("alarm", self, "on_alarm")
+	Event.listen("turn_off_alarm", self, "on_reset_lights")
 	call_deferred("set_area")
 
-func set_area() -> void:
+func set_area() -> void :
 	area = get_node(detection_area)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void :
 	if alarm and not is_instance_valid(spawned_object):
 		timer += delta
 		if timer > 0.35 and is_player_near():
@@ -29,7 +32,6 @@ func _physics_process(delta: float) -> void:
 		if should_despawn():
 			despawn()
 			timer = 0
-		
 
 func is_player_near() -> bool:
 	var sum = 0
@@ -43,34 +45,33 @@ func is_player_near() -> bool:
 		sum += 1
 	return sum == 4
 
-
-func spawn() -> void:
+func spawn() -> void :
 	add_spawn_to_scene()
 	position_spawn()
 	timer = 0.01
 
-func despawn() -> void:
+func despawn() -> void :
 	spawned_object.destroy()
 
-func on_alarm() -> void:
+func on_alarm() -> void :
 	alarm = true
 	timer = 0
 
-func on_reset_lights() -> void:
+func on_reset_lights() -> void :
 	alarm = false
 
-func add_spawn_to_scene() -> void:
+func add_spawn_to_scene() -> void :
 	spawned_object = object_to_spawn.instance()
-	get_tree().current_scene.get_node("Objects").call_deferred("add_child",spawned_object)
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", spawned_object)
 
-func position_spawn() -> void:
+func position_spawn() -> void :
 	spawned_object.transform = global_transform
-	#spawned_object.global_position = global_position
+	
 	if spawned_object.has_method("set_direction"):
 		if set_direction_to_right:
-			spawned_object.call_deferred("set_direction",1)
+			spawned_object.call_deferred("set_direction", 1)
 		else:
-			spawned_object.call_deferred("set_direction",-1)
+			spawned_object.call_deferred("set_direction", - 1)
 
 func should_despawn() -> bool:
 	return not GameManager.is_player_nearby(spawned_object) and not GameManager.is_on_screen(spawned_object.global_position) and timer > 8

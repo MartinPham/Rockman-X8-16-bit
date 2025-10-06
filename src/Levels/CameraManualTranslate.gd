@@ -1,20 +1,20 @@
 extends CameraMode
-class_name TranslateCameraMode
+class_name TranslateCameraMode2
 
-const translate_time := 2
-var initial_camera_position : Vector2
-var timer := 0.0
+const translate_time: = 2
+var initial_camera_position: Vector2
+var timer: = 0.0
 
-func activate(_target) -> void:
+func activate(_target) -> void :
 	.activate(_target)
 	start_translate()
 
-func start_translate() -> void:
-	#initial_camera_position = camera.global_position
+func start_translate() -> void :
+	
 	timer = 0.01
 
 func update(delta: float) -> Vector2:
-	var new_position : Vector2
+	var new_position: Vector2
 	if is_translating():
 		new_position = translate()
 		timer += delta
@@ -25,16 +25,16 @@ func update(delta: float) -> Vector2:
 
 func translate() -> Vector2:
 	var weight = inverse_lerp(0, translate_time, timer)
-	var pos : Vector2
+	var pos: Vector2
 	pos.x = (lerp(camera.global_position.x, get_correct_position().x, weight))
 	pos.y = (lerp(camera.global_position.y, get_correct_position().y, weight))
 	
 	return pos
 
-func get_correct_position () -> Vector2:
+func get_correct_position() -> Vector2:
 	return camera.get_nearest_position()
 
-func deactivate() -> void:
+func deactivate() -> void :
 	if x_axis:
 		camera.current_mode_x = null
 	else:

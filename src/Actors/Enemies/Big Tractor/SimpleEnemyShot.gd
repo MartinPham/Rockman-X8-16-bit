@@ -1,22 +1,22 @@
 extends EnemyShot
 class_name MultipleShot
 
-export var use_shot_position := false
-export var extra_projectiles : Array
+export  var use_shot_position: = false
+export  var extra_projectiles: Array
 onready var prepare: AudioStreamPlayer2D = $prepare
 onready var turn: AudioStreamPlayer2D = $turn
-var played_sound := false
+var played_sound: = false
 
 
-var turning := false
+var turning: = false
 
-func fire(projectile, _shot_position, _notused := 0, _nonused := Vector2.ZERO) -> void:
+func fire(projectile, _shot_position, _notused: = 0, _nonused: = Vector2.ZERO) -> void :
 	instantiate_projectile2(projectile)
 	for p in extra_projectiles:
 		instantiate_projectile2(p)
 
-func instantiate_projectile2(scene : PackedScene) -> void:
-	var projectile = instantiate(scene) 
+func instantiate_projectile2(scene: PackedScene) -> void :
+	var projectile = instantiate(scene)
 	projectile.set_creator(self)
 	projectile.initialize(character.get_facing_direction())
 	if use_shot_position:
@@ -32,7 +32,7 @@ func _Setup():
 		turning = true
 
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	if turning:
 		if has_finished_last_animation():
 			set_direction(get_player_direction_relative())

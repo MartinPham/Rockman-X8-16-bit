@@ -170,7 +170,7 @@ conflicting_moves = [ "Anything" ]
 script = ExtResource( 7 )
 invulnerability_time = 0.1
 max_flash_time = 0.35
-weakenesses = [ "OpticShield" ]
+weakenesses = [ "OpticShield", "RayGun" ]
 
 [node name="audioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Damage"]
 pause_mode = 2
@@ -400,7 +400,6 @@ bus = "SFX"
 
 [node name="BossDeath" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
-explosion_duration = 1.5
 death_animation = "death"
 collectible = "mantis_weapon"
 

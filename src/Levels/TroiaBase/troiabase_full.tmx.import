@@ -13,7 +13,7 @@ dest_files=[ "res://.import/troiabase_full.tmx-68c6dbdf38044850ecf7b69576dfe90b.
 
 custom_properties=true
 tile_metadata=false
-uv_clip=false
+uv_clip=true
 image_flags=7
 collision_layer=1
 embed_internal_images=false

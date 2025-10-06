@@ -7,14 +7,14 @@ onready var end: AudioStreamPlayer2D = $end
 onready var start: AudioStreamPlayer2D = $start
 onready var fall: AudioStreamPlayer2D = $fall
 
-var hit_wall := false
+var hit_wall: = false
 
-func _Setup() -> void:
-	facing_direction = -facing_direction 
+func _Setup() -> void :
+	facing_direction = - facing_direction
 	scale.x = facing_direction
 	set_horizontal_speed(40 * facing_direction)
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	if not hit_wall and not animatedSprite.visible and is_on_wall():
 		hit_wall = true
 		go_to_attack_stage(3)

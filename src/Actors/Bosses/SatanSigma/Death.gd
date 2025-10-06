@@ -1,8 +1,8 @@
 extends BossDeath
 
-var player_final_position : Vector2
+var player_final_position: Vector2
 
-func _ready() -> void:
+func _ready() -> void :
 	player_final_position = global_position
 	player_final_position.x -= 100
 
@@ -10,13 +10,13 @@ func _Setup():
 	character.play_animation(death_animation)
 	character.set_horizontal_speed(0)
 	character.set_vertical_speed(0)
-	Event.emit_signal("enemy_kill","boss")
+	Event.emit_signal("enemy_kill", "boss")
 	GameManager.start_end_cutscene()
-	#sprite.playing = false
+	
 	touch_damage.active = false
 	elapsed_explosion_time = 0.0
 	background.scale.x = 100
-	background.scale.y = 40 
+	background.scale.y = 40
 	GameManager.pause(character.name + name)
 	freeze_moment = OS.get_ticks_msec()
 

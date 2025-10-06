@@ -1,20 +1,20 @@
 extends AttackAbility
 
-export var nearby_distance : Vector2
-var max_distance : Vector2
-var player_direction := 0
+export  var nearby_distance: Vector2
+var max_distance: Vector2
+var player_direction: = 0
 
-var turning := false
+var turning: = false
 
-func _ready() -> void:
+func _ready() -> void :
 	max_distance = $"../AI/vision/collisionShape2D".shape.extents
-	max_distance += Vector2(10,10)
+	max_distance += Vector2(10, 10)
 
-func _Setup() -> void:
+func _Setup() -> void :
 	attack_stage = 0
 	turning = false
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	process_gravity(_delta)
 
 	if not player_in_front() and not turning:
@@ -42,7 +42,7 @@ func _Update(_delta) -> void:
 			EndAbility()
 	
 	
-	if attack_stage == 2: # turn
+	if attack_stage == 2:
 		force_movement(0)
 		process_gravity(_delta)
 		play_animation_once("turn")
@@ -51,11 +51,11 @@ func _Update(_delta) -> void:
 			play_animation_once("ready_start")
 			next_attack_stage()
 
-	elif attack_stage == 3 and timer > 1: #after turning
+	elif attack_stage == 3 and timer > 1:
 		turning = false
 		go_to_attack_stage(0)
 			
-	elif attack_stage == 4: #nearby player
+	elif attack_stage == 4:
 		force_movement(0)
 		play_animation_once("ready_start")
 		if not is_player_nearby(nearby_distance):

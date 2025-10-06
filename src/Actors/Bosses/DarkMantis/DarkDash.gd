@@ -1,7 +1,7 @@
 extends AttackAbility
 
-export (PackedScene) var projectile 
-var target_dir := Vector2.ZERO
+export (PackedScene) var projectile
+
 onready var hitbox: Node2D = $EnemyMeleeAttack
 onready var dash_smoke: Particles2D = $dash_smoke
 onready var cut_1: AudioStreamPlayer2D = $cut1
@@ -9,8 +9,10 @@ onready var cut_2: AudioStreamPlayer2D = $cut2
 onready var dash: AudioStreamPlayer2D = $dash
 onready var land: AudioStreamPlayer2D = $land
 
+var target_dir: Vector2 = Vector2.ZERO
 
-func _Update(delta):
+
+func _Update(delta: float):
 	if attack_stage == 0 and has_finished_last_animation():
 		play_animation_once("dash_start")
 		dash.play()
@@ -28,8 +30,8 @@ func _Update(delta):
 	elif attack_stage == 2:
 		cut_1.play()
 		dash_smoke.emitting = false
-		force_movement(get_horizontal_velocity()*0.15)
-		set_vertical_speed(-get_jump_velocity()*0.85)
+		force_movement(get_horizontal_velocity() * 0.15)
+		set_vertical_speed( - get_jump_velocity() * 0.85)
 		play_animation_once("slash_1")
 		activate_hitbox()
 		next_attack_stage_on_next_frame()
@@ -51,10 +53,10 @@ func _Update(delta):
 		if has_finished_last_animation():
 			cut_2.play()
 			play_animation_once("slash_2")
-# warning-ignore:return_value_discarded
+
 			instantiate_projectile(projectile)
-			force_movement(get_horizontal_velocity()*-0.35)
-			set_vertical_speed(-get_jump_velocity()*0.35)
+			force_movement(get_horizontal_velocity() * - 0.35)
+			set_vertical_speed( - get_jump_velocity() * 0.35)
 			next_attack_stage_on_next_frame()
 	
 	elif attack_stage == 6:
@@ -69,18 +71,18 @@ func _Update(delta):
 			play_animation_once("idle")
 			EndAbility()
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	._Interrupt()
 	dash_smoke.emitting = false
 
-func activate_hitbox() -> void:
+func activate_hitbox() -> void :
 	hitbox.activate()
 
-func update_hitbox() -> void:
+func update_hitbox() -> void :
 	hitbox.handle_direction()
-	
-func instantiate_projectile(scene : PackedScene) -> Node2D:
-	var proj = instantiate(scene) 
+
+func instantiate_projectile(scene: PackedScene) -> Node2D:
+	var proj = instantiate(scene)
 	proj.set_creator(self)
 	proj.initialize(character.get_facing_direction())
 	proj.set_horizontal_speed(proj.speed * 2 * target_dir.x)
@@ -89,6 +91,5 @@ func instantiate_projectile(scene : PackedScene) -> Node2D:
 	proj.scale.x = 1
 	return proj
 
-func set_player_direction() -> void:
+func set_player_direction() -> void :
 	target_dir = (GameManager.get_player_position() - global_position).normalized()
-	

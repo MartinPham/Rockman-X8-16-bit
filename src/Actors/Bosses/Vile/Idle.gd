@@ -1,10 +1,10 @@
 extends BossIdle
 
 
-func on_desperation() -> void:
+func on_desperation() -> void :
 	animation = "flight"
 
-func _Setup() -> void:
+func _Setup() -> void :
 	turn_and_face_player()
 	play_animation(animation)
 

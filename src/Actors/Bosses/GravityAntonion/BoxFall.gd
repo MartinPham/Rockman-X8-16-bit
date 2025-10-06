@@ -1,9 +1,9 @@
 extends AttackAbility
 
-func _Setup() -> void:
+func _Setup() -> void :
 	play_animation("ready")
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0 and has_finished_last_animation():
 		play_animation("idle")
@@ -12,5 +12,5 @@ func _Update(delta) -> void:
 	if character.global_position.y > character.floor_position:
 		character.current_health = 0
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	set_vertical_speed(0)

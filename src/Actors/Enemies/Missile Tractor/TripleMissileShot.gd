@@ -1,19 +1,22 @@
 extends AttackAbility
+
+export  var projectiles: Array
+
 onready var prepare: AudioStreamPlayer2D = $prepare
 onready var shot_sound: AudioStreamPlayer2D = $shot_sound
-
 onready var turn: AudioStreamPlayer2D = $turn
-export var projectiles : Array
-var projectile_number := 0
-var second_volley := false
 
-func _Setup(): #override
+var projectile_number: int = 0
+var second_volley: bool = false
+
+
+func _Setup():
 	projectile_number = 0
 	attack_stage = 0
 	second_volley = false
-	pass
 
-func _Update(_delta) -> void:
+
+func _Update(_delta: float) -> void :
 	if attack_stage == 0:
 		if get_player_direction_relative() != character.get_facing_direction():
 			play_animation("turn")
@@ -51,19 +54,19 @@ func _Update(_delta) -> void:
 	elif attack_stage == 6 and has_finished_last_animation():
 		EndAbility()
 
-func disparo() -> void:
+func disparo() -> void :
 	for p in projectiles:
 		instantiate_multiple(p)
 	projectile_number = 0
 		
-func instantiate_multiple(scene : PackedScene) -> void:
-	var projectile = instantiate(scene) 
+func instantiate_multiple(scene: PackedScene) -> void :
+	var projectile = instantiate(scene)
 	projectile.set_creator(self)
 	projectile.initialize(character.get_facing_direction())
 	if not second_volley:
-		projectile.global_position.x = projectile.global_position.x + 44 *  character.get_facing_direction()
+		projectile.global_position.x = projectile.global_position.x + 44 * character.get_facing_direction()
 		
-	projectile.global_position.y = projectile.global_position.y -16
+	projectile.global_position.y = projectile.global_position.y - 16
 	projectile.global_position.y = projectile.global_position.y + 8 * projectile_number
 	
 	if projectile_number == 1:

@@ -1,7 +1,7 @@
 extends Actor
 
-export var unique_time:= 0.5
-export var boss : PackedScene
+export  var unique_time: = 0.5
+export  var boss: PackedScene
 
 
 signal spawned_boss(boss)

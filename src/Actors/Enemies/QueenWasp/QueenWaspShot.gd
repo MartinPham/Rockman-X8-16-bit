@@ -1,10 +1,10 @@
 extends MultipleShot
 
-export var point_time := 1.0
-export var charge_time := 1.0
+export  var point_time: = 1.0
+export  var charge_time: = 1.0
 
-func _Update(_delta) -> void:
-	if attack_stage == 0:#
+func _Update(_delta: float) -> void :
+	if attack_stage == 0:
 		if turning:
 			if has_finished_last_animation():
 				set_direction(get_player_direction_relative())

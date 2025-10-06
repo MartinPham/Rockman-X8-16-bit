@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - BoosterForest - Loop.ogg-cb904d84cc178e8cf90e8
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

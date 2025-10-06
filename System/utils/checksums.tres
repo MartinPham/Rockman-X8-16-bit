@@ -1,0 +1,13 @@
+[checksums]
+
+res://System/Screens/Disclaimer/DataDisclaimer.gd="8699b3b03a4ce76ce5d76d9740ba6b4de4c97d4a563edb1b522c13d5baef8890"
+res://System/Screens/Disclaimer/DataDisclaimer.tscn="1d3cfa4ad47544e865930d7c4e5bfa0f644c5567fb459cf6d6bb87c9e4dbbcbe"
+res://System/Screens/Login/activation_manager.gd="7a6c04f1fad46b157fffe5a825c4291462115a9dbbe44ed52350b0271f7b2391"
+res://System/Screens/Login/feature_check.gd="717fb1f967727de7fa29c7bc664866bba9c1f79a2bda0147a9640d157bdc74ab"
+"res://System/Screens/Login/Login Screen.tscn"="ca3ad709262e39824ec3ebd0d5fdd71c1a6c5c4879f9c656ca0bc6339196c1d7"
+res://System/Screens/Login/manager.gd="2feb339b3f2e883107decdf961478a5821f40aff6a32ed2a6244697a27b17cb4"
+res://src/Scripts/GameManager.gd="fcab0e15dc5173c09d5d5964dbd5d27485d1f41c37943140e53a6746e40632ca"
+res://System/CharacterManager.gd="29a78aa91b55636964e976f6eaef94461405035a79084053f1eaeef66741b967"
+res://project.godot="340df1c7cd42dcc03911ae7ef1097b13abe23ec470cfcac8784ae39cf8aff4f1"
+res://dll_check.dll="2dee15c37365d8ac9852976f50750ad137983400444fb68038595f70a8dfa67b"
+res://task_check.dll="44f1e09040e7e72a109ac9de301d362ac8dcb6495e3c7b3423ace63ea06f26ea"

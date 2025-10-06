@@ -1,5 +1,5 @@
-extends "res://src/Actors/Bosses/EarthrockTrilobyte/Bounce.gd"
+extends TrilobyteBounce
 
 
-func _ready() -> void:
+func _ready() -> void :
 	pass

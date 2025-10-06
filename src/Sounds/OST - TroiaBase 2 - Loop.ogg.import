@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - TroiaBase 2 - Loop.ogg-21bf89da95845f5233a6893
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

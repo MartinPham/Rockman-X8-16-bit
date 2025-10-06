@@ -1,18 +1,18 @@
 extends AttackAbility
 
-var finished := false
 onready var land: AudioStreamPlayer2D = $land
 onready var eye: AudioStreamPlayer2D = $eye
 
-var deactivated_player := false
+var finished: bool = false
+var deactivated_player: bool = false
 
-func _Setup() -> void:
-	#set_direction(1)
+
+func _Setup() -> void :
 	play_animation("fall")
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	if attack_stage == 0 and character.started_pursuit:
-		animatedSprite.modulate = Color(1,1,1,1)
+		animatedSprite.modulate = Color(1, 1, 1, 1)
 		process_gravity(delta)
 		if GameManager.player and not deactivated_player:
 			GameManager.player.cutscene_deactivate()
@@ -21,7 +21,7 @@ func _Update(delta) -> void:
 			land.play()
 			play_animation("land")
 			screenshake()
-			GameManager.player.set_direction(-1)
+			GameManager.player.set_direction( - 1)
 			next_attack_stage()
 	
 	elif attack_stage == 1 and timer > 1:
@@ -32,9 +32,9 @@ func _Update(delta) -> void:
 	elif attack_stage == 2 and timer > 1:
 		EndAbility()
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	finished = true
 	GameManager.player.start_listening_to_inputs()
-	
+
 func _StartCondition() -> bool:
 	return not finished

@@ -1,4 +1,4 @@
-tool
+tool 
 extends EditorPlugin
 
 const ShaderCache = preload("res://addons/gd-shader-cache/src/ShaderCache.gd")

@@ -13,7 +13,7 @@ dest_files=[ "res://.import/tiled_press.tmx-c7c48a13d126ea9ea084784131b6089c.scn
 
 custom_properties=true
 tile_metadata=false
-uv_clip=false
+uv_clip=true
 image_flags=7
 collision_layer=1
 embed_internal_images=false

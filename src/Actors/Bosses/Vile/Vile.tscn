@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://src/Actors/Modules/Enemy/DamageOnTouch.gd" type="Script" id=1]
 [ext_resource path="res://src/Actors/Modules/Enemy/BossDamage.gd" type="Script" id=2]
@@ -34,7 +34,6 @@
 [ext_resource path="res://src/Sounds/Mantis - Dash.ogg" type="AudioStream" id=32]
 [ext_resource path="res://src/Sounds/Mantis - Dash2.ogg" type="AudioStream" id=33]
 [ext_resource path="res://src/AchievementSystem/VileAchievementUnlocker.gd" type="Script" id=34]
-[ext_resource path="res://src/Actors/Bosses/Vile/RNGUpdate.gd" type="Script" id=35]
 
 [sub_resource type="RectangleShape2D" id=62]
 extents = Vector2( 12, 24 )
@@ -109,7 +108,7 @@ animation = "laugh"
 script = ExtResource( 2 )
 invulnerability_time = 0.1
 max_flash_time = 0.35
-weakenesses = [ "DriftDiamond", "RideArmor" ]
+weakenesses = [ "DriftDiamond", "RideArmor", "IceGattling", "Hyouryuushou" ]
 
 [node name="audioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Damage"]
 pause_mode = 2
@@ -322,8 +321,4 @@ bus = "SFX"
 [node name="VileAchievementUnlocker" type="Node" parent="."]
 script = ExtResource( 34 )
 
-[node name="RNGUpdate" type="Node" parent="."]
-script = ExtResource( 35 )
-
 [connection signal="dps" from="Damage" to="Damage/dps" method="_on_Damage_dps"]
-[connection signal="ability_start" from="BossDeath" to="RNGUpdate" method="_on_BossDeath_ability_start"]

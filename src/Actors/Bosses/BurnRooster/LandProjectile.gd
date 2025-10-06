@@ -1,12 +1,12 @@
 extends GenericProjectile
 
 
-func _ready() -> void:
+func _ready() -> void :
 	pass
 
-func _OnHit(_target_remaining_HP) -> void: #override
+func _OnHit(_target_remaining_HP) -> void :
 	pass
 
-func _OnScreenExit() -> void: #override
+func _OnScreenExit() -> void :
 	set_horizontal_speed(0)
 	pass

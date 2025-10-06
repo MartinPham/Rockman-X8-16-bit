@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://src/Actors/Panda.gd" type="Script" id=1]
 [ext_resource path="res://src/Actors/Bosses/Vile/FinalIntro.gd" type="Script" id=2]
@@ -22,7 +22,6 @@
 [ext_resource path="res://src/Actors/Bosses/Vile/VileAirCannon.gd" type="Script" id=20]
 [ext_resource path="res://src/Actors/Bosses/Vile/VileAirDash.gd" type="Script" id=21]
 [ext_resource path="res://src/Actors/Bosses/Vile/VileDefeat.gd" type="Script" id=22]
-[ext_resource path="res://src/Actors/Bosses/Vile/RNGUpdate.gd" type="Script" id=23]
 [ext_resource path="res://src/Effects/Materials/default_material.tres" type="Material" id=24]
 [ext_resource path="res://src/Sounds/HIT_BOSS.wav" type="AudioStream" id=25]
 [ext_resource path="res://src/Sounds/Rooster - Lowkick.ogg" type="AudioStream" id=26]
@@ -89,7 +88,7 @@ position = Vector2( 0, -19 )
 z_index = 1
 frames = ExtResource( 8 )
 animation = "flight"
-frame = 4
+frame = 1
 playing = true
 
 [node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
@@ -121,7 +120,7 @@ animation = "flight"
 script = ExtResource( 10 )
 invulnerability_time = 0.1
 max_flash_time = 0.35
-weakenesses = [ "DriftDiamond", "RideArmor" ]
+weakenesses = [ "DriftDiamond", "RideArmor", "IceGattling", "Hyouryuushou" ]
 
 [node name="audioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Damage"]
 pause_mode = 2
@@ -380,9 +379,5 @@ perfect_kill = false
 gigacrush_kill = false
 defeated = ExtResource( 16 )
 
-[node name="RNGUpdate" type="Node" parent="."]
-script = ExtResource( 23 )
-
 [connection signal="dps" from="Damage" to="Damage/dps" method="_on_Damage_dps"]
 [connection signal="ability_start" from="BossDeath" to="Flag" method="_on_BossDeath_ability_start"]
-[connection signal="ability_start" from="BossDeath" to="RNGUpdate" method="_on_BossDeath_ability_start"]

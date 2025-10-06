@@ -2,7 +2,7 @@ extends AttackAbility
 export (PackedScene) var projectile
 onready var shot_sound: AudioStreamPlayer2D = $shot_sound
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	if attack_stage == 0 and has_finished_last_animation():
 		turn_and_face_player()
 		play_animation_once("shot")

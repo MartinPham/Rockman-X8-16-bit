@@ -1,15 +1,15 @@
 extends GenericIntro
 
-export var boss_bar : Texture
+export  var boss_bar: Texture
 onready var throne: TileMap = $"../Throne"
 onready var throne_particles: Particles2D = $"../throne_particles"
 onready var throne_explosion: AudioStreamPlayer2D = $"../throne_explosion"
 onready var flash: Sprite = $flash
 
-func connect_start_events() -> void:
+func connect_start_events() -> void :
 	Log("Connecting boss events")
-	Event.listen("warning_done",self,"execute_intro")
-	Event.connect("character_talking",self,"on_talk")
+	Event.listen("warning_done", self, "execute_intro")
+	Event.connect("character_talking", self, "on_talk")
 
 func on_talk(character):
 	if character == "Sigma":
@@ -18,11 +18,11 @@ func on_talk(character):
 		play_animation_once("seated_loop")
 		pass
 
-func _ready() -> void:
-	call_deferred("play_animation","seated_loop")
+func _ready() -> void :
+	call_deferred("play_animation", "seated_loop")
 	
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	if attack_stage == 0:
 		play_animation("seated_loop")
 		start_dialog_or_go_to_attack_stage(2)
@@ -54,7 +54,7 @@ func _Update(_delta) -> void:
 		next_attack_stage()
 		
 	elif attack_stage == 6 and timer > 0.65:
-		Event.emit_signal("set_boss_bar",boss_bar)
+		Event.emit_signal("set_boss_bar", boss_bar)
 		Event.emit_signal("boss_health_appear", character)
 		next_attack_stage()
 

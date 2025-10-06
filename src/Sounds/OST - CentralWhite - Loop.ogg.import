@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - CentralWhite - Loop.ogg-df0b3e61c5863fed634224
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

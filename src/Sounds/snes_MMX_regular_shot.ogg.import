@@ -11,5 +11,5 @@ dest_files=[ "res://.import/snes_MMX_regular_shot.ogg-339cba626ecce7fdd4aefcbb21
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

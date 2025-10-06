@@ -1,17 +1,17 @@
 extends AttackAbility
 
-export var grenade :PackedScene
+export  var grenade: PackedScene
 onready var shot: AudioStreamPlayer2D = $shot
 onready var prepare: AudioStreamPlayer2D = $prepare
 onready var claw_appear: AudioStreamPlayer2D = $claw_appear
 
-func _Setup() -> void:
+func _Setup() -> void :
 	._Setup()
 	claw_appear.play()
-	Tools.timer(0.6,"screenshake",self)
-	Tools.timer(0.6,"play",prepare)
+	Tools.timer(0.6, "screenshake", self)
+	Tools.timer(0.6, "play", prepare)
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	process_gravity(_delta)
 	if attack_stage == 0 and has_finished_last_animation():
 		play_animation("grenade_shot")
@@ -20,17 +20,17 @@ func _Update(_delta) -> void:
 		
 	elif attack_stage == 1 and has_finished_last_animation():
 		play_animation("grenade_shot2")
-		shoot_grenade(get_max_grenade_distance(),-350,Vector2(22 * character.get_facing_direction(),0))
+		shoot_grenade(get_max_grenade_distance(), - 350, Vector2(22 * character.get_facing_direction(), 0))
 		next_attack_stage()
 		
 	elif attack_stage == 2 and has_finished_last_animation():
 		play_animation("grenade_shot")
-		shoot_grenade(210,-350)
+		shoot_grenade(210, - 350)
 		next_attack_stage()
 		
 	elif attack_stage == 3 and has_finished_last_animation():
 		play_animation("grenade_shot2")
-		shoot_grenade(100,-350,Vector2(22 * character.get_facing_direction(),0))
+		shoot_grenade(100, - 350, Vector2(22 * character.get_facing_direction(), 0))
 		next_attack_stage()
 		
 	elif attack_stage == 4 and timer > 0.5:
@@ -41,9 +41,9 @@ func _Update(_delta) -> void:
 		EndAbility()
 
 func get_max_grenade_distance() -> float:
-	return clamp(get_distance_from_player(),260,400)
+	return clamp(get_distance_from_player(), 260, 400)
 
-func shoot_grenade(h_speed := 120.0, v_speed = -350.0, adjust_position := Vector2.ZERO) -> void:
+func shoot_grenade(h_speed: = 120.0, v_speed = - 350.0, adjust_position: = Vector2.ZERO) -> void :
 	shot.play_rp()
 	var p = instantiate_projectile(grenade)
 	p.set_horizontal_speed(h_speed * character.get_facing_direction())

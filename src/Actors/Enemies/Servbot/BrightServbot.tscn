@@ -30,7 +30,7 @@ material = ExtResource( 11 )
 z_index = 1
 frames = ExtResource( 3 )
 animation = "idle"
-frame = 25
+frame = 16
 playing = true
 flip_h = true
 
@@ -67,6 +67,7 @@ bus = "SFX"
 
 [node name="Damage" type="Node2D" parent="."]
 script = ExtResource( 1 )
+max_freeze_hits = 1
 
 [node name="audioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Damage"]
 stream = ExtResource( 13 )

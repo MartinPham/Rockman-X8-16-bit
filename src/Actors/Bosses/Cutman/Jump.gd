@@ -3,13 +3,13 @@ onready var land: AudioStreamPlayer2D = $land
 
 
 	
-func _Setup() -> void:
+func _Setup() -> void :
 	turn_and_face_player()
 	play_animation("Jump")
-	set_vertical_speed(-400)
+	set_vertical_speed( - 400)
 	land.play()
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	force_movement(180)
 	

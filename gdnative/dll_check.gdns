@@ -1,0 +1,8 @@
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[ext_resource path="res://gdnative/dll_check.gdnlib" type="GDNativeLibrary" id=1]
+
+[resource]
+resource_name = "DLLCheck"
+class_name = "DLLCheck"
+library = ExtResource( 1 )

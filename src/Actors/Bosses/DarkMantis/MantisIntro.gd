@@ -3,19 +3,19 @@ onready var wallhit: AudioStreamPlayer2D = $wallhit
 onready var land: AudioStreamPlayer2D = $land
 onready var jump: AudioStreamPlayer2D = $jump
 
-func prepare_for_intro() -> void:
+func prepare_for_intro() -> void :
 	animatedSprite.visible = true
 	set_starting_position()
 	play_animation_once("wall_start")
 	character.animatedSprite.set_frame(4)
-	character.modulate = Color(0,0,0,0.5)
+	character.modulate = Color(0, 0, 0, 0.5)
 
-func _Setup() -> void:
+func _Setup() -> void :
 	._Setup()
 	var tween = get_tree().create_tween()
-	tween.tween_property(character,"modulate",Color(1,1,1,1),0.5)
+	tween.tween_property(character, "modulate", Color(1, 1, 1, 1), 0.5)
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	if attack_stage == 0 and has_finished_last_animation():
 		play_animation_once("walljump_prepare")
 		next_attack_stage_on_next_frame()
@@ -27,7 +27,7 @@ func _Update(delta) -> void:
 		next_attack_stage_on_next_frame()
 
 	elif attack_stage == 2:
-		process_gravity(delta/3)
+		process_gravity(delta / 3)
 		if has_finished_last_animation():
 			play_animation_once("walljump_loop")
 		if is_colliding_with_wall():
@@ -58,7 +58,7 @@ func _Update(delta) -> void:
 			turn_player_towards_boss()
 			wallhit.play()
 			play_animation_once("land")
-			decay_speed(-0.35, 0.5)
+			decay_speed( - 0.35, 0.5)
 			next_attack_stage()
 
 	elif attack_stage == 6:
@@ -79,12 +79,12 @@ func _Update(delta) -> void:
 		if timer > 3:
 			EndAbility()
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	Event.emit_signal("boss_start", character)
 	GameManager.end_cutscene()
 	character.emit_signal("intro_concluded")
 
-func set_starting_position() -> void:
+func set_starting_position() -> void :
 	var top = get_distance_from_ceiling()
 	var wall = get_wall_position(1)
 	var initial_position = Vector2(wall - 21, character.global_position.y - top + 32)

@@ -1,16 +1,16 @@
 extends Panda
 
-var last_dir = -1
-onready var tween := TweenController.new(self,false)
+var last_dir = - 1
+onready var tween: = TweenController.new(self, false)
 
-func _ready() -> void:
+func _ready() -> void :
 	pass
 	
-func set_direction(dir: int, update := false):
+func set_direction(dir: int, update: = false):
 	direction.x = dir
 	emit_signal("new_direction", dir)
-	#if update:
-	#	update_facing_direction()
+	
+	
 		
 	update_facing_direction()
 	if dir != last_dir:
@@ -18,7 +18,7 @@ func set_direction(dir: int, update := false):
 		tween.reset()
 		scale.x = 0
 		tween.create()
-		tween.add_attribute("scale:x",1,.16)
+		tween.add_attribute("scale:x", 1, 0.16)
 
 func update_facing_direction():
 	if animatedSprite.visible:

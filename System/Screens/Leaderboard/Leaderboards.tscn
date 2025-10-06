@@ -1,0 +1,973 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://System/Screens/Leaderboard/Leaderboards.gd" type="Script" id=1]
+[ext_resource path="res://src/Options/pause_bg.png" type="Texture" id=2]
+[ext_resource path="res://System/Screens/Leaderboard/Leaderboard_list.png" type="Texture" id=3]
+[ext_resource path="res://src/Fonts/x8_bitmapfont.tres" type="BitmapFont" id=4]
+[ext_resource path="res://System/Screens/Leaderboard/Category.PNG" type="Texture" id=5]
+[ext_resource path="res://src/Title/title_bg.png" type="Texture" id=6]
+[ext_resource path="res://System/Screens/Leaderboard/Category_Load.gd" type="Script" id=7]
+[ext_resource path="res://src/Options/KeymapExit.gd" type="Script" id=8]
+[ext_resource path="res://src/Options/CoverScreen.gd" type="Script" id=9]
+[ext_resource path="res://src/Sounds/FX - Menu Switch.ogg" type="AudioStream" id=10]
+[ext_resource path="res://src/Sounds/MM - Equip.wav" type="AudioStream" id=11]
+[ext_resource path="res://src/Sounds/CHARGED_SHOT.wav" type="AudioStream" id=12]
+
+[node name="LEADERBOARDS" type="CanvasLayer"]
+script = ExtResource( 1 )
+menu_path = NodePath("Menu")
+initial_focus = NodePath("Menu/exit")
+exit_action = "select"
+start_emit_event = "update_options"
+
+[node name="Menu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="bg" type="TextureRect" parent="Menu"]
+margin_right = 398.0
+margin_bottom = 224.0
+texture = ExtResource( 2 )
+
+[node name="pause" type="TextureRect" parent="Menu/bg"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -142.0
+margin_top = -84.0
+margin_right = 142.0
+margin_bottom = 132.0
+texture = ExtResource( 3 )
+
+[node name="leaderboard_bg" type="Sprite" parent="Menu/bg"]
+visible = false
+modulate = Color( 0, 0, 0, 0.392157 )
+position = Vector2( 199, 122.5 )
+scale = Vector2( 0.668342, 0.763393 )
+texture = ExtResource( 6 )
+
+[node name="TabsContainer" type="HBoxContainer" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -5.0
+margin_bottom = -199.0
+custom_constants/separation = 1
+
+[node name="tab1" type="TextureButton" parent="Menu/TabsContainer"]
+modulate = Color( 0.490196, 0.490196, 0.490196, 1 )
+margin_right = 64.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 64, 25 )
+action_mode = 0
+texture_normal = ExtResource( 5 )
+script = ExtResource( 7 )
+menu_path = NodePath("../../..")
+
+[node name="category_shadow" type="Label" parent="Menu/TabsContainer/tab1"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 2.0
+margin_top = 9.0
+margin_right = 68.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat"
+align = 1
+valign = 1
+
+[node name="category" type="Label" parent="Menu/TabsContainer/tab1"]
+margin_left = 1.0
+margin_top = 8.0
+margin_right = 67.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat"
+align = 1
+valign = 1
+
+[node name="Tab" type="Control" parent="Menu/TabsContainer"]
+visible = false
+margin_right = 64.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 64, 25 )
+
+[node name="tab_bg" type="TextureRect" parent="Menu/TabsContainer/Tab"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 5 )
+
+[node name="category_shadow" type="Label" parent="Menu/TabsContainer/Tab"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 1.0
+margin_top = 9.0
+margin_right = 67.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat"
+align = 1
+valign = 1
+
+[node name="category" type="Label" parent="Menu/TabsContainer/Tab"]
+margin_top = 8.0
+margin_right = 54.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat"
+align = 1
+valign = 1
+
+[node name="Tab2" type="Control" parent="Menu/TabsContainer"]
+visible = false
+margin_right = 64.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 64, 25 )
+
+[node name="tab_bg" type="TextureRect" parent="Menu/TabsContainer/Tab2"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 5 )
+
+[node name="category_shadow" type="Label" parent="Menu/TabsContainer/Tab2"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 1.0
+margin_top = 9.0
+margin_right = 67.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat2"
+align = 1
+valign = 1
+
+[node name="category" type="Label" parent="Menu/TabsContainer/Tab2"]
+margin_top = 8.0
+margin_right = 54.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat2"
+align = 1
+valign = 1
+
+[node name="Tab3" type="Control" parent="Menu/TabsContainer"]
+visible = false
+margin_right = 64.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 64, 25 )
+
+[node name="tab_bg" type="TextureRect" parent="Menu/TabsContainer/Tab3"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 5 )
+
+[node name="category_shadow" type="Label" parent="Menu/TabsContainer/Tab3"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 1.0
+margin_top = 9.0
+margin_right = 67.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat3"
+align = 1
+valign = 1
+
+[node name="category" type="Label" parent="Menu/TabsContainer/Tab3"]
+margin_top = 8.0
+margin_right = 54.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat3"
+align = 1
+valign = 1
+
+[node name="Tab4" type="Control" parent="Menu/TabsContainer"]
+visible = false
+margin_right = 64.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 64, 25 )
+
+[node name="tab_bg" type="TextureRect" parent="Menu/TabsContainer/Tab4"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 5 )
+
+[node name="category_shadow" type="Label" parent="Menu/TabsContainer/Tab4"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 1.0
+margin_top = 9.0
+margin_right = 67.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat4"
+align = 1
+valign = 1
+
+[node name="category" type="Label" parent="Menu/TabsContainer/Tab4"]
+margin_top = 8.0
+margin_right = 54.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat4"
+align = 1
+valign = 1
+
+[node name="Tab5" type="Control" parent="Menu/TabsContainer"]
+visible = false
+margin_right = 64.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 64, 25 )
+
+[node name="tab_bg" type="TextureRect" parent="Menu/TabsContainer/Tab5"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 5 )
+
+[node name="category_shadow" type="Label" parent="Menu/TabsContainer/Tab5"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 1.0
+margin_top = 9.0
+margin_right = 67.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat5"
+align = 1
+valign = 1
+
+[node name="category" type="Label" parent="Menu/TabsContainer/Tab5"]
+margin_top = 8.0
+margin_right = 54.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 66, 17 )
+custom_fonts/font = ExtResource( 4 )
+text = "cat5"
+align = 1
+valign = 1
+
+[node name="LeaderboardContainerShadow" type="HBoxContainer" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 71.0
+margin_top = 49.0
+margin_right = -69.0
+margin_bottom = -17.0
+alignment = 1
+
+[node name="Username" type="VBoxContainer" parent="Menu/LeaderboardContainerShadow"]
+margin_right = 90.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 90, 0 )
+custom_constants/separation = 7
+
+[node name="label" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+modulate = Color( 0, 0, 0, 1 )
+margin_right = 90.0
+margin_bottom = 8.0
+custom_fonts/font = ExtResource( 4 )
+text = "Username"
+
+[node name="label1" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="label2" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 30.0
+margin_right = 182.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 4 )
+text = "2"
+
+[node name="label3" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 45.0
+margin_right = 182.0
+margin_bottom = 53.0
+custom_fonts/font = ExtResource( 4 )
+text = "3"
+
+[node name="label4" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 60.0
+margin_right = 182.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 4 )
+text = "4"
+
+[node name="label5" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 60.0
+margin_right = 182.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 4 )
+text = "5"
+
+[node name="label6" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 90.0
+margin_right = 182.0
+margin_bottom = 98.0
+custom_fonts/font = ExtResource( 4 )
+text = "6"
+
+[node name="label7" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 105.0
+margin_right = 182.0
+margin_bottom = 113.0
+custom_fonts/font = ExtResource( 4 )
+text = "7"
+
+[node name="label8" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 120.0
+margin_right = 182.0
+margin_bottom = 128.0
+custom_fonts/font = ExtResource( 4 )
+text = "8"
+
+[node name="label9" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 135.0
+margin_right = 182.0
+margin_bottom = 143.0
+custom_fonts/font = ExtResource( 4 )
+text = "9"
+
+[node name="label10" type="Label" parent="Menu/LeaderboardContainerShadow/Username"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 150.0
+margin_right = 182.0
+margin_bottom = 158.0
+custom_fonts/font = ExtResource( 4 )
+text = "10"
+
+[node name="RTA" type="VBoxContainer" parent="Menu/LeaderboardContainerShadow"]
+margin_left = 94.0
+margin_right = 173.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 79, 0 )
+custom_constants/separation = 7
+
+[node name="label" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+modulate = Color( 0, 0, 0, 1 )
+margin_right = 79.0
+margin_bottom = 8.0
+custom_fonts/font = ExtResource( 4 )
+text = "RTA"
+align = 1
+
+[node name="label1" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+align = 2
+
+[node name="label2" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 30.0
+margin_right = 73.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 4 )
+text = "2"
+align = 2
+
+[node name="label3" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 45.0
+margin_right = 73.0
+margin_bottom = 53.0
+custom_fonts/font = ExtResource( 4 )
+text = "3"
+align = 2
+
+[node name="label4" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 60.0
+margin_right = 73.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 4 )
+text = "4"
+align = 2
+
+[node name="label5" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 75.0
+margin_right = 73.0
+margin_bottom = 83.0
+custom_fonts/font = ExtResource( 4 )
+text = "5"
+align = 2
+
+[node name="label6" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 90.0
+margin_right = 73.0
+margin_bottom = 98.0
+custom_fonts/font = ExtResource( 4 )
+text = "6"
+align = 2
+
+[node name="label7" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 105.0
+margin_right = 73.0
+margin_bottom = 113.0
+custom_fonts/font = ExtResource( 4 )
+text = "7"
+align = 2
+
+[node name="label8" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 120.0
+margin_right = 73.0
+margin_bottom = 128.0
+custom_fonts/font = ExtResource( 4 )
+text = "8"
+align = 2
+
+[node name="label9" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 135.0
+margin_right = 73.0
+margin_bottom = 143.0
+custom_fonts/font = ExtResource( 4 )
+text = "9"
+align = 2
+
+[node name="label10" type="Label" parent="Menu/LeaderboardContainerShadow/RTA"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 150.0
+margin_right = 73.0
+margin_bottom = 158.0
+custom_fonts/font = ExtResource( 4 )
+text = "10"
+align = 2
+
+[node name="Time" type="VBoxContainer" parent="Menu/LeaderboardContainerShadow"]
+margin_left = 177.0
+margin_right = 257.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 80, 0 )
+custom_constants/separation = 7
+
+[node name="label" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+modulate = Color( 0, 0, 0, 1 )
+margin_right = 80.0
+margin_bottom = 8.0
+custom_fonts/font = ExtResource( 4 )
+text = "Time"
+align = 1
+
+[node name="label1" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+align = 2
+
+[node name="label2" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 30.0
+margin_right = 73.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 4 )
+text = "2"
+align = 2
+
+[node name="label3" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 45.0
+margin_right = 73.0
+margin_bottom = 53.0
+custom_fonts/font = ExtResource( 4 )
+text = "3"
+align = 2
+
+[node name="label4" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 60.0
+margin_right = 73.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 4 )
+text = "4"
+align = 2
+
+[node name="label5" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 75.0
+margin_right = 73.0
+margin_bottom = 83.0
+custom_fonts/font = ExtResource( 4 )
+text = "5"
+align = 2
+
+[node name="label6" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 90.0
+margin_right = 73.0
+margin_bottom = 98.0
+custom_fonts/font = ExtResource( 4 )
+text = "6"
+align = 2
+
+[node name="label7" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 105.0
+margin_right = 73.0
+margin_bottom = 113.0
+custom_fonts/font = ExtResource( 4 )
+text = "7"
+align = 2
+
+[node name="label8" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 120.0
+margin_right = 73.0
+margin_bottom = 128.0
+custom_fonts/font = ExtResource( 4 )
+text = "8"
+align = 2
+
+[node name="label9" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 135.0
+margin_right = 73.0
+margin_bottom = 143.0
+custom_fonts/font = ExtResource( 4 )
+text = "9"
+align = 2
+
+[node name="label10" type="Label" parent="Menu/LeaderboardContainerShadow/Time"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 150.0
+margin_right = 73.0
+margin_bottom = 158.0
+custom_fonts/font = ExtResource( 4 )
+text = "10"
+align = 2
+
+[node name="LeaderboardContainer" type="HBoxContainer" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 70.0
+margin_top = 48.0
+margin_right = -51.0
+margin_bottom = -148.0
+
+[node name="Username" type="VBoxContainer" parent="Menu/LeaderboardContainer"]
+margin_right = 90.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 90, 0 )
+custom_constants/separation = 7
+
+[node name="label" type="Label" parent="Menu/LeaderboardContainer/Username"]
+margin_right = 90.0
+margin_bottom = 8.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Username"
+
+[node name="label1" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="label2" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "2"
+
+[node name="label3" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "3"
+
+[node name="label4" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "4"
+
+[node name="label5" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "5"
+
+[node name="label6" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "6"
+
+[node name="label7" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "7"
+
+[node name="label8" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "8"
+
+[node name="label9" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "9"
+
+[node name="label10" type="Label" parent="Menu/LeaderboardContainer/Username"]
+visible = false
+margin_top = 15.0
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "10"
+
+[node name="RTA" type="VBoxContainer" parent="Menu/LeaderboardContainer"]
+margin_left = 94.0
+margin_right = 173.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 79, 0 )
+custom_constants/separation = 7
+
+[node name="label" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+margin_right = 79.0
+margin_bottom = 8.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "RTA"
+align = 1
+
+[node name="label1" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+align = 2
+
+[node name="label2" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "2"
+align = 2
+
+[node name="label3" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "3"
+align = 2
+
+[node name="label4" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "4"
+align = 2
+
+[node name="label5" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "5"
+align = 2
+
+[node name="label6" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "6"
+align = 2
+
+[node name="label7" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "7"
+align = 2
+
+[node name="label8" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "8"
+align = 2
+
+[node name="label9" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "9"
+align = 2
+
+[node name="label10" type="Label" parent="Menu/LeaderboardContainer/RTA"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "10"
+align = 2
+
+[node name="Time" type="VBoxContainer" parent="Menu/LeaderboardContainer"]
+margin_left = 177.0
+margin_right = 257.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 80, 0 )
+custom_constants/separation = 7
+
+[node name="label" type="Label" parent="Menu/LeaderboardContainer/Time"]
+margin_right = 80.0
+margin_bottom = 8.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Time"
+align = 1
+
+[node name="label1" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+align = 2
+
+[node name="label2" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "2"
+align = 2
+
+[node name="label3" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "3"
+align = 2
+
+[node name="label4" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "4"
+align = 2
+
+[node name="label5" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "5"
+align = 2
+
+[node name="label6" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "6"
+align = 2
+
+[node name="label7" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "7"
+align = 2
+
+[node name="label8" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "8"
+align = 2
+
+[node name="label9" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "9"
+align = 2
+
+[node name="label10" type="Label" parent="Menu/LeaderboardContainer/Time"]
+visible = false
+margin_top = 15.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+text = "10"
+align = 2
+
+[node name="exit" type="TextureButton" parent="Menu"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -32.0
+margin_top = -27.0
+margin_right = 32.0
+margin_bottom = -17.0
+action_mode = 0
+script = ExtResource( 8 )
+menu_path = NodePath("../..")
+
+[node name="text" type="Label" parent="Menu/exit"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -133.0
+margin_top = 3.0
+margin_right = 133.0
+margin_bottom = 17.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 4 )
+text = "EXIT_BUTTON"
+align = 1
+uppercase = true
+
+[node name="choice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -4.0
+bus = "SFX"
+
+[node name="Fader" type="ColorRect" parent="."]
+margin_right = 398.0
+margin_bottom = 224.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+script = ExtResource( 9 )
+menu = NodePath("../Menu")
+
+[node name="equip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -4.0
+bus = "SFX"
+
+[node name="pick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -10.0
+pitch_scale = 0.43
+bus = "SFX"
+
+[connection signal="focus_entered" from="Menu/TabsContainer/tab1" to="Menu/TabsContainer/tab1" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/TabsContainer/tab1" to="Menu/TabsContainer/tab1" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/TabsContainer/tab1" to="Menu/TabsContainer/tab1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/TabsContainer/tab1" to="Menu/TabsContainer/tab1" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/TabsContainer/tab1" to="Menu/TabsContainer/tab1" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/exit" to="Menu/exit" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/exit" to="Menu/exit" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/exit" to="Menu/exit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/exit" to="Menu/exit" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/exit" to="Menu/exit" method="_on_pressed"]

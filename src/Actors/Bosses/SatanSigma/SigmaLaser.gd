@@ -3,7 +3,7 @@ onready var damage: Node2D = $DamageOnTouch
 onready var animation: AnimatedSprite = $animatedSprite
 
 
-func _ready() -> void:
+func _ready() -> void :
 	visible = false
 
 func activate():
@@ -15,4 +15,4 @@ func activate():
 func deactivate():
 	damage.deactivate()
 	animation.play("cannon_end")
-	Tools.timer_p(1,"set_visible",self,false)
+	Tools.timer_p(1, "set_visible", self, false)

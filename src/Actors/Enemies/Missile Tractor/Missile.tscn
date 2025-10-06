@@ -16,6 +16,7 @@ speed = 240.0
 
 [node name="animatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )
+frame = 0
 flip_h = false
 
 [node name="particles2D2" type="Particles2D" parent="animatedSprite" index="0"]

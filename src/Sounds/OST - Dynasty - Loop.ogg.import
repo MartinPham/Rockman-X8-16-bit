@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - Dynasty - Loop.ogg-8acc1934d43644e382d8c1ec834
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

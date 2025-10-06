@@ -22,6 +22,7 @@ blast_area = ExtResource( 3 )
 modulate = Color( 1, 0.709804, 0.454902, 1 )
 frames = ExtResource( 1 )
 animation = "missile"
+frame = 3
 playing = true
 
 [node name="area2D" type="Area2D" parent="."]

@@ -1,13 +1,13 @@
 extends AttackAbility
 
-const projectile_distance_from_wall := 90
-export var optic_gun : PackedScene
+const projectile_distance_from_wall: = 90
+export  var optic_gun: PackedScene
 
-func _Setup() -> void:
+func _Setup() -> void :
 	turn_and_face_player()
 	play_animation("attack2_prepare")
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	
 	if attack_stage == 0 and timer > 0.5:
@@ -22,7 +22,7 @@ func _Update(delta) -> void:
 	elif attack_stage == 2 and has_finished_last_animation():
 		EndAbility()
 
-func create_optic_gun() -> void:
+func create_optic_gun() -> void :
 	var o = instantiate(optic_gun)
 	o.global_position.y += 8
 	o.global_position.x += 24 * get_facing_direction()
@@ -30,8 +30,8 @@ func create_optic_gun() -> void:
 	o.starting_direction = get_facing_direction()
 
 func get_laser_stop_positions() -> Array:
-	var left_wall = get_wall_position(-1) + projectile_distance_from_wall
+	var left_wall = get_wall_position( - 1) + projectile_distance_from_wall
 	var right_wall = get_wall_position(1) - projectile_distance_from_wall
 	if get_facing_direction() > 0:
-		return [right_wall,left_wall]
-	return [left_wall,right_wall]
+		return [right_wall, left_wall]
+	return [left_wall, right_wall]

@@ -1,15 +1,15 @@
 extends AttackAbility
 
-export var optic_orb : PackedScene
+export  var optic_orb: PackedScene
 onready var charge: AudioStreamPlayer2D = $charge
 onready var shot: AudioStreamPlayer2D = $shot
 
-func _Setup() -> void:
+func _Setup() -> void :
 	turn_and_face_player()
 	play_animation("attack3_prepare")
 	charge.play()
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	
 	if attack_stage == 0 and has_finished_last_animation():

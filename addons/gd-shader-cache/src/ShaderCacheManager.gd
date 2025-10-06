@@ -28,7 +28,7 @@ func spawn_cache(cache_packed_scene):
 	var active_camera = get_active_camera()
 	active_camera.add_child(cache_scene)
 	cache_scene.scale = Vector3.ONE * 0.001
-	cache_scene.global_transform.origin = -active_camera.global_transform.basis.z * 5
+	cache_scene.global_transform.origin = - active_camera.global_transform.basis.z * 5
 
 	return cache_scene
 

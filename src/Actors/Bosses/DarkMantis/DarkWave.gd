@@ -1,17 +1,17 @@
 extends SimpleProjectile
 
-func initialize(_direction) -> void: #called from instantiator
+
+func initialize(_direction) -> void :
 	Log("Initializing")
 	activate()
 	reset_timer()
-	#set_direction(direction)
 	_Setup()
-	
-func explode() -> void:
+
+func explode() -> void :
 	pass
 	
-func _OnHit(_target_remaining_HP) -> void: #override
+func _OnHit(_target_remaining_HP) -> void :
 	pass
 
-func _OnScreenExit() -> void: #override
+func _OnScreenExit() -> void :
 	Log("Exited Screen")

@@ -1,9 +1,9 @@
 extends AttackAbility
 onready var createbox: AudioStreamPlayer2D = $createbox
 
-export var projectile : PackedScene
+export  var projectile: PackedScene
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0:
 		play_animation("summon_prepare")

@@ -1,7 +1,7 @@
 extends AttackAbility
 
-const travel_speed := 550.0
-const jump_speed := -500.0
+const travel_speed: = 550.0
+const jump_speed: = - 500.0
 onready var smoke_dash: Particles2D = $"../smoke_dash"
 onready var highslash: Node2D = $highslash
 onready var lowslash: Node2D = $lowslash
@@ -12,20 +12,20 @@ onready var dash: AudioStreamPlayer2D = $dash
 onready var slash: AudioStreamPlayer2D = $slash
 onready var land: AudioStreamPlayer2D = $land
 
-export var projectile : PackedScene
+export  var projectile: PackedScene
 
-func _Setup() -> void:
+func _Setup() -> void :
 	turn_and_face_player()
 
 func play_sword():
-	sword.play_rp(0.03,0.93)
+	sword.play_rp(0.03, 0.93)
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	process_gravity(_delta)
 
 	if attack_stage == 0:
 		play_animation("low_dash_prepare")
-		Tools.timer(0.1,"play_sword",self)
+		Tools.timer(0.1, "play_sword", self)
 		next_attack_stage()
 	
 	elif attack_stage == 1 and has_finished_last_animation():
@@ -49,17 +49,17 @@ func _Update(_delta) -> void:
 		next_attack_stage()
 
 	elif attack_stage == 4:
-		if timer > .25 or is_colliding_with_wall() or not is_player_in_front() and get_distance_from_player() > 64:
+		if timer > 0.25 or is_colliding_with_wall() or not is_player_in_front() and get_distance_from_player() > 64:
 			play_animation("low_dash_pause")
 			reset_collider()
 			lowslash.deactivate()
-			decay_speed(0.5,0.2)
+			decay_speed(0.5, 0.2)
 			next_attack_stage()
 			
 	elif attack_stage == 5 and has_finished_last_animation():
 		play_animation("upward_start")
 		smoke_dash.emitting = false
-		slash.play_rp(0.03,1.2)
+		slash.play_rp(0.03, 1.2)
 		turn_and_face_player()
 		next_attack_stage()
 		
@@ -68,12 +68,12 @@ func _Update(_delta) -> void:
 		create_wave()
 		highslash.activate()
 		set_vertical_speed(jump_speed)
-		force_movement(travel_speed/2)
+		force_movement(travel_speed / 2)
 		next_attack_stage()
 	
 	elif attack_stage == 7 and has_finished_last_animation():
 		play_animation("upward_loop")
-		decay_speed(0.5,0.6)
+		decay_speed(0.5, 0.6)
 		next_attack_stage()
 
 	elif attack_stage == 8 and timer > 0.07:
@@ -90,7 +90,7 @@ func _Update(_delta) -> void:
 	elif attack_stage == 10 and timer > 0.15:
 		EndAbility()
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	._Interrupt()
 	lowslash.deactivate()
 	highslash.deactivate()
@@ -103,12 +103,12 @@ func turn_and_face_player():
 	lowslash.handle_direction()
 	
 func reduce_collider():
-	high.set_deferred("disabled",true)
-	high2.set_deferred("disabled",true)
+	high.set_deferred("disabled", true)
+	high2.set_deferred("disabled", true)
 
 func reset_collider():
-	high.set_deferred("disabled",false)
-	high2.set_deferred("disabled",false)
+	high.set_deferred("disabled", false)
+	high2.set_deferred("disabled", false)
 	
 func create_wave():
 	var shot = instantiate_projectile(projectile)

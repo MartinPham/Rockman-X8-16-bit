@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - Inferno - Loop.ogg-56e8cf6823dda802e545e0e9384
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

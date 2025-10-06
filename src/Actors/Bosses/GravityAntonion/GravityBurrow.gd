@@ -8,7 +8,7 @@ onready var burrow_sfx: AudioStreamPlayer2D = $burrow3
 onready var jump: AudioStreamPlayer2D = $jump
 onready var land: AudioStreamPlayer2D = $land
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0 and character.is_on_floor():
 		turn_and_face_player()
@@ -22,7 +22,7 @@ func _Update(delta) -> void:
 		burrow.emitting = true
 		burrow_2.emitting = true
 		activate_invulnerability()
-		Tools.timer(0.4,"deactivate_contact_damage",self)
+		Tools.timer(0.4, "deactivate_contact_damage", self)
 		next_attack_stage()
 	
 	elif attack_stage == 2 and has_finished_last_animation():
@@ -41,7 +41,7 @@ func _Update(delta) -> void:
 		next_attack_stage_on_next_frame()
 		
 	elif attack_stage == 4:
-		set_vertical_speed(-470.0)
+		set_vertical_speed( - 470.0)
 		next_attack_stage()
 	
 	elif attack_stage == 5 and timer > 0.5 and get_vertical_speed() > 0:
@@ -56,23 +56,23 @@ func _Update(delta) -> void:
 	elif attack_stage == 7 and has_finished_last_animation():
 		EndAbility()
 
-func deactivate_contact_damage() -> void:
+func deactivate_contact_damage() -> void :
 	if executing:
 		damage_on_touch.deactivate()
 
-func activate_contact_damage() -> void:
+func activate_contact_damage() -> void :
 	damage_on_touch.activate()
 
-func activate_invulnerability() -> void:
+func activate_invulnerability() -> void :
 	character.add_invulnerability("burrow")
 	damage.can_get_hit = false
 
-func deactivate_invulnerability() -> void:
+func deactivate_invulnerability() -> void :
 	character.remove_invulnerability("burrow")
 	damage.can_get_hit = true
 
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	deactivate_invulnerability()
 	activate_contact_damage()
 	burrow.emitting = false

@@ -1,25 +1,26 @@
-extends "res://src/Actors/Enemies/GroundPizza/JuggleAndMove.gd"
+extends PizzaJuggleAndMove
 
-func set_projectile() -> void:
+
+func set_projectile() -> void :
 	pass
 	
-func toggle_projectile_damage(b : bool) -> void:
+func toggle_projectile_damage(b: bool) -> void :
 	pass
 
-func hide_projectile() -> void:
+func hide_projectile() -> void :
 	pass
 
 func projectile_active() -> bool:
 	return true
 
-func unhide_projectile() ->void:
+func unhide_projectile() -> void :
 	pass
 
-func return_projectile() -> void:
+func return_projectile() -> void :
 	next_attack_stage()
 
-func _Update(_delta) -> void:
-	if character.scale.y == -1:
+func _Update(_delta: float) -> void :
+	if character.scale.y == - 1:
 		process_inverted_gravity(_delta)
 	else:
 		process_gravity(_delta)
@@ -30,11 +31,8 @@ func _Update(_delta) -> void:
 		return_projectile()
 		next_attack_stage()
 		
-	#attack_stage 1 is tween in return_projectile()
-		
 	elif attack_stage == 2:
 		play_animation_once("idle")
 		force_movement_toward_direction(horizontal_velocity, character.get_direction())
-		#projectile.position.y = (cos(timer * frequency) * jump_velocity) - 9
 		if is_colliding_with_wall() or is_near_ledge() or is_over_range():
 			turn()

@@ -1,12 +1,12 @@
 extends EnemyShield
 
-func _ready() -> void:
+func _ready() -> void :
 	pass
 
-func activate() -> void:
+func activate() -> void :
 	.activate()
 	character.add_invulnerability(name)
 	
-func deactivate() -> void:
+func deactivate() -> void :
 	.deactivate()
 	character.remove_invulnerability(name)

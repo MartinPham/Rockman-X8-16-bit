@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/Fonts/Xclassicfont.fnt" type="BitmapFont" id=1]
 [ext_resource path="res://src/Fonts/X8Bossfont.fnt" type="BitmapFont" id=2]
@@ -10,16 +10,23 @@
 [ext_resource path="res://src/Options/GameStartButton.gd" type="Script" id=8]
 [ext_resource path="res://src/Options/AutonomousMenuButton.gd" type="Script" id=9]
 [ext_resource path="res://src/Sounds/CHARGED_SHOT.wav" type="AudioStream" id=10]
-[ext_resource path="res://src/Sounds/FX - Menu Switch.ogg" type="AudioStream" id=11]
-[ext_resource path="res://images/rockman logo.png" type="Texture" id=12]
+[ext_resource path="res://System/SFX/move_cursor.ogg" type="AudioStream" id=11]
+[ext_resource path="res://src/Title/title_megaman.png" type="Texture" id=12]
 [ext_resource path="res://src/Title/title_bg.png" type="Texture" id=13]
 [ext_resource path="res://src/Fonts/x8_bitmapfont.tres" type="BitmapFont" id=14]
 [ext_resource path="res://src/Actors/Player/x_sprites/x.res" type="SpriteFrames" id=15]
 [ext_resource path="res://src/Options/LilMegamanOnScreen.gd" type="Script" id=16]
-[ext_resource path="res://src/Actors/Weapons/Projectiles/heavy_shot.res" type="SpriteFrames" id=17]
+[ext_resource path="res://src/Actors/Weapons/Projectiles/medium_shot.res" type="SpriteFrames" id=17]
 [ext_resource path="res://src/Actors/Player/x_sprites/x_crystal_pallette.png" type="Texture" id=18]
 [ext_resource path="res://addons/PaletteSwap/PaletteSwap.gdshader" type="Shader" id=19]
-[ext_resource path="res://Alt Music/y7se_000.wav" type="AudioStream" id=20]
+[ext_resource path="res://System/Screens/Loading/Loading.tscn" type="PackedScene" id=20]
+[ext_resource path="res://System/SFX/open_option.ogg" type="AudioStream" id=21]
+[ext_resource path="res://Axl_mod/SFX/copy_bullet.wav" type="AudioStream" id=22]
+[ext_resource path="res://System/SFX/window_close.ogg" type="AudioStream" id=23]
+[ext_resource path="res://Zero_mod/SFX/sfx_Saber.wav" type="AudioStream" id=24]
+[ext_resource path="res://src/Options/username.gd" type="Script" id=25]
+[ext_resource path="res://System/Screens/Leaderboard/Leaderboards.tscn" type="PackedScene" id=26]
+[ext_resource path="res://src/Options/event_text.gd" type="Script" id=28]
 
 [sub_resource type="ShortCut" id=1]
 
@@ -49,20 +56,21 @@ margin_right = 398.0
 margin_bottom = 226.0
 texture = ExtResource( 13 )
 
+[node name="MegaMan" type="TextureRect" parent="Menu"]
+margin_left = 83.0
+margin_top = 12.0
+margin_right = 236.0
+margin_bottom = 107.0
+texture = ExtResource( 12 )
+
 [node name="X8" type="TextureRect" parent="Menu"]
-margin_left = 177.0
-margin_top = -29.0
-margin_right = 427.0
-margin_bottom = 151.0
+margin_left = 135.0
+margin_top = -34.0
+margin_right = 385.0
+margin_bottom = 146.0
 texture = ExtResource( 6 )
 
-[node name="MegaMan" type="TextureRect" parent="Menu"]
-margin_left = 30.0
-margin_top = 23.0
-margin_right = 315.0
-margin_bottom = 110.0
-texture = ExtResource( 12 )
-expand = true
+[node name="EVENT" type="TextureRect" parent="Menu"]
 
 [node name="Title" type="Control" parent="Menu"]
 visible = false
@@ -110,18 +118,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -43.0
-margin_top = 35.0
-margin_right = 157.0
-margin_bottom = 102.0
+margin_left = -199.0
+margin_top = 11.0
+margin_right = 198.0
+margin_bottom = 103.0
 grow_horizontal = 2
-custom_constants/separation = 3
+custom_constants/separation = 0
+alignment = 1
 
 [node name="GameStart" type="TextureButton" parent="Menu/OptionHolder"]
 modulate = Color( 0.407843, 0.792157, 1, 1 )
 self_modulate = Color( 1, 1, 1, 0 )
-margin_right = 200.0
-margin_bottom = 16.0
+margin_top = 14.0
+margin_right = 397.0
+margin_bottom = 30.0
 rect_min_size = Vector2( 200, 16 )
 action_mode = 0
 script = ExtResource( 8 )
@@ -134,20 +144,22 @@ pick_sound = NodePath("../../../pick")
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -7.0
-margin_right = 189.0
+margin_right = 398.0
 margin_bottom = 7.0
 custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 1 )
 text = "GAME_START"
+align = 1
 uppercase = true
 
-[node name="Options" type="TextureButton" parent="Menu/OptionHolder"]
+[node name="Leaderboards" type="TextureButton" parent="Menu/OptionHolder"]
+visible = false
 modulate = Color( 0.407843, 0.792157, 1, 1 )
-margin_top = 19.0
-margin_right = 200.0
-margin_bottom = 35.0
+margin_top = 30.0
+margin_right = 397.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 18, 16 )
 action_mode = 0
 shortcut = SubResource( 1 )
@@ -155,8 +167,73 @@ script = ExtResource( 9 )
 idle_color = Color( 0.407843, 0.792157, 1, 1 )
 focus_color = Color( 0.984314, 1, 0.686275, 1 )
 menu_path = NodePath("../../..")
-pick_sound = NodePath("../../../pick")
-able_to_unlock_debug = true
+pick_sound = NodePath("../../../equip")
+
+[node name="LEADERBOARDS" parent="Menu/OptionHolder/Leaderboards" instance=ExtResource( 26 )]
+layer = 5
+visible = false
+
+[node name="text" type="Label" parent="Menu/OptionHolder/Leaderboards"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 398.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 64, 14 )
+custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 1 )
+text = "LEADERBOARDS"
+align = 1
+uppercase = true
+
+[node name="Loading" type="TextureButton" parent="Menu/OptionHolder"]
+modulate = Color( 0.407843, 0.792157, 1, 1 )
+margin_top = 30.0
+margin_right = 397.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 18, 16 )
+action_mode = 0
+shortcut = SubResource( 1 )
+script = ExtResource( 9 )
+idle_color = Color( 0.407843, 0.792157, 1, 1 )
+focus_color = Color( 0.984314, 1, 0.686275, 1 )
+menu_path = NodePath("../../..")
+pick_sound = NodePath("../../../equip")
+
+[node name="LOADING" parent="Menu/OptionHolder/Loading" instance=ExtResource( 20 )]
+layer = 5
+visible = false
+
+[node name="text" type="Label" parent="Menu/OptionHolder/Loading"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 398.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 64, 14 )
+custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 1 )
+text = "LOAD GAME"
+align = 1
+uppercase = true
+
+[node name="Options" type="TextureButton" parent="Menu/OptionHolder"]
+modulate = Color( 0.407843, 0.792157, 1, 1 )
+margin_top = 46.0
+margin_right = 397.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 18, 16 )
+action_mode = 0
+shortcut = SubResource( 1 )
+script = ExtResource( 9 )
+idle_color = Color( 0.407843, 0.792157, 1, 1 )
+focus_color = Color( 0.984314, 1, 0.686275, 1 )
+menu_path = NodePath("../../..")
+pick_sound = NodePath("../../../equip")
 
 [node name="OptionsMenu" parent="Menu/OptionHolder/Options" instance=ExtResource( 4 )]
 layer = 5
@@ -166,7 +243,7 @@ visible = false
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -7.0
-margin_right = 82.0
+margin_right = 398.0
 margin_bottom = 7.0
 rect_min_size = Vector2( 64, 14 )
 custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
@@ -174,13 +251,14 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 1 )
 text = "OPTIONS_START"
+align = 1
 uppercase = true
 
 [node name="Keycfg" type="TextureButton" parent="Menu/OptionHolder"]
 modulate = Color( 0.407843, 0.792157, 1, 1 )
-margin_top = 38.0
-margin_right = 200.0
-margin_bottom = 54.0
+margin_top = 62.0
+margin_right = 397.0
+margin_bottom = 78.0
 rect_min_size = Vector2( 18, 16 )
 action_mode = 0
 shortcut = SubResource( 1 )
@@ -188,7 +266,7 @@ script = ExtResource( 9 )
 idle_color = Color( 0.407843, 0.792157, 1, 1 )
 focus_color = Color( 0.984314, 1, 0.686275, 1 )
 menu_path = NodePath("../../..")
-pick_sound = NodePath("../../../pick")
+pick_sound = NodePath("../../../equip")
 
 [node name="KeyConfig" parent="Menu/OptionHolder/Keycfg" instance=ExtResource( 3 )]
 layer = 5
@@ -198,7 +276,7 @@ visible = false
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -7.0
-margin_right = 64.0
+margin_right = 398.0
 margin_bottom = 7.0
 rect_min_size = Vector2( 64, 14 )
 custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
@@ -206,49 +284,66 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 1 )
 text = "KEYCFG_START"
+align = 1
 uppercase = true
 
 [node name="demo_02" type="Label" parent="Menu"]
 modulate = Color( 1, 1, 1, 0.360784 )
-margin_left = 2.0
-margin_top = 220.0
-margin_right = 396.0
-margin_bottom = 247.0
+margin_top = 222.0
+margin_right = 397.0
+margin_bottom = 249.0
 custom_colors/font_color = Color( 0.639216, 0.713726, 0.898039, 1 )
 custom_colors/font_color_shadow = Color( 0.270588, 0.270588, 0.270588, 1 )
 custom_fonts/font = ExtResource( 14 )
-text = "Demo 02 V.0.3.0.2"
+text = "MOD V.0.3.0.2 TEST 6"
 align = 2
 
-[node name="shad" type="Label" parent="Menu"]
-visible = false
+[node name="username" type="Label" parent="Menu"]
+margin_left = 4.0
+margin_top = 11.0
+margin_right = 401.0
+margin_bottom = 38.0
+custom_colors/font_color = Color( 0.639216, 0.713726, 0.898039, 1 )
+custom_colors/font_color_shadow = Color( 0.270588, 0.270588, 0.270588, 1 )
+custom_fonts/font = ExtResource( 14 )
+text = "USERNAME"
+script = ExtResource( 25 )
+
+[node name="event_text" type="Label" parent="Menu"]
+margin_left = 4.0
+margin_top = 222.0
+margin_right = 394.0
+margin_bottom = 245.0
+custom_colors/font_color = Color( 0.639216, 0.713726, 0.898039, 1 )
+custom_colors/font_color_shadow = Color( 0.270588, 0.270588, 0.270588, 1 )
+custom_fonts/font = ExtResource( 14 )
+text = "EVENT_TEXT"
+script = ExtResource( 28 )
+
+[node name="16-bit_shadow" type="Label" parent="Menu"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 178.0
 margin_top = 121.0
-margin_right = 234.0
+margin_right = 398.0
 margin_bottom = 148.0
 custom_colors/font_color = Color( 0.639216, 0.713726, 0.898039, 1 )
 custom_colors/font_color_shadow = Color( 0.270588, 0.270588, 0.270588, 1 )
 custom_fonts/font = ExtResource( 14 )
-text = "16-bit"
+text = "16-BIT_TITLE"
 align = 1
 
-[node name="demo_03" type="Label" parent="Menu"]
-margin_left = 159.0
+[node name="16-bit" type="Label" parent="Menu"]
 margin_top = 119.0
-margin_right = 242.0
-margin_bottom = 149.0
+margin_right = 398.0
+margin_bottom = 146.0
 custom_colors/font_color = Color( 0.639216, 0.713726, 0.898039, 1 )
 custom_colors/font_color_shadow = Color( 0.270588, 0.270588, 0.270588, 1 )
 custom_fonts/font = ExtResource( 14 )
-text = "Awakening
-16-bit
-"
+text = "16-BIT_TITLE"
 align = 1
 
 [node name="MegamanCursor" type="AnimatedSprite" parent="."]
 material = SubResource( 2 )
-position = Vector2( 110, 154 )
+position = Vector2( 110, 144 )
 frames = ExtResource( 15 )
 animation = "idle"
 script = ExtResource( 16 )
@@ -258,9 +353,14 @@ visible = false
 position = Vector2( 13, 2 )
 z_index = -1
 frames = ExtResource( 17 )
-animation = "Tag"
-frame = 2
+animation = "loop"
+frame = 5
 playing = true
+
+[node name="equip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = -4.0
+bus = "SFX"
 
 [node name="choice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
@@ -273,6 +373,18 @@ volume_db = -10.0
 pitch_scale = 0.43
 bus = "SFX"
 
+[node name="pick2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+volume_db = -10.0
+bus = "SFX"
+
+[node name="saber" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 24 )
+volume_db = -8.0
+pitch_scale = 0.94
+bus = "SFX"
+
 [node name="Fader" type="ColorRect" parent="."]
 visible = false
 margin_right = 398.0
@@ -282,8 +394,9 @@ color = Color( 0, 0, 0, 1 )
 script = ExtResource( 5 )
 menu = NodePath("../Menu")
 
-[node name="CheatSfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 20 )
+[node name="cancel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+volume_db = -4.0
 bus = "SFX"
 
 [connection signal="focus_entered" from="Menu/OptionHolder/GameStart" to="Menu/OptionHolder/GameStart" method="_on_focus_entered"]
@@ -291,6 +404,17 @@ bus = "SFX"
 [connection signal="mouse_entered" from="Menu/OptionHolder/GameStart" to="Menu/OptionHolder/GameStart" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Menu/OptionHolder/GameStart" to="Menu/OptionHolder/GameStart" method="_on_mouse_exited"]
 [connection signal="pressed" from="Menu/OptionHolder/GameStart" to="Menu/OptionHolder/GameStart" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/OptionHolder/Leaderboards" to="Menu/OptionHolder/Leaderboards" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/OptionHolder/Leaderboards" to="Menu/OptionHolder/Leaderboards" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/OptionHolder/Leaderboards" to="Menu/OptionHolder/Leaderboards" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/OptionHolder/Leaderboards" to="Menu/OptionHolder/Leaderboards" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/OptionHolder/Leaderboards" to="Menu/OptionHolder/Leaderboards" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/OptionHolder/Loading" to="Menu/OptionHolder/Loading" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/OptionHolder/Loading" to="Menu/OptionHolder/Loading" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/OptionHolder/Loading" to="Menu/OptionHolder/Loading" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/OptionHolder/Loading" to="Menu/OptionHolder/Loading" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/OptionHolder/Loading" to="Menu/OptionHolder/Loading" method="_on_pressed"]
+[connection signal="loaded_savefile" from="Menu/OptionHolder/Loading/LOADING" to="Menu/OptionHolder/GameStart" method="update_game_mode"]
 [connection signal="focus_entered" from="Menu/OptionHolder/Options" to="Menu/OptionHolder/Options" method="_on_focus_entered"]
 [connection signal="focus_exited" from="Menu/OptionHolder/Options" to="Menu/OptionHolder/Options" method="_on_focus_exited"]
 [connection signal="mouse_entered" from="Menu/OptionHolder/Options" to="Menu/OptionHolder/Options" method="_on_mouse_entered"]

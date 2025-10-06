@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - AlternateLumine - Loop.ogg-3e6322fc44c8f196f0e
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

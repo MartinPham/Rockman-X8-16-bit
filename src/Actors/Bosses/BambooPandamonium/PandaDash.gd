@@ -1,19 +1,19 @@
 extends AttackAbility
-var barriers_present:= false
+var barriers_present: = false
 onready var dash: AudioStreamPlayer2D = $dash
 
-func _on_barriers_created() -> void:
+func _on_barriers_created() -> void :
 	barriers_present = true
-func _on_barriers_destroyed() -> void:
+func _on_barriers_destroyed() -> void :
 	barriers_present = false
 
-func _Setup() -> void:
+func _Setup() -> void :
 	if not barriers_present:
 		EndAbility()
 	else:
 		play_animation("dash_prepare")
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	process_gravity(_delta)
 	if attack_stage == 0 and has_finished_last_animation():
 		play_animation("dash_loop")
@@ -23,7 +23,7 @@ func _Update(_delta) -> void:
 		
 	elif attack_stage == 1 and timer > 0.75:
 		play_animation("dash_end")
-		decay_speed(0.5,0.35)
+		decay_speed(0.5, 0.35)
 		next_attack_stage()
 		
 	elif attack_stage == 2 and has_finished_last_animation():

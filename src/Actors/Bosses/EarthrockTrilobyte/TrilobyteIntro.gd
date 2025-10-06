@@ -7,17 +7,17 @@ onready var crystals = [crystal, crystal_2, crystal_3]
 onready var break_sound: AudioStreamPlayer2D = $break
 onready var appear: AudioStreamPlayer2D = $appear
 
-func prepare_for_intro() -> void:
+func prepare_for_intro() -> void :
 	make_invisible()
 	for c in crystals:
 		c.visible = false
 	
-func _Setup() -> void:
+func _Setup() -> void :
 	GameManager.start_cutscene()
 	turn_and_face_player()
 	repeat_for_all_crystals("introduce")
 
-func _Update(delta) -> void:
+func _Update(delta: float) -> void :
 	process_gravity(delta)
 	if attack_stage == 0 and timer > 1:
 		repeat_for_all_crystals("shatter_and_break")
@@ -62,30 +62,30 @@ func _Update(delta) -> void:
 		play_animation("idle")
 		EndAbility()
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	Event.emit_signal("boss_start", character)
 	GameManager.end_cutscene()
 	character.emit_signal("intro_concluded")
 
-func repeat_for_all_crystals(method : String, time_between := 0.1) -> void:
-	var interval := 0.0165
+func repeat_for_all_crystals(method: String, time_between: = 0.1) -> void :
+	var interval: = 0.0165
 	for c in crystals:
-		Tools.timer_p(interval,method,self,c)
+		Tools.timer_p(interval, method, self, c)
 		interval += time_between
 
-func introduce(crystal_sprite : AnimatedSprite) -> void:
+func introduce(crystal_sprite: AnimatedSprite) -> void :
 	crystal_sprite.visible = true
 	crystal_sprite.playing = true
 	crystal_sprite.frame = 0
 	crystal_sprite.play("intro")
 	appear.play_rp()
 
-func shatter_and_break(crystal_sprite : AnimatedSprite) -> void:
+func shatter_and_break(crystal_sprite: AnimatedSprite) -> void :
 	crystal_sprite.play("shattered")
-	break_sound.play_rp(0.05,1.85)
-	Tools.timer_p(1.0,"_break",self,crystal_sprite)
+	break_sound.play_rp(0.05, 1.85)
+	Tools.timer_p(1.0, "_break", self, crystal_sprite)
 
-func _break(crystal_sprite : AnimatedSprite) -> void:
+func _break(crystal_sprite: AnimatedSprite) -> void :
 	crystal_sprite.visible = false
 	break_sound.play_rp()
 	get_node(crystal_sprite.name + "_remains").emitting = true

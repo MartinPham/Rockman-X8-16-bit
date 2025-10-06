@@ -1,3 +1,1 @@
 extends Panda
-
-	

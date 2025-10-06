@@ -1,17 +1,17 @@
 extends GrabAttack
+
 onready var grab_area: Node2D = $GrabArea
 onready var drain: AudioStreamPlayer2D = $drain
 
-var munch_timer := 0.0
-var munched_times := 0
+var munch_timer: float = 0.0
+var munched_times: int = 0
 onready var dash_smoke: Particles2D = $dash_smoke
 onready var dash: AudioStreamPlayer2D = $dash
 
-func _ready() -> void:
-# warning-ignore:return_value_discarded
-	grab_area.connect("touch_target",self,"apply_stuck_state")
+func _ready() -> void :
+	grab_area.connect("touch_target", self, "apply_stuck_state")
 
-func _Setup() -> void:
+func _Setup() -> void :
 	._Setup()
 	grab_area.handle_direction()
 	grabbed_player = false
@@ -51,9 +51,9 @@ func _Update(_delta):
 			if mashed_enough():
 				GameManager.player.stop_forced_movement()
 				if munched_times > 0:
-					GameManager.player.damage(0,get_parent())# warning-ignore:return_value_discarded
+					GameManager.player.damage(0, get_parent())
 				else:
-					GameManager.player.damage(1,get_parent())
+					GameManager.player.damage(1, get_parent())
 				next_attack_stage_on_next_frame()
 		else:
 			next_attack_stage()
@@ -64,8 +64,7 @@ func _Update(_delta):
 			play_animation_once("idle")
 			EndAbility()
 	
-	#extra
-	elif attack_stage == 5: 
+	elif attack_stage == 5:
 		play_animation_once("intro")
 		if timer > 1:
 			play_animation_once("desperation_prepare")
@@ -74,12 +73,12 @@ func _Update(_delta):
 		play_animation_once("desperation_loop")
 		if timer > 1:
 			EndAbility()
-		
-func _Interrupt() -> void:
+
+func _Interrupt() -> void :
 	dash_smoke.emitting = false
 	GameManager.player.stop_forced_movement()
 
-func suck_life(delta) -> void:
+func suck_life(delta: float) -> void :
 	munch_timer += delta
 	if GameManager.player.current_health <= 0:
 		go_to_attack_stage(5)
@@ -92,14 +91,12 @@ func suck_life(delta) -> void:
 		GameManager.player.animatedSprite.set_frame(0)
 		munched_times += 1
 
-func set_player_state_and_animation() -> void:
+func set_player_state_and_animation() -> void :
 	GameManager.player.force_movement()
 	GameManager.player.play_animation("damage")
 	GameManager.player.animatedSprite.set_frame(10)
 	GameManager.player.grabbed = true
 
-func reposition_player() -> void:
-	var tween := get_tree().create_tween()
-# warning-ignore:return_value_discarded
-	tween.tween_property(GameManager.player, "global_position", get_safe_player_grab_position(),translate_duration).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
-
+func reposition_player() -> void :
+	var tween: = get_tree().create_tween()
+	tween.tween_property(GameManager.player, "global_position", get_safe_player_grab_position(), translate_duration).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)

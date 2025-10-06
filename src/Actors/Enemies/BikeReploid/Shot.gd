@@ -1,19 +1,19 @@
 extends AttackAbility
 
-const timer_between_shots := 0.5
-const total_shots := 5
-var shots_fired := 0
-export var projectile : PackedScene
+const timer_between_shots: = 0.5
+const total_shots: = 5
+var shots_fired: = 0
+export  var projectile: PackedScene
 onready var shot_origin: Node2D = $"../animatedSprite/shot_origin"
 
 var tween
 
-func _Setup() -> void:
+func _Setup() -> void :
 	shots_fired = 0
 	tween = create_tween()
-	tween.tween_method(self,"force_movement",get_actual_speed(),horizontal_velocity,0.5) # warning-ignore:return_value_discarded 
+	tween.tween_method(self, "force_movement", get_actual_speed(), horizontal_velocity, 0.5)
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	process_gravity(_delta)
 	if attack_stage == 0 and has_finished_last_animation():
 		play_animation("shot")
@@ -28,7 +28,7 @@ func _Update(_delta) -> void:
 	elif attack_stage == 2 and has_finished_last_animation():
 		EndAbility()
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	force_movement(horizontal_velocity)
 	play_animation("idle")
 	if tween:
@@ -37,8 +37,8 @@ func _Interrupt() -> void:
 func _EndCondition() -> bool:
 	return abs(get_distance_to_player()) > 240
 
-func fire_shot() -> void:
+func fire_shot() -> void :
 	var p = instantiate_projectile(projectile)
 	p.global_position = shot_origin.global_position
-	p.set_horizontal_speed(100 * -character.get_facing_direction())
+	p.set_horizontal_speed(100 * - character.get_facing_direction())
 	shots_fired += 1

@@ -102,7 +102,6 @@ animations = [ {
 pause_mode = 2
 position = Vector2( 0, -104 )
 script = ExtResource( 4 )
-explosion_time = 3.0
 death_animation = ""
 
 [node name="Explosion Particles" parent="." instance=ExtResource( 1 )]

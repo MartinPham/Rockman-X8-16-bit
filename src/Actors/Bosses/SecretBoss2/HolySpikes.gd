@@ -1,8 +1,8 @@
 extends AttackAbility
-export var spike : PackedScene
+export  var spike: PackedScene
 
 func _Update(_delta):
-	if attack_stage == 0 and timer > .5:
+	if attack_stage == 0 and timer > 0.5:
 		play_animation("ground")
 		create_spike()
 		next_attack_stage()
@@ -17,6 +17,6 @@ func _Update(_delta):
 func create_spike():
 	var new_spike = spike.instance()
 	new_spike.direction = get_facing_direction()
-	character.get_parent().call_deferred("add_child",new_spike)
-	new_spike.global_position = character.global_position + Vector2(16*get_facing_direction(),23)
+	character.get_parent().call_deferred("add_child", new_spike)
+	new_spike.global_position = character.global_position + Vector2(16 * get_facing_direction(), 23)
 

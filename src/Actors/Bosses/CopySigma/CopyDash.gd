@@ -1,6 +1,6 @@
 extends AttackAbility
 
-const travel_speed := 460.0
+const travel_speed: = 460.0
 onready var highslash: Node2D = $highslash
 onready var lowslash: Node2D = $lowslash
 onready var smoke_dash: Particles2D = $"../smoke_dash"
@@ -9,10 +9,10 @@ onready var slash: AudioStreamPlayer2D = $slash
 onready var sword: AudioStreamPlayer2D = $"../sword"
 onready var high_2: CollisionShape2D = $"../area2D/high2"
 
-func _Setup() -> void:
+func _Setup() -> void :
 	turn_and_face_player()
 
-func _Update(_delta) -> void:
+func _Update(_delta: float) -> void :
 	process_gravity(_delta)
 
 	if attack_stage == 0:
@@ -42,7 +42,7 @@ func _Update(_delta) -> void:
 		play_animation("dash_slash_1")
 		highslash.activate()
 		slash.play_rp(0.03)
-		decay_speed(0.5,0.3)
+		decay_speed(0.5, 0.3)
 		smoke_dash.emitting = false
 		next_attack_stage()
 
@@ -70,7 +70,7 @@ func _Update(_delta) -> void:
 		play_animation("dash_slash_2")
 		lowslash.activate()
 		slash.play_rp(0.03)
-		decay_speed(0.5,0.3)
+		decay_speed(0.5, 0.3)
 		smoke_dash.emitting = false
 		next_attack_stage()
 			
@@ -92,7 +92,7 @@ func _Update(_delta) -> void:
 	elif attack_stage == 13 and has_finished_last_animation():
 		EndAbility()
 
-func _Interrupt() -> void:
+func _Interrupt() -> void :
 	._Interrupt()
 	smoke_dash.emitting = false
 	reset_collider()
@@ -103,7 +103,7 @@ func turn_and_face_player():
 	lowslash.handle_direction()
 
 func reduce_collider():
-	high_2.set_deferred("disabled",true)
+	high_2.set_deferred("disabled", true)
 
 func reset_collider():
-	high_2.set_deferred("disabled",false)
+	high_2.set_deferred("disabled", false)

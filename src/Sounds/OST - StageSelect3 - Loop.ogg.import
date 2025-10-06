@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - StageSelect3 - Loop.ogg-943fd9371b73168c9af226
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

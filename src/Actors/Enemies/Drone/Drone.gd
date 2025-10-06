@@ -1,7 +1,7 @@
 extends Enemy
 
 
-func update_facing_direction() -> void:
+func update_facing_direction() -> void :
 	pass
 
 

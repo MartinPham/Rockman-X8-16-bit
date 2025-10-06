@@ -11,5 +11,5 @@ dest_files=[ "res://.import/OST - boss.ogg-996707343dd3bca17ca44426cb709af3.oggs
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

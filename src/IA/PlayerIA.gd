@@ -1,7 +1,9 @@
 extends Node
 
-var weapon : Resource
 onready var x: KinematicBody2D = $"../X"
+
+var weapon: Resource
+
 
 func initialize():
 	if GameManager.player == null:
@@ -10,27 +12,25 @@ func initialize():
 	call_deferred("emit_signal_weapon")
 
 func emit_signal_weapon():
-	Event.emit_signal("select_weapon",weapon)
+	Event.emit_signal("select_weapon", weapon)
 	
 
-func delayed_start() -> void:
+func delayed_start() -> void :
 	weapon.input_sequence.call_actions(self)
 	define_camera_right_limit(weapon.input_sequence.limit)
 
 func start():
-	#Event.emit_signal("intro_x")
-	Tools.timer(1,"delayed_start",self)
+	Tools.timer(1, "delayed_start", self)
 
-func emulate_press(key, press := false) -> void:
-	
+func emulate_press(key, press: = false) -> void :
 	var event = InputEventAction.new()
 	event.action = key
 	event.pressed = press
 	Input.parse_input_event(event)
 
-func define_camera_right_limit(value) -> void:
+func define_camera_right_limit(value) -> void :
 	$"../StateCamera".custom_limits_right = value
 
-func _on_weapon_defined(_weapon) -> void:
+func _on_weapon_defined(_weapon) -> void :
 	weapon = _weapon
 	call_deferred("initialize")
