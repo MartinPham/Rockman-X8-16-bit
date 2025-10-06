@@ -11,7 +11,8 @@ var game_version: String = GameManager.version
 var full_user_agent: String = USER_AGENT_PREFIX + GameManager.version
 
 func _ready() -> void :
-	connect("features_checked", self, "_on_features_checked")
+	return
+#	connect("features_checked", self, "_on_features_checked")
 
 func validate_encrypted_response(json):
 	var result = {

@@ -130,71 +130,72 @@ func _on_request_completed(result: int, response_code: int, headers: Array, body
 
 
 func _ready() -> void :
-	if get_parent().name == "root":
-		start()
-	else:
-		menu.visible = false
-		visible = true
-	
-	
-	for i in range(categories.size()):
-		var category = categories[i]
-		var tab_button = X8TextureButton.new()
-		tab_button.rect_min_size = Vector2(64, 25)
-		tab_button.rect_position = Vector2(0, 0)
-		tab_button.margin_right = 1
-		tab_button.margin_right = 65
-		
-		var tab_label_shadow = Label.new()
-		tab_label_shadow.text = category
-		tab_label_shadow.add_font_override("font", font)
-		tab_label_shadow.add_color_override("font_color", Color(0, 0, 0))
-		tab_label_shadow.rect_position = Vector2(1, 9)
-		tab_label_shadow.align = Label.ALIGN_CENTER
-		tab_label_shadow.valign = Label.VALIGN_CENTER
-		tab_label_shadow.rect_min_size = Vector2(66, 17)
-		var tab_label = Label.new()
-		tab_label.text = category
-		tab_label.add_font_override("font", font)
-		tab_label.add_color_override("font_color", font_color_dim)
-		tab_label.rect_position = Vector2(0, 8)
-		tab_label.align = Label.ALIGN_CENTER
-		tab_label.valign = Label.VALIGN_CENTER
-		tab_label.rect_min_size = Vector2(66, 17)
-
-		tab_button.add_child(tab_label_shadow)
-		tab_button.add_child(tab_label)
-		tabs_container.add_child(tab_button)
-		
-		tab_button.set_script(cat_script)
-		tab_button.category_num = i
-		tab_button.texture_normal = tab_bg
-		tab_button.modulate = Color("#7d7d7d")
-		tab_button.action_mode = TextureButton.ACTION_MODE_BUTTON_PRESS
-		tab_button.focus_mode = TextureButton.FOCUS_ALL
-		tab_button.menu_path = tab_button.get_parent().get_parent().get_parent().get_path()
-		tab_button.connect("pressed", tab_button, "_on_pressed")
-		tab_button.connect("focus_entered", tab_button, "_on_focus_entered")
-		tab_button.connect("focus_exited", tab_button, "_on_focus_exited")
-		tab_button.connect("mouse_entered", tab_button, "_on_mouse_entered")
-		tab_button.connect("mouse_exited", tab_button, "_on_mouse_exited")
-		tab_button.start_button()
-
-		var category_container = VBoxContainer.new()
-		leaderboard_container.add_child(category_container)
-
-		category_containers[category] = category_container
-
-		
-		
-		
-
-		if i == 0:
-			active_tab = tab_label
-			active_tab.add_color_override("font_color", font_color)
-			
-	if categories.size() > 0:
-		fetch_leaderboard(categories[0])
+	return
+#	if get_parent().name == "root":
+#		start()
+#	else:
+#		menu.visible = false
+#		visible = true
+#
+#
+#	for i in range(categories.size()):
+#		var category = categories[i]
+#		var tab_button = X8TextureButton.new()
+#		tab_button.rect_min_size = Vector2(64, 25)
+#		tab_button.rect_position = Vector2(0, 0)
+#		tab_button.margin_right = 1
+#		tab_button.margin_right = 65
+#
+#		var tab_label_shadow = Label.new()
+#		tab_label_shadow.text = category
+#		tab_label_shadow.add_font_override("font", font)
+#		tab_label_shadow.add_color_override("font_color", Color(0, 0, 0))
+#		tab_label_shadow.rect_position = Vector2(1, 9)
+#		tab_label_shadow.align = Label.ALIGN_CENTER
+#		tab_label_shadow.valign = Label.VALIGN_CENTER
+#		tab_label_shadow.rect_min_size = Vector2(66, 17)
+#		var tab_label = Label.new()
+#		tab_label.text = category
+#		tab_label.add_font_override("font", font)
+#		tab_label.add_color_override("font_color", font_color_dim)
+#		tab_label.rect_position = Vector2(0, 8)
+#		tab_label.align = Label.ALIGN_CENTER
+#		tab_label.valign = Label.VALIGN_CENTER
+#		tab_label.rect_min_size = Vector2(66, 17)
+#
+#		tab_button.add_child(tab_label_shadow)
+#		tab_button.add_child(tab_label)
+#		tabs_container.add_child(tab_button)
+#
+#		tab_button.set_script(cat_script)
+#		tab_button.category_num = i
+#		tab_button.texture_normal = tab_bg
+#		tab_button.modulate = Color("#7d7d7d")
+#		tab_button.action_mode = TextureButton.ACTION_MODE_BUTTON_PRESS
+#		tab_button.focus_mode = TextureButton.FOCUS_ALL
+#		tab_button.menu_path = tab_button.get_parent().get_parent().get_parent().get_path()
+#		tab_button.connect("pressed", tab_button, "_on_pressed")
+#		tab_button.connect("focus_entered", tab_button, "_on_focus_entered")
+#		tab_button.connect("focus_exited", tab_button, "_on_focus_exited")
+#		tab_button.connect("mouse_entered", tab_button, "_on_mouse_entered")
+#		tab_button.connect("mouse_exited", tab_button, "_on_mouse_exited")
+#		tab_button.start_button()
+#
+#		var category_container = VBoxContainer.new()
+#		leaderboard_container.add_child(category_container)
+#
+#		category_containers[category] = category_container
+#
+#
+#
+#
+#
+#		if i == 0:
+#			active_tab = tab_label
+#			active_tab.add_color_override("font_color", font_color)
+#
+#	if categories.size() > 0:
+#		fetch_leaderboard(categories[0])
 
 func _on_tab_pressed(event, category: String, tab_label: Label) -> void :
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:

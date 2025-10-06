@@ -14,15 +14,16 @@ func fadein() -> void :
 	tween.attribute("modulate:a", 0.0, 0.5, fade)
 
 func _ready() -> void :
-	fade.modulate = Color.black
-	Tools.timer(1.5, "fadein", self)
-	info.text = GameManager.current_demo + " V." + GameManager.version
-	check_for_username()
-	if CharacterManager.USERNAME != "":
-		activation_label.text = "Please wait."
-		activation_label.show()
-		check_validation_status()
-	line_edit.connect("text_entered", self, "_on_enter_pressed")
+	goto_next_scene()
+#	fade.modulate = Color.black
+#	Tools.timer(1.5, "fadein", self)
+#	info.text = GameManager.current_demo + " V." + GameManager.version
+#	check_for_username()
+#	if CharacterManager.USERNAME != "":
+#		activation_label.text = "Please wait."
+#		activation_label.show()
+#		check_validation_status()
+#	line_edit.connect("text_entered", self, "_on_enter_pressed")
 
 func check_for_username() -> void :
 	CharacterManager.load_user()

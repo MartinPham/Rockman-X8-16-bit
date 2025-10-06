@@ -115,13 +115,14 @@ func _on_player_set():
 
 
 func _ready() -> void :
-	Event.connect("leaderboard_any", self, "set_category_any")
-	Event.connect("leaderboard_100", self, "set_category_100")
-	Event.connect("leaderboard_x", self, "set_category_x")
-	Event.connect("leaderboard_zero", self, "set_category_zero")
-	Event.connect("leaderboard_axl", self, "set_category_axl")
-	
-	Event.connect("player_set", self, "_on_player_set")
+	return
+#	Event.connect("leaderboard_any", self, "set_category_any")
+#	Event.connect("leaderboard_100", self, "set_category_100")
+#	Event.connect("leaderboard_x", self, "set_category_x")
+#	Event.connect("leaderboard_zero", self, "set_category_zero")
+#	Event.connect("leaderboard_axl", self, "set_category_axl")
+#
+#	Event.connect("player_set", self, "_on_player_set")
 
 
 
