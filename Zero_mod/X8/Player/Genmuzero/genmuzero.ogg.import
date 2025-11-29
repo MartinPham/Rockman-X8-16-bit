@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/genmuzero.ogg-ac2d3d7fa8819be66e56ef968437e407.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/X8/Player/Genmuzero/genmuzero.ogg"
+dest_files=[ "res://.import/genmuzero.ogg-ac2d3d7fa8819be66e56ef968437e407.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

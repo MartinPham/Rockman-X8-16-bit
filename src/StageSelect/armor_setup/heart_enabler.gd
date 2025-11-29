@@ -1,0 +1,142 @@
+extends X8OptionButton
+
+export  var legible_name: String
+export  var description: String
+
+onready var name_display: Label = $"../../Description/name"
+onready var disc_display: Label = $"../../Description/disc"
+onready var equip: AudioStreamPlayer = $"../../../equip"
+onready var unequip: AudioStreamPlayer = $"../../../unequip"
+onready var pick: AudioStreamPlayer = $"../../../pick"
+onready var heart_holder = get_parent()
+
+onready var equipped_hearts: Label = $equipped
+onready var increase_button: TextureButton = $increase_button 
+onready var decrease_button: TextureButton = $decrease_button 
+
+onready var character_name = $"../../CharacterName"
+var character = ""
+
+enum state_enum {locked, unlocked}
+var state = state_enum.unlocked
+
+var num_equipped
+
+var exiting_lock : bool = false
+
+
+func change_state():
+	if state == state_enum.unlocked:
+		state = state_enum.locked
+		menu.lock_buttons()
+		enable()
+		increase_button.visible = true
+		decrease_button.visible = true
+	else:
+		state = state_enum.unlocked
+		menu.unlock_buttons()
+		increase_button.visible = false
+		decrease_button.visible = false
+
+func _input(event: InputEvent) -> void :
+	if state != state_enum.locked:
+		return
+		
+	if event.is_action_pressed("ui_up") and not event.is_echo():
+		pick.play()
+		CharacterManager.set_player_equipped_hearts(character, num_equipped+1)
+		refresh_equipped_hearts()
+	elif event.is_action_pressed("ui_down") and not event.is_echo():
+		pick.play()
+		CharacterManager.set_player_equipped_hearts(character, num_equipped-1)
+		refresh_equipped_hearts()
+	elif event.is_action_pressed("ui_accept"):
+		equip.play()
+		change_state()
+		exiting_lock = true
+		grab_focus()
+
+func refresh_equipped_hearts() -> void:
+	refresh_character_name()
+	num_equipped = CharacterManager.equipped_hearts[character]
+	equipped_hearts.text = str(num_equipped) + "/"
+	material.set_shader_param("grayscale", not CharacterManager.are_hearts_equipped())
+	
+func refresh_character_name() -> void:
+	if character_name.text == "Zero (BETA)":
+		character = "Zero"
+	elif character_name.text == "Zero (Awakened)":
+		character = "Zero"
+	else:
+		character = character_name.text
+
+func setup() -> void :
+	menu.connect("character_changed", self, "refresh_equipped_hearts")
+	refresh_equipped_hearts()
+	if get_heart_count() == 0:
+		visible = false
+		heart_holder.visible = false
+	dim()
+	display()
+	material.set_shader_param("grayscale", not GameManager.equip_hearts)
+
+func _on_focus_entered() -> void :
+	if state == state_enum.unlocked:
+		._on_focus_entered()
+		display_info()
+		
+func _on_focus_exited() -> void :
+	if state == state_enum.unlocked:
+		._on_focus_exited()
+
+func on_press() -> void :
+	if not exiting_lock:
+		change_state()
+		equip.play()
+		strong_flash()
+		display()
+	else:
+		exiting_lock = false
+
+
+#func on_press() -> void :
+#	change_state()
+#	increase_value()
+#	if GameManager.equip_hearts:
+#		equip.play()
+#		strong_flash()
+#	else:
+#		unequip.play()
+#		flash()
+#	material.set_shader_param("grayscale", not GameManager.equip_hearts)
+
+func process_inputs() -> void :
+	pass
+		
+func increase_value() -> void :
+	#GameManager.equip_hearts = not GameManager.equip_hearts
+	display()
+
+func decrease_value() -> void :
+	#GameManager.equip_hearts = not GameManager.equip_hearts
+	display()
+
+func display() -> void :
+	if not GameManager.equip_hearts:
+		value.text = " "
+		self_modulate.a = 0.7
+	else:
+		value.text = str(get_heart_count())
+		self_modulate.a = 1
+
+func get_heart_count() -> int:
+	var count = 0
+	for item in GameManager.collectibles:
+		if "life_up" in item:
+			count += 1
+	return count
+
+func display_info() -> void :
+	name_display.text = tr(legible_name)
+	disc_display.text = tr(description)
+

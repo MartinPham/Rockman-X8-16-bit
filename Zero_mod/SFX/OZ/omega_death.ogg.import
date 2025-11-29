@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/omega_death.ogg-2c74a5db5a7c8c4d9adb6fe58de77c8c.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/OZ/omega_death.ogg"
+dest_files=[ "res://.import/omega_death.ogg-2c74a5db5a7c8c4d9adb6fe58de77c8c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

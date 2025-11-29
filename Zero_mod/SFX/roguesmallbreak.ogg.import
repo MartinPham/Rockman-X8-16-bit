@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/roguesmallbreak.ogg-666e0e6adbe08e0d02f5b33d6a5e91b3.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/roguesmallbreak.ogg"
+dest_files=[ "res://.import/roguesmallbreak.ogg-666e0e6adbe08e0d02f5b33d6a5e91b3.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

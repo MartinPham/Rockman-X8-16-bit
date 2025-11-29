@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/Levels/Primrose/rotation_disabler.gd" type="Script" id=1]
+[ext_resource path="res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres" type="Material" id=2]
+[ext_resource path="res://Zero_mod/X8/Sprites/zbuster/object/Rekohouha.gd" type="Script" id=3]
+[ext_resource path="res://Zero_mod/X8/Sprites/zbuster/object/object.tres" type="SpriteFrames" id=4]
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 17, 32 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 17, 32 )
+
+[node name="Rekohouha" type="KinematicBody2D" groups=["Player Projectile"]]
+z_index = 8
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 3 )
+damage = 20.0
+damage_to_bosses = 10.0
+damage_to_weakness = 10.0
+break_guards = true
+
+[node name="animatedSprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 2 )
+z_index = 5
+frames = ExtResource( 4 )
+animation = "rekohouha"
+playing = true
+flip_h = true
+
+[node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -4.76837e-07, 0 )
+scale = Vector2( 1.7, 3.2 )
+
+[node name="disabler" type="Node" parent="."]
+script = ExtResource( 1 )
+fade_out = true
+delete_after_fade = true
+undo_on_rotation_end = false
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 3.14159
+shape = SubResource( 19 )
+
+[node name="area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 24
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="area2D"]
+shape = SubResource( 20 )
+
+[connection signal="area_entered" from="area2D" to="." method="_on_area2D_body_entered"]
+[connection signal="body_entered" from="area2D" to="." method="_on_area2D_body_entered"]

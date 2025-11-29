@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/roguewave.ogg-0b867f5d878c1f864b85ae91175e960f.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/roguewave.ogg"
+dest_files=[ "res://.import/roguewave.ogg-0b867f5d878c1f864b85ae91175e960f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

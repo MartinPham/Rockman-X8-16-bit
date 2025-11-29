@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/omega_shot.ogg-c65f1cea23056023d446fbc22278b48d.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/OZ/omega_shot.ogg"
+dest_files=[ "res://.import/omega_shot.ogg-c65f1cea23056023d446fbc22278b48d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

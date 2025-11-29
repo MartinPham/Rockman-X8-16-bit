@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hanger_2.ogg-3e6f52248373b42c86908b56cfcd7b13.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/hanger_2.ogg"
+dest_files=[ "res://.import/hanger_2.ogg-3e6f52248373b42c86908b56cfcd7b13.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

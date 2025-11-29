@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/capsule.ogg-c967fdc1d31acf59adfb8b3c793c35ff.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/capsule.ogg"
+dest_files=[ "res://.import/capsule.ogg-c967fdc1d31acf59adfb8b3c793c35ff.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

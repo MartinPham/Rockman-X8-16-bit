@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/omega_walk.ogg-73a4e3dd90b555611066e25e3de92453.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/OZ/omega_walk.ogg"
+dest_files=[ "res://.import/omega_walk.ogg-73a4e3dd90b555611066e25e3de92453.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

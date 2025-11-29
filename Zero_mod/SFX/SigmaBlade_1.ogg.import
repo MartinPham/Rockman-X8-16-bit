@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SigmaBlade_1.ogg-8023f430d6ce3da547eb44efe9a60ddc.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/SigmaBlade_1.ogg"
+dest_files=[ "res://.import/SigmaBlade_1.ogg-8023f430d6ce3da547eb44efe9a60ddc.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

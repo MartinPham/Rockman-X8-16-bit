@@ -1,0 +1,277 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://System/Android/AndroidControls.gd" type="Script" id=1]
+[ext_resource path="res://System/Android/Sprites/android_joystick_pointer.png" type="Texture" id=2]
+[ext_resource path="res://System/Android/Sprites/android_jump.png" type="Texture" id=3]
+[ext_resource path="res://System/Android/Sprites/android_joystick.png" type="Texture" id=4]
+[ext_resource path="res://System/Android/joystick.gd" type="Script" id=5]
+[ext_resource path="res://System/Android/Sprites/android_joystick_back.png" type="Texture" id=6]
+[ext_resource path="res://System/Android/Sprites/android_shoot.png" type="Texture" id=7]
+[ext_resource path="res://System/Android/Sprites/android_dash.png" type="Texture" id=8]
+[ext_resource path="res://System/Android/Sprites/android_weapon_left.png" type="Texture" id=9]
+[ext_resource path="res://System/Android/Sprites/android_weapon_right.png" type="Texture" id=10]
+[ext_resource path="res://System/Android/Sprites/android_pause.png" type="Texture" id=11]
+[ext_resource path="res://System/Android/Sprites/android_altshoot.png" type="Texture" id=12]
+[ext_resource path="res://System/Android/Sprites/android_special.png" type="Texture" id=13]
+[ext_resource path="res://System/Android/Sprites/android_nothing.png" type="Texture" id=14]
+[ext_resource path="res://System/Android/Sprites/android_dashfire.png" type="Texture" id=15]
+[ext_resource path="res://System/Android/Sprites/android_switch.png" type="Texture" id=16]
+[ext_resource path="res://System/Android/Sprites/android_dashjump.png" type="Texture" id=17]
+[ext_resource path="res://System/Android/dashaltfire.gd" type="Script" id=18]
+[ext_resource path="res://System/Android/ride_arm_fire.gd" type="Script" id=19]
+[ext_resource path="res://System/Android/fire.gd" type="Script" id=20]
+[ext_resource path="res://System/Android/dashjump.gd" type="Script" id=21]
+[ext_resource path="res://System/Android/ShowControls.gd" type="Script" id=24]
+[ext_resource path="res://System/Android/weaponround.gd" type="Script" id=25]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 35.1283
+
+[sub_resource type="CircleShape2D" id=2]
+
+[node name="AndroidControls" type="CanvasLayer"]
+pause_mode = 2
+
+[node name="Key" type="TouchScreenButton" parent="."]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( -32, 0 )
+normal = ExtResource( 14 )
+pressed = ExtResource( 14 )
+action = "shoryuuken"
+visibility_mode = 1
+script = ExtResource( 24 )
+_action = "shoryuuken"
+
+[node name="Pause" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 215, 0 )
+scale = Vector2( 0.3, 0.3 )
+normal = ExtResource( 11 )
+pressed = ExtResource( 11 )
+action = "pause"
+visibility_mode = 1
+script = ExtResource( 1 )
+_action = "pause"
+
+[node name="Jump" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 384, 176 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 3 )
+passby_press = true
+action = "jump"
+visibility_mode = 1
+script = ExtResource( 1 )
+_action = "jump"
+
+[node name="Dash" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 384, 136 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 8 )
+passby_press = true
+action = "dash"
+visibility_mode = 1
+script = ExtResource( 1 )
+_action = "dash"
+
+[node name="Fire" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 344, 176 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 7 )
+passby_press = true
+visibility_mode = 1
+script = ExtResource( 20 )
+_action = "fire"
+
+[node name="AltFire" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 344, 136 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 12 )
+passby_press = true
+visibility_mode = 1
+script = ExtResource( 20 )
+_action = "alt_fire"
+
+[node name="Fire_Ride_arm" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+visible = false
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 344, 176 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 7 )
+passby_press = true
+action = "fire"
+visibility_mode = 1
+script = ExtResource( 19 )
+_action = "fire"
+
+[node name="AltFire_Ride_arm" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+visible = false
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 344, 136 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 12 )
+passby_press = true
+action = "alt_fire"
+visibility_mode = 1
+script = ExtResource( 19 )
+_action = "alt_fire"
+
+[node name="Special" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+physics_interpolation_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 344, 56.0001 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 13 )
+action = "select_special"
+visibility_mode = 1
+script = ExtResource( 1 )
+_action = "select_special"
+
+[node name="WeaponPrev" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 32, 7.62939e-06 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 9 )
+passby_press = true
+action = "weapon_select_left"
+visibility_mode = 1
+script = ExtResource( 1 )
+_action = "weapon_select_left"
+
+[node name="WeaponNext" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 374, 0 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 10 )
+passby_press = true
+action = "weapon_select_right"
+visibility_mode = 1
+script = ExtResource( 1 )
+_action = "weapon_select_right"
+
+[node name="Switch" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 384, 56.0001 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 16 )
+passby_press = true
+action = "char_switch"
+visibility_mode = 1
+script = ExtResource( 1 )
+_action = "char_switch"
+
+[node name="dashjump" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 344, 96 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 17 )
+passby_press = true
+visibility_mode = 1
+script = ExtResource( 21 )
+
+[node name="dashaltfire" type="TouchScreenButton" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 384, 96 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 15 )
+passby_press = true
+visibility_mode = 1
+script = ExtResource( 18 )
+
+[node name="joystick" type="Area2D" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 91.0001, 166 )
+scale = Vector2( 1.2, 1.2 )
+script = ExtResource( 5 )
+
+[node name="background" type="Sprite" parent="Key/joystick"]
+pause_mode = 2
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+
+[node name="outline" type="Sprite" parent="Key/joystick"]
+pause_mode = 2
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="pointer" type="Sprite" parent="Key/joystick/outline"]
+pause_mode = 2
+texture = ExtResource( 2 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Key/joystick"]
+pause_mode = 2
+position = Vector2( 0, -2 )
+shape = SubResource( 1 )
+
+[node name="weaponround" type="Area2D" parent="Key"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 331, 30 )
+scale = Vector2( 0.500001, 0.500001 )
+script = ExtResource( 25 )
+
+[node name="background" type="Sprite" parent="Key/weaponround"]
+pause_mode = 2
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+
+[node name="outline" type="Sprite" parent="Key/weaponround"]
+pause_mode = 2
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="pointer" type="Sprite" parent="Key/weaponround/outline"]
+pause_mode = 2
+texture = ExtResource( 2 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Key/weaponround"]
+pause_mode = 2
+position = Vector2( 0, -2 )
+shape = SubResource( 1 )
+
+[node name="weaponcenter" type="TouchScreenButton" parent="Key/weaponround"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( -16, -18 )
+normal = ExtResource( 14 )
+shape = SubResource( 2 )
+passby_press = true
+visibility_mode = 1
+script = ExtResource( 1 )
+_action = "reset_weapon"

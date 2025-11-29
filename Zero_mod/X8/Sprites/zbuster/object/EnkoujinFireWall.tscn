@@ -1,0 +1,138 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://src/Actors/NewStateMachine/audioplayer.gd" type="Script" id=1]
+[ext_resource path="res://Zero_mod/X8/Sprites/zbuster/object/EnkoujinFireWall.gd" type="Script" id=2]
+[ext_resource path="res://src/Sounds/56 - MMX - Enemy Death.wav" type="AudioStream" id=3]
+[ext_resource path="res://src/Levels/Primrose/rotation_disabler.gd" type="Script" id=4]
+[ext_resource path="res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres" type="Material" id=5]
+[ext_resource path="res://Zero_mod/Boss/enkoujin_spike.png" type="Texture" id=6]
+[ext_resource path="res://src/Effects/Materials/pinkfire_mat.tres" type="Material" id=9]
+[ext_resource path="res://src/Effects/Materials/pinkfire_particles.tres" type="Material" id=10]
+[ext_resource path="res://Zero_mod/Boss/fire2.png" type="Texture" id=12]
+[ext_resource path="res://Zero_mod/Boss/fire3.png" type="Texture" id=13]
+[ext_resource path="res://Zero_mod/Boss/fire1.png" type="Texture" id=14]
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 6 )
+region = Rect2( 48, 0, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 0, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 6 )
+region = Rect2( 144, 0, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 64, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 6 )
+region = Rect2( 48, 64, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 64, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 6 )
+region = Rect2( 144, 64, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 128, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 6 )
+region = Rect2( 48, 128, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 128, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 6 )
+region = Rect2( 144, 128, 48, 64 )
+
+[sub_resource type="SpriteFrames" id=32]
+animations = [ {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"loop": true,
+"name": "enkoujinwave",
+"speed": 28.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), null ],
+"loop": false,
+"name": "enkoujinwaveexplode",
+"speed": 24.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 32, 20 )
+
+[node name="FireDashCharged" type="KinematicBody2D" groups=["Player Projectile"]]
+z_index = 8
+collision_layer = 4
+script = ExtResource( 2 )
+damage = 10.0
+damage_to_bosses = 4.0
+damage_to_weakness = 25.0
+break_guards = true
+
+[node name="animatedSprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 5 )
+rotation = 1.5708
+frames = SubResource( 32 )
+animation = "enkoujinwave"
+playing = true
+
+[node name="fire1" type="Particles2D" parent="animatedSprite"]
+material = ExtResource( 9 )
+rotation = -1.5708
+z_index = 1
+amount = 7
+local_coords = false
+process_material = ExtResource( 10 )
+texture = ExtResource( 14 )
+
+[node name="fire2" type="Particles2D" parent="animatedSprite"]
+material = ExtResource( 9 )
+rotation = -1.5708
+z_index = 1
+amount = 5
+local_coords = false
+process_material = ExtResource( 10 )
+texture = ExtResource( 12 )
+
+[node name="fire3" type="Particles2D" parent="animatedSprite"]
+material = ExtResource( 9 )
+rotation = -1.5708
+z_index = 1
+amount = 6
+local_coords = false
+process_material = ExtResource( 10 )
+texture = ExtResource( 13 )
+
+[node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 19 )
+
+[node name="disabler" type="Node" parent="."]
+script = ExtResource( 4 )
+fade_out = true
+delete_after_fade = true
+undo_on_rotation_end = false
+
+[node name="vanish" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 2.0
+max_distance = 600.0
+bus = "SFX"
+script = ExtResource( 1 )

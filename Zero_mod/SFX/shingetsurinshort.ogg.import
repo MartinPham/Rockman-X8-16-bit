@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/shingetsurinshort.ogg-e67f6f6015226745ddfdbc71dcb7e1cf.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/shingetsurinshort.ogg"
+dest_files=[ "res://.import/shingetsurinshort.ogg-e67f6f6015226745ddfdbc71dcb7e1cf.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

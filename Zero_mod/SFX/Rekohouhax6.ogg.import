@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Rekohouhax6.ogg-f7a38e84432ef0a49e4447d9dc088e32.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/Rekohouhax6.ogg"
+dest_files=[ "res://.import/Rekohouhax6.ogg-f7a38e84432ef0a49e4447d9dc088e32.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

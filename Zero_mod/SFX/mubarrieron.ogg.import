@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mubarrieron.ogg-c10f5f6a6fad748a1a7c547200d3db3a.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/mubarrieron.ogg"
+dest_files=[ "res://.import/mubarrieron.ogg-c10f5f6a6fad748a1a7c547200d3db3a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

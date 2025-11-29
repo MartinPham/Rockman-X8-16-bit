@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Zero_mod/X8/Sprites/zbuster/object/EnkoujinFire.gd" type="Script" id=1]
+[ext_resource path="res://src/Actors/NewStateMachine/audioplayer.gd" type="Script" id=2]
+[ext_resource path="res://src/Sounds/56 - MMX - Enemy Death.wav" type="AudioStream" id=3]
+[ext_resource path="res://Zero_mod/Boss/fire2.png" type="Texture" id=5]
+[ext_resource path="res://Zero_mod/Boss/fire3.png" type="Texture" id=6]
+[ext_resource path="res://Zero_mod/Boss/fire1.png" type="Texture" id=7]
+[ext_resource path="res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres" type="Material" id=8]
+[ext_resource path="res://Zero_mod/X8/Sprites/zbuster/object/object.tres" type="SpriteFrames" id=9]
+[ext_resource path="res://src/Effects/Materials/pinkfire_mat.tres" type="Material" id=10]
+[ext_resource path="res://src/Effects/Materials/pinkfire_particles.tres" type="Material" id=11]
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 20, 32 )
+
+[node name="FireDashCharged" type="KinematicBody2D" groups=["Enemy Projectile"]]
+z_index = 10
+collision_layer = 4
+script = ExtResource( 1 )
+damage = 10.0
+damage_to_bosses = 4.0
+damage_to_weakness = 25.0
+break_guards = true
+
+[node name="animatedSprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 8 )
+z_index = 5
+frames = ExtResource( 9 )
+animation = "enkoujinwave"
+playing = true
+
+[node name="fire1" type="Particles2D" parent="animatedSprite"]
+material = ExtResource( 10 )
+position = Vector2( 0, -1 )
+z_index = 1
+amount = 7
+local_coords = false
+process_material = ExtResource( 11 )
+texture = ExtResource( 7 )
+
+[node name="fire2" type="Particles2D" parent="animatedSprite"]
+material = ExtResource( 10 )
+position = Vector2( 0, -1 )
+z_index = 1
+amount = 5
+local_coords = false
+process_material = ExtResource( 11 )
+texture = ExtResource( 5 )
+
+[node name="fire3" type="Particles2D" parent="animatedSprite"]
+material = ExtResource( 10 )
+position = Vector2( 0, -1 )
+z_index = 1
+amount = 6
+local_coords = false
+process_material = ExtResource( 11 )
+texture = ExtResource( 6 )
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 21 )
+
+[node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
+position = Vector2( -0.500003, 1.5 )
+scale = Vector2( 3.05, 3.05 )
+
+[node name="vanish" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 2.0
+max_distance = 600.0
+bus = "SFX"
+script = ExtResource( 2 )
